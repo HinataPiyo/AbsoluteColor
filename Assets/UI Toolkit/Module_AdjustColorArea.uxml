@@ -1,0 +1,14 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_AdjustColorSlider" src="project://database/Assets/UI%20Toolkit/Temp_AdjustColorSlider.uxml?fileID=9197481963319205126&amp;guid=09fcc4eb8900a604b9f903abde89f521&amp;type=3#Temp_AdjustColorSlider" />
+    <ui:VisualElement name="root" style="flex-grow: 1; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(93, 34, 0); border-right-color: rgb(93, 34, 0); border-top-color: rgb(93, 34, 0); border-bottom-color: rgb(93, 34, 0); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; background-color: rgb(255, 224, 195); align-items: center; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+        <ui:Label text="NowColor" name="preview-color-text" style="font-size: 42px; -unity-text-align: middle-center; margin-top: 11px;" />
+        <ui:VisualElement name="preview-color" style="background-color: rgb(205, 69, 69); width: 80%; height: 15%; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;" />
+        <ui:Label text="ChangeRGB" name="change-rgb-text" style="font-size: 32px;" />
+        <ui:VisualElement name="adjust-color-sliders" style="width: 100%; padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px; justify-content: space-around; height: 55%;">
+            <ui:Instance template="Temp_AdjustColorSlider" />
+            <ui:Instance template="Temp_AdjustColorSlider" />
+            <ui:Instance template="Temp_AdjustColorSlider" />
+        </ui:VisualElement>
+        <ui:Button text="decide" name="decide-button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 62px; border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; -unity-font-style: bold;" />
+    </ui:VisualElement>
+</ui:UXML>

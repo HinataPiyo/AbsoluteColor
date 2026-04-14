@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Module_AdjustColorArea" src="project://database/Assets/UI%20Toolkit/Module_AdjustColorArea.uxml?fileID=9197481963319205126&amp;guid=a280ac9e5dbfaa2429e3e8d8b0238e88&amp;type=3#Module_AdjustColorArea" />
+    <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: column-reverse; padding-bottom: 150px;">
+        <ui:Instance template="Module_AdjustColorArea" name="AdjustColorArea" style="height: 45%;" />
+        <ui:VisualElement name="TopicPreviewArea" style="flex-grow: 1;">
+            <ui:Label text="MaxScore: 2000" name="max-score" style="font-size: 42px; -unity-text-align: middle-left;" />
+            <ui:Label text="Round1" name="round-count" style="font-size: 80px; -unity-text-align: middle-center; top: 5%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

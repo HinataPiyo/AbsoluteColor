@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/AdjustColorSlider.uss?fileID=7433441132597879392&amp;guid=329de683b6c49f94fa51bceb75734488&amp;type=3#AdjustColorSlider" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Slider label="R" value="42" high-value="100" style="min-height: auto; align-items: center;" />
+    </ui:VisualElement>
+</ui:UXML>
