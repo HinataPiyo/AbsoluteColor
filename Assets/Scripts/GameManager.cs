@@ -22,11 +22,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameLoop());
     }
 
-    void Update()
-    {
-        
-    }
-
     IEnumerator GameLoop()
     {
         for (int ii = 1; ii <= MaxRound; ii++)
@@ -55,6 +50,7 @@ public class GameManager : MonoBehaviour
             isPlayerDecided = false;    // プレイヤーの決定フラグをリセット
 
             // リザルトを表示してスコアを更新しPlayerが次へ行くまで待機
+            yield return new WaitUntil(() => result.IsResultDisplayed == false);   // 結果が表示されている間は待機
         }
 
         // ゲーム終了の処理

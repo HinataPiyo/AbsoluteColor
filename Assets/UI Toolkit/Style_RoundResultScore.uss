@@ -2,11 +2,15 @@
 }
 
 .difference-range-text {
-    font-size: 52px;
+    font-size: 42px;
     -unity-text-align: middle-center;
 }
 
 #parameter {
     font-size: 40px;
     padding-left: 17px;
+}
+
+.result .unity-base-slider__label {
+    font-size: 34px;
 }

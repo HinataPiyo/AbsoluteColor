@@ -59,7 +59,9 @@ Assets/Scripts/
  GameManager.cs
  OtherInfo/TopicPreviewAreaController.cs
  PreviewColor/PreviewSlider.cs
- ResultController.cs
+ Result/
+  ResultController.cs
+  RoundResult.cs
  TopicSphere/TopicSphereController.cs
 Assets/TutorialInfo/Scripts/Readme.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs

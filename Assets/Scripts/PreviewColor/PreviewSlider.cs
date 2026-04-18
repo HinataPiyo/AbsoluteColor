@@ -12,7 +12,7 @@ public class PreviewSlider
     public PreviewSlider(VisualElement root, RGBType _type, Material _mat)
     {
         Type = _type;
-        VisualElement preview_slider_root = root.Q<VisualElement>("PreviewColorSlider");
+        VisualElement preview_slider_root = root.Q<VisualElement>("preview-root");
         if (preview_slider_root == null) { Debug.LogError("PreviewColorSliderのVisualElementが見つかりませんでした"); return; }
 
         preview_slider = preview_slider_root.Q<Slider>();

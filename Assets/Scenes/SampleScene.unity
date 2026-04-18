@@ -148,7 +148,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 763462275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &29519262
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   topicSphere: {fileID: 132816996}
   topicPreviewArea: {fileID: 894059130}
-  result: {fileID: 763462276}
+  result: {fileID: 894059131}
 --- !u!1 &132816994
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +519,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 763462275}
-  - component: {fileID: 763462276}
   m_Layer: 0
   m_Name: ResultCoutroller
   m_TagString: Untagged
@@ -534,25 +534,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763462274}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 29519261}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &763462276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763462274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f591d8167d1c942b80c3684b3f66f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ResultController
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,6 +602,7 @@ GameObject:
   - component: {fileID: 894059127}
   - component: {fileID: 894059129}
   - component: {fileID: 894059130}
+  - component: {fileID: 894059131}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -687,6 +676,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 756b0c6bfe950e442a8cc2ace0dd3894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TopicPreviewAreaController
+--- !u!114 &894059131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894059126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f591d8167d1c942b80c3684b3f66f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResultController
+  rgbMats:
+  - {fileID: 2100000, guid: b10694c5847060748bb1dc01506fcf5b, type: 2}
+  - {fileID: 2100000, guid: 7c066c00a2b23864d91df2fe2e1e9f3d, type: 2}
+  - {fileID: 2100000, guid: 1708aeea1ed2e704c9f24709518c5b01, type: 2}
 --- !u!1 &1411270832
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,4 +890,3 @@ SceneRoots:
   - {fileID: 894059128}
   - {fileID: 132816995}
   - {fileID: 29519261}
-  - {fileID: 763462275}

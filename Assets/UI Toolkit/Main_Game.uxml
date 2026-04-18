@@ -10,7 +10,7 @@
             <ui:Label text="time: 10s" name="timer" style="font-size: 62px; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="result-root" style="position: absolute; width: 100%; height: 100%; justify-content: center; align-items: center;">
-        <ui:Instance template="Module_RoundResultScore" style="position: relative; width: 80%;"/>
+    <ui:VisualElement name="result-root" style="position: absolute; width: 100%; height: 100%; justify-content: center; align-items: center; display: none;">
+        <ui:Instance template="Module_RoundResultScore" name="RoundResultScore" style="position: relative; width: 80%;"/>
     </ui:VisualElement>
 </ui:UXML>
