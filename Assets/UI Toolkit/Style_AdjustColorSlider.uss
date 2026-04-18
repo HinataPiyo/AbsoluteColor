@@ -1,0 +1,19 @@
+.adjust .unity-base-slider__tracker {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    flex-grow: 1;
+    position: relative;
+    top: 0%;
+}
+
+.adjust .unity-base-slider__dragger {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    top: 0%;
+    flex-grow: 1;
+    width: 15px;
+}

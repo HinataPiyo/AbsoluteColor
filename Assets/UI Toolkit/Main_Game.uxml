@@ -1,10 +1,16 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Module_AdjustColorArea" src="project://database/Assets/UI%20Toolkit/Module_AdjustColorArea.uxml?fileID=9197481963319205126&amp;guid=a280ac9e5dbfaa2429e3e8d8b0238e88&amp;type=3#Module_AdjustColorArea" />
+    <ui:Template name="Module_AdjustColorArea" src="project://database/Assets/UI%20Toolkit/Module_AdjustColorArea.uxml?fileID=9197481963319205126&amp;guid=a280ac9e5dbfaa2429e3e8d8b0238e88&amp;type=3#Module_AdjustColorArea"/>
+    <ui:Template name="Module_RoundResultScore" src="project://database/Assets/UI%20Toolkit/Module_RoundResultScore.uxml?fileID=9197481963319205126&amp;guid=e906f17d63dae1140961bbcaf72e4003&amp;type=3#Module_RoundResultScore"/>
     <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: column-reverse; padding-bottom: 150px;">
-        <ui:Instance template="Module_AdjustColorArea" name="AdjustColorArea" style="height: 45%;" />
+        <ui:Instance template="Module_AdjustColorArea" name="AdjustColorArea" style="height: 45%;"/>
         <ui:VisualElement name="TopicPreviewArea" style="flex-grow: 1;">
-            <ui:Label text="MaxScore: 2000" name="max-score" style="font-size: 42px; -unity-text-align: middle-left;" />
-            <ui:Label text="Round1" name="round-count" style="font-size: 80px; -unity-text-align: middle-center; top: 5%;" />
+            <ui:Label text="MaxScore: 2000" name="max-score" style="font-size: 42px; -unity-text-align: middle-left;"/>
+            <ui:Label text="NowScore: 500" name="now-score" style="font-size: 42px; -unity-text-align: middle-left;"/>
+            <ui:Label text="Round1" name="round-count" style="font-size: 80px; -unity-text-align: middle-center; -unity-font-style: bold;"/>
+            <ui:Label text="time: 10s" name="timer" style="font-size: 62px; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="result-root" style="position: absolute; width: 100%; height: 100%; justify-content: center; align-items: center;">
+        <ui:Instance template="Module_RoundResultScore" style="position: relative; width: 80%;"/>
     </ui:VisualElement>
 </ui:UXML>

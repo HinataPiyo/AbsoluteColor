@@ -1,6 +1,8 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/UI%20Toolkit/AdjustColorSlider.uss?fileID=7433441132597879392&amp;guid=329de683b6c49f94fa51bceb75734488&amp;type=3#AdjustColorSlider" />
-    <ui:VisualElement name="root" style="flex-grow: 1;">
-        <ui:Slider label="R" value="42" high-value="100" style="min-height: auto; align-items: center;" />
+    <ui:Template name="Temp_PreviewColorSlider" src="project://database/Assets/UI%20Toolkit/Temp_PreviewColorSlider.uxml?fileID=9197481963319205126&amp;guid=09fcc4eb8900a604b9f903abde89f521&amp;type=3#Temp_PreviewColorSlider"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Style_AdjustColorSlider.uss?fileID=7433441132597879392&amp;guid=ccbac51ad1d035a42a9e29ef357866fd&amp;type=3#Style_AdjustColorSlider"/>
+    <ui:VisualElement name="adjust-slider-root" style="flex-grow: 1; align-items: center;">
+        <ui:Instance template="Temp_PreviewColorSlider" name="PreviewColorSlider" style="width: 100%;"/>
+        <ui:Slider value="42" high-value="100" name="adjust-slider" class="adjust" style="width: 76%; margin-right: 0; min-height: auto; height: 24px; margin-top: 0; margin-bottom: 0; margin-left: 0; padding-left: 11px;"/>
     </ui:VisualElement>
 </ui:UXML>

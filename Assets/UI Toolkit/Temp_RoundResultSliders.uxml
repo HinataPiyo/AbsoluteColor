@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_PreviewColorSlider" src="project://database/Assets/UI%20Toolkit/Temp_PreviewColorSlider.uxml?fileID=9197481963319205126&amp;guid=09fcc4eb8900a604b9f903abde89f521&amp;type=3#Temp_PreviewColorSlider"/>
+    <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: row; justify-content: space-around;">
+        <ui:VisualElement name="topic-area" style="width: 50%; padding-right: 70px;">
+            <ui:Label text="お題" name="topic-text" style="-unity-text-align: middle-center; font-size: 24px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="answer-area" style="width: 50%; padding-right: 70px;">
+            <ui:Label text="答え" name="topic-text" style="-unity-text-align: middle-center; font-size: 24px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+            <ui:Instance template="Temp_PreviewColorSlider"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
