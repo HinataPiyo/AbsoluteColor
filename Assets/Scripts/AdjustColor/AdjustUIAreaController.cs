@@ -44,7 +44,7 @@ public class AdjustUIAreaController: MonoBehaviour
         }
 
         // 決定用のButtonに処理を登録
-        decideButton.RegisterCallback<ClickEvent>(evt => { GameManager.I.OnDecideColor(r, g, b); });
+        decideButton.RegisterCallback<ClickEvent>(evt => { GameManager.I.isPlayerDecided = true; });
     }
 
     /// <summary>
@@ -77,5 +77,10 @@ public class AdjustUIAreaController: MonoBehaviour
     public void UpdatePreviewColor(Color color)
     {
         previewColor.style.backgroundColor = new StyleColor(color);
+    }
+
+    public Color GetDecidedColor()
+    {
+        return new Color(r, g, b);
     }
 }

@@ -1,10 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_RoundResultSliders" src="project://database/Assets/UI%20Toolkit/Temp_RoundResultSliders.uxml?fileID=9197481963319205126&amp;guid=6a9d6077ccc10154f8ef9990761d5681&amp;type=3#Temp_RoundResultSliders"/>
     <Style src="project://database/Assets/UI%20Toolkit/Style_RoundResultScore.uss?fileID=7433441132597879392&amp;guid=cbb9dfed6ca82714384a6695f104ea59&amp;type=3"/>
-    <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgb(255, 219, 161); border-left-color: rgb(255, 73, 55); border-right-color: rgb(255, 73, 55); border-top-color: rgb(255, 73, 55); border-bottom-color: rgb(255, 73, 55); border-top-width: 15px; border-right-width: 15px; border-bottom-width: 15px; border-left-width: 15px; border-top-left-radius: 29px; border-top-right-radius: 29px; border-bottom-right-radius: 29px; border-bottom-left-radius: 29px;">
-        <ui:Label text="Round1" name="round-count" style="-unity-text-align: middle-center; font-size: 52px; -unity-font-style: bold; padding-top: 0; margin-top: 10px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
-        <ui:Instance template="Temp_RoundResultSliders" name="RoundResultSliders" class="round-result result" style="border-left-color: rgb(20, 20, 20); border-right-color: rgb(20, 20, 20); border-top-color: rgb(20, 20, 20); border-bottom-color: rgb(20, 20, 20); border-bottom-width: 9px; margin-right: 0; margin-left: 0; height: 45%; margin-top: 0; margin-bottom: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;"/>
-        <ui:VisualElement name="difference-range" style="flex-direction: row; margin-left: 20px; margin-right: 20px; margin-top: 25px;">
+    <ui:VisualElement name="round-result-root" style="background-color: rgb(255, 219, 161); border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 29px; border-top-right-radius: 29px; border-bottom-right-radius: 29px; border-bottom-left-radius: 29px; margin-bottom: 10px; margin-top: 10px; margin-right: 10px; margin-left: 10px;">
+        <ui:Label text="Round1" name="round-count" class="round-count-text" style="margin-top: 10px; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+        <ui:Instance template="Temp_RoundResultSliders" name="RoundResultSliders" class="round-result result" style="border-left-color: rgb(233, 177, 25); border-right-color: rgb(233, 177, 25); border-top-color: rgb(233, 177, 25); border-bottom-color: rgb(233, 177, 25); border-bottom-width: 9px; margin-right: 0; margin-left: 0; margin-top: 0; margin-bottom: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; flex-grow: 1;"/>
+        <ui:VisualElement name="difference-range" style="flex-direction: row; margin-left: 20px; margin-right: 20px; margin-top: 0;">
             <ui:Label text="お題と答えの差" name="difference-range-text" style="-unity-text-align: middle-left; -unity-font-style: bold; font-size: 28px; margin-left: 2px;"/>
             <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row; margin-right: 0; justify-content: flex-end;">
                 <ui:Label text="R-0.2" class="difference-range-text"/>
@@ -13,9 +13,9 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="score-box" style="flex-direction: row; margin-left: 20px; margin-right: 18px;">
-            <ui:Label text="SCORE" name="score-text" style="font-size: 92px; -unity-font-style: bold-and-italic; -unity-text-outline-width: 5px; -unity-text-outline-color: rgb(255, 74, 0); color: rgb(255, 252, 0); -unity-text-align: middle-left;"/>
-            <ui:Label text="20,000" name="score-value" style="flex-grow: 1; -unity-text-align: middle-right; font-size: 92px; -unity-font-style: bold-and-italic; color: rgb(255, 249, 0); -unity-text-outline-width: 4px; -unity-text-outline-color: rgb(255, 0, 0);"/>
+            <ui:Label text="SCORE" name="score-text" class="score-text"/>
+            <ui:Label text="20,000" name="score-value" class="score-text" style="flex-grow: 1; -unity-text-align: middle-right;"/>
         </ui:VisualElement>
-        <ui:Button text="NextTopic" style="margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-grow: 1; align-self: center; width: 50%; font-size: 36px;"/>
+        <ui:Button text="NextRound" name="button-next-round" style="margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-grow: 1; align-self: center; width: 50%; font-size: 36px; min-height: 5%;"/>
     </ui:VisualElement>
 </ui:UXML>

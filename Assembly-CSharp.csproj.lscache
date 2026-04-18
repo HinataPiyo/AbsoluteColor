@@ -60,6 +60,7 @@ Assets/Scripts/
  OtherInfo/TopicPreviewAreaController.cs
  PreviewColor/PreviewSlider.cs
  Result/
+  AllRoundTotalResult.cs
   ResultController.cs
   RoundResult.cs
  TopicSphere/TopicSphereController.cs

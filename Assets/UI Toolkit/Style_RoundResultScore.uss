@@ -14,3 +14,20 @@
 .result .unity-base-slider__label {
     font-size: 34px;
 }
+
+.score-text {
+    -unity-font-style: bold-and-italic;
+    font-size: 92px;
+    -unity-text-align: middle-left;
+    color: rgb(255, 235, 0);
+    -unity-text-outline-color: rgb(255, 0, 0);
+    -unity-text-outline-width: 3px;
+}
+
+
+
+.round-count-text {
+    font-size: 52px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}

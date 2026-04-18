@@ -1,12 +1,11 @@
 .unity-base-slider__tracker {
-    min-height: auto;
-    height: 100%;
-    top: auto;
+    min-height: 80%;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
     -unity-material: url("project://database/Assets/Materials/Mat_R.mat?fileID=2100000&guid=b10694c5847060748bb1dc01506fcf5b&type=2#Mat_R") prop("_ChannelMask" 1 0 0 0);
+    top: 10%;
 }
 
 .unity-slider__label {
@@ -20,10 +19,9 @@
 }
 
 .unity-base-slider__dragger {
-    height: 100%;
-    top: 0%;
+    top: 10%;
     position: relative;
-    min-height: auto;
+    min-height: 80%;
     width: 1%;
     min-width: auto;
     margin-top: 0;
@@ -35,14 +33,6 @@
 }
 
 .unity-base-field__input {
-    border-left-color: rgb(0, 0, 0);
-    border-right-color: rgb(0, 0, 0);
-    border-top-color: rgb(0, 0, 0);
-    border-bottom-color: rgb(0, 0, 0);
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-bottom-width: 5px;
-    border-left-width: 5px;
 }
 
 .preview-parameter {

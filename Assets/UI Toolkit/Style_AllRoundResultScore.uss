@@ -1,0 +1,46 @@
+:root {
+}
+
+#button-next-round {
+    display: none;
+}
+
+.allround-result .score-text {
+    font-size: 46px;
+}
+
+.allround-result .round-count-text {
+    font-size: 30px;
+    -unity-text-align: middle-center;
+}
+
+.total-score-text {
+    font-size: 92px;
+    -unity-font-style: bold-and-italic;
+    color: rgb(255, 213, 0);
+    -unity-text-outline-color: rgb(255, 89, 94);
+    -unity-text-outline-width: 3px;
+}
+
+.score-rank {
+    font-size: 72px;
+    -unity-font-style: bold-and-italic;
+    color: rgb(255, 255, 255);
+    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(58, 0, 255);
+}
+
+.button {
+    font-size: 24px;
+    -unity-text-align: middle-center;
+    min-height: 5%;
+    flex-grow: 1;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+}

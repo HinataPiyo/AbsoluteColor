@@ -14,10 +14,10 @@ public class RoundResult
     Button nextRoundButton;
     Material[] rgbMats;
 
-    public RoundResult(VisualElement root, Material[] _rgbMats, ResultData resultData, System.Action onNextRound)
+    public RoundResult(VisualElement root, Material[] _rgbMats, ResultData resultData, System.Action onNextRound = null)
     {
         rgbMats = _rgbMats;
-        VisualElement scoreRoot = root.Q<VisualElement>("RoundResultScore");
+        VisualElement scoreRoot = root.Q<VisualElement>("round-result-root");
         if (scoreRoot == null) { Debug.LogError("RoundResultScoreのVisualElementが見つかりませんでした"); return; }
 
         roundCount = scoreRoot.Q<Label>("round-count");
@@ -47,6 +47,7 @@ public class RoundResult
         if (answer_preview_roots.Count != 3) { Debug.LogError($"{answer_preview_roots.Count} : プレイヤーのPreviewSliderの数が3つではありませんでした"); return; }
         if (difference_ranges.Count != 3) { Debug.LogError($"{difference_ranges.Count} : 差分のLabelの数が3つではありませんでした"); return; }
 
+        if(resultData.RoundCount >= GameManager.MaxRound) nextRoundButton.text = "結果発表";    // 最終ラウンドの場合はボタンのテキストを変更する
         nextRoundButton.RegisterCallback<ClickEvent>(evt => onNextRound.Invoke());     // 次のラウンドに進むボタンに処理を登録
         CreatePreviewSliders(topic_preview_roots, answer_preview_roots);        // お題の色とPlayerが決定した色のPreviewSliderを作成する
         AssignResultDataToUI(resultData);       // ResultDataの内容をUIに反映する
@@ -77,6 +78,7 @@ public class RoundResult
         topic_previewColor.style.backgroundColor = resultData.TopicColor;
         answer_previewColor.style.backgroundColor = resultData.AnswerColor;
 
+        // お題の色とPlayerが決定した色の差をUIに反映する
         for (int ii = 0; ii < topic_preview_sliders.Count; ii++)
         {
             topic_preview_sliders[ii].AdjustChanged(resultData.TopicColor[(int)topic_preview_sliders[ii].Type]);

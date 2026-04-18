@@ -167,6 +167,10 @@ MonoBehaviour:
   topicSphere: {fileID: 132816996}
   topicPreviewArea: {fileID: 894059130}
   result: {fileID: 894059131}
+  adjustUIArea: {fileID: 894059129}
+  allRoundTotalResult: {fileID: 894059132}
+  isPlayerDecided: 0
+  uiDoc: {fileID: 894059127}
 --- !u!1 &132816994
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +607,7 @@ GameObject:
   - component: {fileID: 894059129}
   - component: {fileID: 894059130}
   - component: {fileID: 894059131}
+  - component: {fileID: 894059132}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -688,6 +693,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f591d8167d1c942b80c3684b3f66f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResultController
+  rgbMats:
+  - {fileID: 2100000, guid: b10694c5847060748bb1dc01506fcf5b, type: 2}
+  - {fileID: 2100000, guid: 7c066c00a2b23864d91df2fe2e1e9f3d, type: 2}
+  - {fileID: 2100000, guid: 1708aeea1ed2e704c9f24709518c5b01, type: 2}
+--- !u!114 &894059132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894059126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d57dae9844fe644296eb360d87d0171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AllRoundTotalResult
+  roundResultTemplate: {fileID: 9197481963319205126, guid: e906f17d63dae1140961bbcaf72e4003, type: 3}
   rgbMats:
   - {fileID: 2100000, guid: b10694c5847060748bb1dc01506fcf5b, type: 2}
   - {fileID: 2100000, guid: 7c066c00a2b23864d91df2fe2e1e9f3d, type: 2}

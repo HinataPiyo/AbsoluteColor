@@ -56,7 +56,7 @@ public class ResultData
 public class ResultController : MonoBehaviour
 {
     UIDocument uiDoc;
-    List<ResultData> resultColors = new List<ResultData>();    // お題の色とPlayerが決定した色のリスト
+    public readonly List<ResultData> resultColors = new List<ResultData>();    // お題の色とPlayerが決定した色のリスト
 
     VisualElement resultRoot;
     public bool IsResultDisplayed { get; private set; } = false;    // 結果が表示されているかどうかのフラグ
@@ -69,8 +69,9 @@ public class ResultController : MonoBehaviour
 
     void OnEnable()
     {
-        resultRoot = uiDoc.rootVisualElement.Q<VisualElement>("result-root");
+        resultRoot = uiDoc.rootVisualElement.Q<VisualElement>("RoundResultScore");
         if (resultRoot == null) { Debug.LogError("result-rootのVisualElementが見つかりませんでした"); return; }
+
         resultRoot.style.display = DisplayStyle.None;   // 最初は結果表示用のUIを非表示にする
     }
 
@@ -79,7 +80,7 @@ public class ResultController : MonoBehaviour
     /// </summary>
     public void AddResultColor(Color topicColor, Color playerColor)
     {
-        resultRoot.style.display = DisplayStyle.Flex;   // 結果表示用のUIを表示する
+        resultRoot.style.display = DisplayStyle.Flex;       // 結果表示用のUIを表示する
         resultColors.Add(new ResultData(topicColor, playerColor, resultColors.Count + 1));
 
         // 結果の色をUIに反映する

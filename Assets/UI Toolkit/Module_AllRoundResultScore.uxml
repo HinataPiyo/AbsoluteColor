@@ -1,0 +1,28 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Module_RoundResultScore" src="project://database/Assets/UI%20Toolkit/Module_RoundResultScore.uxml?fileID=9197481963319205126&amp;guid=e906f17d63dae1140961bbcaf72e4003&amp;type=3#Module_RoundResultScore"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Style_AllRoundResultScore.uss?fileID=7433441132597879392&amp;guid=5df8c68eb5664a14394f6a444546060e&amp;type=3"/>
+    <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgb(255, 212, 155); border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">
+        <ui:Label text="TotalResult" name="total-result-text" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 50px;"/>
+        <ui:VisualElement name="rounds-container" class="allround-result" style="height: 80%; border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; border-bottom-left-radius: 24px; overflow: hidden; background-color: rgb(255, 219, 161);">
+            <ui:ScrollView horizontal-scroller-visibility="Hidden" style="flex-grow: 1;">
+                <ui:Instance template="Module_RoundResultScore"/>
+                <ui:Instance template="Module_RoundResultScore"/>
+                <ui:Instance template="Module_RoundResultScore"/>
+                <ui:Instance template="Module_RoundResultScore"/>
+                <ui:Instance template="Module_RoundResultScore"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="score-rank-box" style="flex-grow: 1; flex-direction: row; justify-content: space-between; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:Label text="RANK" name="score-rank-text" class="score-rank" style="margin-left: 64px;"/>
+            <ui:Label text="S" name="score-rank-value" class="score-rank"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="total-score-box" style="flex-grow: 1; flex-direction: row; justify-content: space-between; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:Label text="SCORE" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
+            <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="buttons-container" style="flex-grow: 1; flex-direction: row;">
+            <ui:Button text="ホームに戻る" name="button-back-home" class="button"/>
+            <ui:Button text="リトライ" name="button-retry" class="button"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
