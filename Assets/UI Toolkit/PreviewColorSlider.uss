@@ -16,6 +16,7 @@
     min-width: auto;
     overflow: visible;
     margin-right: 10px;
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
 }
 
 .unity-base-slider__dragger {
@@ -41,9 +42,10 @@
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
-    margin-left: 0;
+    margin-left: 10px;
     padding-top: 0;
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
 }

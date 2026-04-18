@@ -41,6 +41,7 @@ public class AdjustUIAreaController: MonoBehaviour
             PreviewSlider preview_slider = new PreviewSlider(bars[index], (RGBType)index, rgbMats[index]);
             adjust_sliders.Add(adjust_slider);
             preview_sliders.Add(preview_slider);
+            OnSliderValueChanged((RGBType)index, 0f);     // スライダーの初期値を0にする
         }
 
         // 決定用のButtonに処理を登録

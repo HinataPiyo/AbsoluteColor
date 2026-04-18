@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public enum ScoreRank { S, A, B, C, D }
@@ -12,6 +13,7 @@ public class AllRoundTotalResult : MonoBehaviour
     ScrollView resultScrollView;    // 結果を表示するためのScrollView
     Label totalScore;           // 総合スコアを表示するためのLabel
     Label scoreRank;            // スコアランクを表示するためのLabel
+    Label scoreRankText;
     Button backHomeButton;      // ホームに戻るためのButton
     Button retryButton;         // もう一度プレイするためのButton
 
@@ -30,6 +32,7 @@ public class AllRoundTotalResult : MonoBehaviour
         resultScrollView = allroundResultRoot.Q<ScrollView>();
         totalScore = allroundResultRoot.Q<Label>("total-score-value");
         scoreRank = allroundResultRoot.Q<Label>("score-rank-value");
+        scoreRankText = allroundResultRoot.Q<Label>("score-rank-text");
         backHomeButton = allroundResultRoot.Q<Button>("button-back-home");
         retryButton = allroundResultRoot.Q<Button>("button-retry");
 
@@ -41,6 +44,9 @@ public class AllRoundTotalResult : MonoBehaviour
 
         resultScrollView.Clear();   // ScrollViewの内容をクリアする
         allroundResultRoot.style.display = DisplayStyle.None;   // 最初は全ラウンドの結果表示用のUIを非表示にする
+
+        retryButton.RegisterCallback<ClickEvent>(evt => { SceneManager.LoadScene(0); });
+        backHomeButton.SetEnabled(false);   // ホームに戻るボタンは現状未実装のため、無効化しておく
     }
 
     /// <summary>
@@ -67,6 +73,7 @@ public class AllRoundTotalResult : MonoBehaviour
         ScoreRank rank = CalculateScoreRank(totalScoreValue);
         scoreRank.text = rank.ToString();
         scoreRank.style.unityTextOutlineColor = scoreRankColors[rank];
+        scoreRankText.style.unityTextOutlineColor = scoreRankColors[rank];  
     }
 
     /// <summary>

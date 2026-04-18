@@ -7,6 +7,8 @@
 
 .allround-result .score-text {
     font-size: 46px;
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
+    -unity-text-outline-width: 3px;
 }
 
 .allround-result .round-count-text {
@@ -18,16 +20,18 @@
     font-size: 92px;
     -unity-font-style: bold-and-italic;
     color: rgb(255, 213, 0);
-    -unity-text-outline-color: rgb(255, 89, 94);
-    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(255, 45, 51);
+    -unity-text-outline-width: 6px;
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
 }
 
 .score-rank {
     font-size: 72px;
     -unity-font-style: bold-and-italic;
     color: rgb(255, 255, 255);
-    -unity-text-outline-width: 3px;
+    -unity-text-outline-width: 6px;
     -unity-text-outline-color: rgb(58, 0, 255);
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
 }
 
 .button {

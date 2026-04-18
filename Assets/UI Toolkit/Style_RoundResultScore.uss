@@ -4,6 +4,7 @@
 .difference-range-text {
     font-size: 42px;
     -unity-text-align: middle-center;
+    -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
 }
 
 #parameter {
@@ -23,8 +24,6 @@
     -unity-text-outline-color: rgb(255, 0, 0);
     -unity-text-outline-width: 3px;
 }
-
-
 
 .round-count-text {
     font-size: 52px;
