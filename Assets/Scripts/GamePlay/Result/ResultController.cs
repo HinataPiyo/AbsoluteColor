@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [System.Serializable]
-public class ResultData
+public partial class ResultData
 {
     public Color TopicColor { get; private set; }    // お題の色
     public Color AnswerColor { get; private set; }   // Playerが決定した色
@@ -53,25 +53,19 @@ public class ResultData
     }
 }
 
-public class ResultController : MonoBehaviour
+public class ResultController : MonoBehaviour, IUIModuleController
 {
-    UIDocument uiDoc;
     public readonly List<ResultData> resultColors = new List<ResultData>();    // お題の色とPlayerが決定した色のリスト
 
     VisualElement resultRoot;
     public bool IsResultDisplayed { get; private set; } = false;    // 結果が表示されているかどうかのフラグ
-    [SerializeField] Material[] rgbMats;
+    Material[] rgbMats;
 
-    void Awake()
+
+    public void Initialize(VisualElement root, Material[] Mats)
     {
-        uiDoc = GetComponent<UIDocument>();
-    }
-
-    void OnEnable()
-    {
-        resultRoot = uiDoc.rootVisualElement.Q<VisualElement>("RoundResultScore");
-        if (resultRoot == null) { Debug.LogError("result-rootのVisualElementが見つかりませんでした"); return; }
-
+        rgbMats = Mats;
+        resultRoot = root;
         resultRoot.style.display = DisplayStyle.None;   // 最初は結果表示用のUIを非表示にする
     }
 

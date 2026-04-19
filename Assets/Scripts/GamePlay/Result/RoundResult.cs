@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class RoundResult
+public partial class RoundResult
 {
     List<PreviewSlider> topic_preview_sliders = new List<PreviewSlider>();
     List<PreviewSlider> answer_preview_sliders = new List<PreviewSlider>();

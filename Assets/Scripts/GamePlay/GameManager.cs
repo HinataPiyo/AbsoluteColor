@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
     public const int MaxRound = 5;
     const float initialTimeLimit = 15f;
     [SerializeField] TopicSphereController topicSphere;
-    [SerializeField] TopicPreviewAreaController topicPreviewArea;
-    [SerializeField] ResultController result;
-    [SerializeField] AdjustUIAreaController adjustUIArea;
-    [SerializeField] AllRoundTotalResult allRoundTotalResult;
+    TopicPreviewAreaController topicPreviewArea;
+    ResultController result;
+    AdjustUIAreaController adjustUIArea;
+    AllRoundTotalResult allRoundTotalResult;
     Color topicColor;
     VisualElement ignoreRoot;   // 結果表示中にプレイヤーの入力を無視するためのVisualElement
     [HideInInspector] public bool isPlayerDecided = false;
@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if(I == null) I = this;
+        topicPreviewArea = uiDoc.GetComponent<TopicPreviewAreaController>();
+        result = uiDoc.GetComponent<ResultController>();
+        adjustUIArea = uiDoc.GetComponent<AdjustUIAreaController>();
+        allRoundTotalResult = uiDoc.GetComponent<AllRoundTotalResult>();
     }
 
     void OnEnable()

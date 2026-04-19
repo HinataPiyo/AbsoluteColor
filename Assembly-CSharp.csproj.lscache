@@ -59,6 +59,8 @@ Assets/Scripts/
   AdjustUIAreaController.cs
  GamePlay/
   GameManager.cs
+  GamePlayUIModuleManager.cs
+  IUIModuleController.cs
   OtherInfo/TopicPreviewAreaController.cs
   PreviewColor/PreviewSlider.cs
   Result/

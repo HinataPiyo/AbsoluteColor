@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public enum ScoreRank { S, A, B, C, D }
-public class AllRoundTotalResult : MonoBehaviour
+public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 {
     [SerializeField] VisualTreeAsset roundResultTemplate;    // ラウンドごとの結果を表示するためのUIテンプレート
-    [SerializeField] Material[] rgbMats;    // スコアランクごとの色を設定するためのMaterial
-    UIDocument uiDoc;
+    Material[] rgbMats;    // スコアランクごとの色を設定するためのMaterial
     ScrollView resultScrollView;    // 結果を表示するためのScrollView
     Label totalScore;           // 総合スコアを表示するためのLabel
     Label scoreRank;            // スコアランクを表示するためのLabel
@@ -19,14 +18,11 @@ public class AllRoundTotalResult : MonoBehaviour
 
     VisualElement allroundResultRoot;    // 全ラウンドの結果を表示するためのVisualElement
 
-    void Awake()
+    public void Initialize(VisualElement root, Material[] Mats = null)
     {
-        uiDoc = GetComponent<UIDocument>();
-    }
+        rgbMats = Mats;
+        allroundResultRoot = root;
 
-    void OnEnable()
-    {
-        allroundResultRoot = uiDoc.rootVisualElement.Q<VisualElement>("AllRoundResultScore");
         if (allroundResultRoot == null) { Debug.LogError("allroundResultRootのVisualElementが見つかりませんでした"); return; }
         
         resultScrollView = allroundResultRoot.Q<ScrollView>();
@@ -50,6 +46,11 @@ public class AllRoundTotalResult : MonoBehaviour
             SceneManager.LoadScene(0);
         });
         backHomeButton.SetEnabled(false);   // ホームに戻るボタンは現状未実装のため、無効化しておく
+    }
+
+    void OnEnable()
+    {
+        
     }
 
     /// <summary>

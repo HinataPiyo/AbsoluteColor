@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public enum RGBType { R, G, B }
 
 [Serializable]
-public class AdjustSlider
+public partial class AdjustSlider
 {
     Slider adjust_slider;
 

@@ -1,20 +1,17 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class TopicPreviewAreaController : MonoBehaviour
+public class TopicPreviewAreaController : MonoBehaviour, IUIModuleController
 {
-    UIDocument uiDoc;
-
     Label maxScore;
     Label roundCount;
     Label timer;
 
-    void Awake()
+    public void Initialize(VisualElement root, Material[] Mats)
     {
-        uiDoc = GetComponent<UIDocument>();
-        maxScore = uiDoc.rootVisualElement.Q("TopicPreviewArea").Q<Label>("max-score");
-        roundCount = uiDoc.rootVisualElement.Q("TopicPreviewArea").Q<Label>("round-count");
-        timer = uiDoc.rootVisualElement.Q("TopicPreviewArea").Q<Label>("timer");
+        maxScore = root.Q("TopicPreviewArea").Q<Label>("max-score");
+        roundCount = root.Q("TopicPreviewArea").Q<Label>("round-count");
+        timer = root.Q("TopicPreviewArea").Q<Label>("timer");
 
         if (maxScore == null) { Debug.LogError("max-scoreのLabelが見つかりませんでした"); return; }
         if (roundCount == null) { Debug.LogError("round-countのLabelが見つかりませんでした"); return; }
@@ -36,6 +33,6 @@ public class TopicPreviewAreaController : MonoBehaviour
     public void UpdateMaxScore(int score)
     {
         // 最高スコアの更新処理
-        maxScore.text = "MaxScore: " + score.ToString();
+        maxScore.text = "HightScore: " + score.ToString();
     }
 }

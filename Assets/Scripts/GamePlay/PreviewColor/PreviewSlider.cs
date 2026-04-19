@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 using System;
 
 [Serializable]
-public class PreviewSlider
+public partial class PreviewSlider
 {
     Slider preview_slider;
     Label parameter;

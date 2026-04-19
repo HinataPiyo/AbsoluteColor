@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class AdjustUIAreaController: MonoBehaviour
+public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
 {
-    UIDocument uiDoc;
     List<AdjustSlider> adjust_sliders = new List<AdjustSlider>();
     List<PreviewSlider> preview_sliders = new List<PreviewSlider>();
     VisualElement previewColor;
@@ -12,22 +11,16 @@ public class AdjustUIAreaController: MonoBehaviour
     float r, g, b;
     int rSeStep, gSeStep, bSeStep;
 
-    [SerializeField] Material[] rgbMats;
+    Material[] rgbMats;
 
-    void Awake()
+    public void Initialize(VisualElement root, Material[] Mats)
     {
-        uiDoc = GetComponent<UIDocument>();
-    }
+        rgbMats = Mats;
 
-    /// <summary>
-    /// UIToolkitのレイアウトが全て完了した後に呼び出したいため、OnEnableで初期化処理を行う
-    /// </summary>
-    void OnEnable()
-    {
         // 色調整を行うProgressbarを探す
-        List<VisualElement> bars = uiDoc.rootVisualElement.Q<VisualElement>("adjust-color-sliders").Query<VisualElement>("adjust-slider-root").ToList();
-        previewColor = uiDoc.rootVisualElement.Q<VisualElement>("preview-color");
-        decideButton = uiDoc.rootVisualElement.Q<Button>("decide-button");
+        List<VisualElement> bars = root.Q<VisualElement>("adjust-color-sliders").Query<VisualElement>("adjust-slider-root").ToList();
+        previewColor = root.Q<VisualElement>("preview-color");
+        decideButton = root.Q<Button>("decide-button");
 
         if (bars.Count != 3) { Debug.LogError($"{bars.Count} : Progressbarの数が3つではありませんでした"); return; }
         if (rgbMats == null || rgbMats.Length != 3) { Debug.LogError("Materialの数が3つではありませんでした"); return; }
