@@ -10,6 +10,7 @@ public class AdjustUIAreaController: MonoBehaviour
     VisualElement previewColor;
     Button decideButton;
     float r, g, b;
+    int rSeStep, gSeStep, bSeStep;
 
     [SerializeField] Material[] rgbMats;
 
@@ -37,7 +38,7 @@ public class AdjustUIAreaController: MonoBehaviour
         for (int ii = 0; ii < bars.Count; ii++)
         {
             int index = ii;     // クロージャ対策
-            AdjustSlider adjust_slider = new AdjustSlider(bars[index], (RGBType)index, rgbMats[index], OnSliderValueChanged);
+            AdjustSlider adjust_slider = new AdjustSlider(bars[index], (RGBType)index, OnSliderValueChanged);
             PreviewSlider preview_slider = new PreviewSlider(bars[index], (RGBType)index, rgbMats[index]);
             adjust_sliders.Add(adjust_slider);
             preview_sliders.Add(preview_slider);
@@ -45,7 +46,10 @@ public class AdjustUIAreaController: MonoBehaviour
         }
 
         // 決定用のButtonに処理を登録
-        decideButton.RegisterCallback<ClickEvent>(evt => { GameManager.I.isPlayerDecided = true; });
+        decideButton.RegisterCallback<ClickEvent>(evt => {
+            GameManager.I.isPlayerDecided = true;
+            AudioManager.I.PlaySE("DecideAdjustColorButton");
+        });
     }
 
     /// <summary>
@@ -55,21 +59,40 @@ public class AdjustUIAreaController: MonoBehaviour
     /// <param name="value">スライダーの値</param>
     public void OnSliderValueChanged(RGBType type, float value)
     {
+        bool shouldPlaySe = false;
+
         switch (type)
         {
             case RGBType.R:
                 r = value;
+                shouldPlaySe = HasSecondDecimalChanged(ref rSeStep, value);
                 break;
             case RGBType.G:
                 g = value;
+                shouldPlaySe = HasSecondDecimalChanged(ref gSeStep, value);
                 break;
             case RGBType.B:
                 b = value;
+                shouldPlaySe = HasSecondDecimalChanged(ref bSeStep, value);
                 break;
         }
 
         preview_sliders.Find(slider => slider.Type == type).AdjustChanged(value);       // プレビュー用のスライダーも値を変更する
-        UpdatePreviewColor(new Color(r, g, b));     // プレビュー用のVisualElementの背景色を変更する
+        UpdatePreviewColor(new Color(r, g, b));         // プレビュー用のVisualElementの背景色を変更する
+        if (shouldPlaySe) AudioManager.I.PlaySE("MoveAdjustSlider");      // 小数第2位以上が変化したときのみSEを再生する
+    }
+
+    /// <summary>
+    /// 小数第2位以上が変化したかどうかを判定するためのメソッド
+    /// </summary>
+    /// <param name="previousStep">前回の小数第2位までの値を100倍して整数にしたもの</param>
+    /// <param name="value">スライダーの値</param>
+    bool HasSecondDecimalChanged(ref int previousStep, float value)
+    {
+        int currentStep = Mathf.FloorToInt(value * 100f);
+        bool hasChanged = currentStep != previousStep;
+        previousStep = currentStep;
+        return hasChanged;
     }
 
     /// <summary>

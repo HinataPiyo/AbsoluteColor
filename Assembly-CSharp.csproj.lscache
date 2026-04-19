@@ -52,18 +52,21 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 /warnaserror+:NU1605
 
 [sourceFiles]
-Assets/Scripts/AdjustColor/
- AdjustSlider.cs
- AdjustUIAreaController.cs
 Assets/Scripts/
- GameManager.cs
- OtherInfo/TopicPreviewAreaController.cs
- PreviewColor/PreviewSlider.cs
- Result/
-  AllRoundTotalResult.cs
-  ResultController.cs
-  RoundResult.cs
- TopicSphere/TopicSphereController.cs
+ Audio/AudioManager.cs
+ GamePlay/AdjustColor/
+  AdjustSlider.cs
+  AdjustUIAreaController.cs
+ GamePlay/
+  GameManager.cs
+  OtherInfo/TopicPreviewAreaController.cs
+  PreviewColor/PreviewSlider.cs
+  Result/
+   AllRoundTotalResult.cs
+   ResultController.cs
+   RoundResult.cs
+  TopicSphere/TopicSphereController.cs
+ ScriptableObjects/AudioDataSO.cs
 Assets/TutorialInfo/Scripts/Readme.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 

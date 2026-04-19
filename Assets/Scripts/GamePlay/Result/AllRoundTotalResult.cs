@@ -45,7 +45,10 @@ public class AllRoundTotalResult : MonoBehaviour
         resultScrollView.Clear();   // ScrollViewの内容をクリアする
         allroundResultRoot.style.display = DisplayStyle.None;   // 最初は全ラウンドの結果表示用のUIを非表示にする
 
-        retryButton.RegisterCallback<ClickEvent>(evt => { SceneManager.LoadScene(0); });
+        retryButton.RegisterCallback<ClickEvent>(evt => {
+            AudioManager.I.PlaySE("NormalButton");
+            SceneManager.LoadScene(0);
+        });
         backHomeButton.SetEnabled(false);   // ホームに戻るボタンは現状未実装のため、無効化しておく
     }
 

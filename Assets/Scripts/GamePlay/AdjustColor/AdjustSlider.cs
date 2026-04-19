@@ -13,7 +13,7 @@ public class AdjustSlider
     /// 1. 色調整を行うSlider
     /// 2. Sliderの背景色をRGBのどれかにする(背景色は実際のグラデーションにする)
     /// </summary>
-    public AdjustSlider(VisualElement root, RGBType _type, Material _mat,Action<RGBType, float> onValueChanged)
+    public AdjustSlider(VisualElement root, RGBType _type, Action<RGBType, float> onValueChanged)
     {
         adjust_slider = root.Q<Slider>("adjust-slider");
 

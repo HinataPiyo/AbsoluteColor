@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c327e15149f22f43a84df03ef69c5e8, type: 3}
+  m_Name: AudioDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::AudioDataSO
+  seClips:
+  - tag: MoveAdjustSlider
+    clip: {fileID: 8300000, guid: 3d35e00b8766a954ca13bddca0f7159f, type: 3}
+  - tag: SpawnTopic
+    clip: {fileID: 8300000, guid: 8e5e3537b0cceb94b8c7df0f92f9cb1e, type: 3}
+  - tag: DecideAdjustColorButton
+    clip: {fileID: 8300000, guid: e321178d467e8c347a4a5db5e035760d, type: 3}
+  - tag: NormalButton
+    clip: {fileID: 8300000, guid: 60c2fdc07fca0084db36bc9a6598563c, type: 3}
+  - tag: TimeUp
+    clip: {fileID: 8300000, guid: ce771800ae04e7a40be14f321bc63958, type: 3}
+  bgmClips:
+  - tag: HomeScene
+    clip: {fileID: 8300000, guid: 9f94d97cb67d34c4c8183925d9c08e96, type: 3}
+  - tag: GamePlayScene
+    clip: {fileID: 8300000, guid: a0783924b72a42946b73a6bc9d099532, type: 3}

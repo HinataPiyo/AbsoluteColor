@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        AudioManager.I.PlayBGM("GamePlayScene");
         StartCoroutine(GameLoop());
     }
 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
+            if(!isPlayerDecided) { AudioManager.I.PlaySE("TimeUp"); }   // タイムアップのSEを再生する
             result.AddResultColor(topicColor, adjustUIArea.GetDecidedColor());      // 結果の色を追加する
 
             
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         topicColor = new Color(GetRandomZeroToOne(), GetRandomZeroToOne(), GetRandomZeroToOne());
         topicSphere.SetColor(topicColor);
+        AudioManager.I.PlaySE("SpawnTopic");
     }
 
     /// <summary>
