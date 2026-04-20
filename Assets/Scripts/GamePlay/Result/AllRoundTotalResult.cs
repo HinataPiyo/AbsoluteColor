@@ -8,7 +8,7 @@ public enum ScoreRank { S, A, B, C, D }
 public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 {
     [SerializeField] VisualTreeAsset roundResultTemplate;    // ラウンドごとの結果を表示するためのUIテンプレート
-    Material[] rgbMats;    // スコアランクごとの色を設定するためのMaterial
+    Material[] colorMaterials;    // スコアランクごとの色を設定するためのMaterial
     ScrollView resultScrollView;    // 結果を表示するためのScrollView
     Label totalScore;           // 総合スコアを表示するためのLabel
     Label scoreRank;            // スコアランクを表示するためのLabel
@@ -20,7 +20,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
-        rgbMats = Mats;
+        colorMaterials = Mats;
         allroundResultRoot = root;
 
         if (allroundResultRoot == null) { Debug.LogError("allroundResultRootのVisualElementが見つかりませんでした"); return; }
@@ -67,7 +67,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
         {
             ResultData data = resultDataList[ii];
             VisualElement elem = roundResultTemplate.Instantiate();   // テンプレートからUIを生成する
-            new RoundResult(elem, rgbMats, data);    // 生成したUIにラウンドの結果を表示するための処理を行う
+            new RoundResult(elem, colorMaterials, data);    // 生成したUIにラウンドの結果を表示するための処理を行う
             resultScrollView.Add(elem);   // ScrollViewに生成したUIを追加する
         }
             

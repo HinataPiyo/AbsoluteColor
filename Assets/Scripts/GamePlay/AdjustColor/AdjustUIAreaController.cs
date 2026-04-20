@@ -11,11 +11,11 @@ public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
     float r, g, b;
     int rSeStep, gSeStep, bSeStep;
 
-    Material[] rgbMats;
+    Material[] colorMaterials;
 
     public void Initialize(VisualElement root, Material[] Mats)
     {
-        rgbMats = Mats;
+        colorMaterials = Mats;
 
         // 色調整を行うProgressbarを探す
         List<VisualElement> bars = root.Q<VisualElement>("adjust-color-sliders").Query<VisualElement>("adjust-slider-root").ToList();
@@ -23,7 +23,7 @@ public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
         decideButton = root.Q<Button>("decide-button");
 
         if (bars.Count != 3) { Debug.LogError($"{bars.Count} : Progressbarの数が3つではありませんでした"); return; }
-        if (rgbMats == null || rgbMats.Length != 3) { Debug.LogError("Materialの数が3つではありませんでした"); return; }
+        if (colorMaterials == null || colorMaterials.Length != 3) { Debug.LogError("Materialの数が3つではありませんでした"); return; }
         if (previewColor == null) { Debug.LogError("プレビュー用のVisualElementが見つかりませんでした"); return; }
         if (decideButton == null) { Debug.LogError("決定用のButtonが見つかりませんでした"); return; }
 
@@ -32,7 +32,7 @@ public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
         {
             int index = ii;     // クロージャ対策
             AdjustSlider adjust_slider = new AdjustSlider(bars[index], (RGBType)index, OnSliderValueChanged);
-            PreviewSlider preview_slider = new PreviewSlider(bars[index], (RGBType)index, rgbMats[index]);
+            PreviewSlider preview_slider = new PreviewSlider(bars[index], (RGBType)index, colorMaterials[index]);
             adjust_sliders.Add(adjust_slider);
             preview_sliders.Add(preview_slider);
             OnSliderValueChanged((RGBType)index, 0f);     // スライダーの初期値を0にする

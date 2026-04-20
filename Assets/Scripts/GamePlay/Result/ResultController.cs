@@ -59,12 +59,12 @@ public class ResultController : MonoBehaviour, IUIModuleController
 
     VisualElement resultRoot;
     public bool IsResultDisplayed { get; private set; } = false;    // 結果が表示されているかどうかのフラグ
-    Material[] rgbMats;
+    Material[] colorMaterials;
 
 
     public void Initialize(VisualElement root, Material[] Mats)
     {
-        rgbMats = Mats;
+        colorMaterials = Mats;
         resultRoot = root;
         resultRoot.style.display = DisplayStyle.None;   // 最初は結果表示用のUIを非表示にする
     }
@@ -78,7 +78,7 @@ public class ResultController : MonoBehaviour, IUIModuleController
         resultColors.Add(new ResultData(topicColor, playerColor, resultColors.Count + 1));
 
         // 結果の色をUIに反映する
-        new RoundResult(resultRoot, rgbMats, resultColors[resultColors.Count - 1], () => {
+        new RoundResult(resultRoot, colorMaterials, resultColors[resultColors.Count - 1], () => {
             IsResultDisplayed = false;      // 結果が表示されていない状態にする
             resultRoot.style.display = DisplayStyle.None;   // 結果表示用のUIを非表示にする
         });

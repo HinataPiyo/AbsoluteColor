@@ -12,11 +12,11 @@ public partial class RoundResult
     VisualElement answer_previewColor;
     Label score;
     Button nextRoundButton;
-    Material[] rgbMats;
+    Material[] colorMaterials;
 
-    public RoundResult(VisualElement root, Material[] _rgbMats, ResultData resultData, System.Action onNextRound = null)
+    public RoundResult(VisualElement root, Material[] _colorMaterials, ResultData resultData, System.Action onNextRound = null)
     {
-        rgbMats = _rgbMats;
+        colorMaterials = _colorMaterials;
         VisualElement scoreRoot = root.Q<VisualElement>("round-result-root");
         if (scoreRoot == null) { Debug.LogError("RoundResultScoreのVisualElementが見つかりませんでした"); return; }
 
@@ -61,8 +61,8 @@ public partial class RoundResult
         for (int ii = 0; ii < topic_preview_roots.Count; ii++)
         {
             int index = ii;     // クロージャ対策
-            PreviewSlider topic_preview_slider = new PreviewSlider(topic_preview_roots[index], (RGBType)index, rgbMats[index]);
-            PreviewSlider answer_preview_slider = new PreviewSlider(answer_preview_roots[index], (RGBType)index, rgbMats[index]);
+            PreviewSlider topic_preview_slider = new PreviewSlider(topic_preview_roots[index], (RGBType)index, colorMaterials[index]);
+            PreviewSlider answer_preview_slider = new PreviewSlider(answer_preview_roots[index], (RGBType)index, colorMaterials[index]);
             topic_preview_sliders.Add(topic_preview_slider);
             answer_preview_sliders.Add(answer_preview_slider);
         }

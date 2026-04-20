@@ -19,7 +19,7 @@ public class GamePlayUIModuleManager : UIModuleManagerBase
     const string ResultPath = "RoundResultScore";
     const string AllRoundTotalResultPath = "AllRoundResultScore";
 
-    [SerializeField] Material[] RGB_Mats;
+    Material[] ColorMaterials;
 
     protected override void Awake()
     {
@@ -29,13 +29,15 @@ public class GamePlayUIModuleManager : UIModuleManagerBase
         Result = GetComponent<ResultController>();
         AllRoundTotalResult = GetComponent<AllRoundTotalResult>();
         TopicPreviewArea = GetComponent<TopicPreviewAreaController>();
+
+        ColorMaterials = CoreResource.CurrentColorChannelData.Materials;   // 現在の色チャンネルデータからマテリアルを取得
     }
 
     void Initialize()
     {
-        Initialize(AdjustUIArea, AdjustUIAreaPath, RGB_Mats);
-        Initialize(Result, ResultPath, RGB_Mats);
-        Initialize(AllRoundTotalResult, AllRoundTotalResultPath, RGB_Mats);
+        Initialize(AdjustUIArea, AdjustUIAreaPath, ColorMaterials);
+        Initialize(Result, ResultPath, ColorMaterials);
+        Initialize(AllRoundTotalResult, AllRoundTotalResultPath, ColorMaterials);
         Initialize(TopicPreviewArea, TopicPreviewAreaPath);
     }
 
