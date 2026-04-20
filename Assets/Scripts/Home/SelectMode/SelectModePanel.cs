@@ -15,7 +15,7 @@ public class SelectModePanel : MonoBehaviour, IUIModuleController, IPanelChangeE
     ScrollView modeScrollView;    // モード選択のスクロールビュー
     List<SelectModeComposition> modeCompositions = new List<SelectModeComposition>();   // モード選択のUI構成を管理するリスト
 
-    public void Initialize(VisualElement root, Material[] Mats = null)
+    public void Initialize(VisualElement root)
     {
         Root = root;
 

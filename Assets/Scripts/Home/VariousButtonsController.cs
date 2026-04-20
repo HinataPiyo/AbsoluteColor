@@ -12,7 +12,7 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController, IPan
     Button rankingButton;
     Button scoreHistoryButton;
 
-    public void Initialize(VisualElement root, Material[] Mats = null)
+    public void Initialize(VisualElement root)
     {
         Root = root;
 

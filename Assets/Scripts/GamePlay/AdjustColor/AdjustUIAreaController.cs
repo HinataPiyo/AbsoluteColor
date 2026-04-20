@@ -13,9 +13,9 @@ public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
 
     Material[] colorMaterials;
 
-    public void Initialize(VisualElement root, Material[] Mats)
+    public void Initialize(VisualElement root)
     {
-        colorMaterials = Mats;
+        colorMaterials = CoreResource.CurrentColorChannelData.Materials;     // 色調整用のMaterialを取得する
 
         // 色調整を行うProgressbarを探す
         List<VisualElement> bars = root.Q<VisualElement>("adjust-color-sliders").Query<VisualElement>("adjust-slider-root").ToList();

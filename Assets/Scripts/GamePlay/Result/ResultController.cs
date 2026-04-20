@@ -62,9 +62,9 @@ public class ResultController : MonoBehaviour, IUIModuleController
     Material[] colorMaterials;
 
 
-    public void Initialize(VisualElement root, Material[] Mats)
+    public void Initialize(VisualElement root)
     {
-        colorMaterials = Mats;
+        colorMaterials = CoreResource.CurrentColorChannelData.Materials;
         resultRoot = root;
         resultRoot.style.display = DisplayStyle.None;   // 最初は結果表示用のUIを非表示にする
     }

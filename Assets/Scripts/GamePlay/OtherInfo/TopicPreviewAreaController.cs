@@ -7,7 +7,7 @@ public class TopicPreviewAreaController : MonoBehaviour, IUIModuleController
     Label roundCount;
     Label timer;
 
-    public void Initialize(VisualElement root, Material[] Mats)
+    public void Initialize(VisualElement root)
     {
         maxScore = root.Q("TopicPreviewArea").Q<Label>("max-score");
         roundCount = root.Q("TopicPreviewArea").Q<Label>("round-count");

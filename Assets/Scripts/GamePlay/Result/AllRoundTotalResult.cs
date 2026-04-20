@@ -18,9 +18,9 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 
     VisualElement allroundResultRoot;    // 全ラウンドの結果を表示するためのVisualElement
 
-    public void Initialize(VisualElement root, Material[] Mats = null)
+    public void Initialize(VisualElement root)
     {
-        colorMaterials = Mats;
+        colorMaterials = CoreResource.CurrentColorChannelData.Materials;
         allroundResultRoot = root;
 
         if (allroundResultRoot == null) { Debug.LogError("allroundResultRootのVisualElementが見つかりませんでした"); return; }

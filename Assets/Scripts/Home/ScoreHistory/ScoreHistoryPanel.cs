@@ -11,7 +11,7 @@ public class ScoreHistoryPanel : MonoBehaviour, IUIModuleController, IPanelChang
     ScrollView scoreHistoryScrollView;    // モード選択のスクロールビュー
     
 
-    public void Initialize(VisualElement root, Material[] Mats = null)
+    public void Initialize(VisualElement root)
     {
         Root = root;
 

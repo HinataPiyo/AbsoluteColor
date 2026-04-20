@@ -14,6 +14,6 @@ public class UIModuleManagerBase : MonoBehaviour
     {
         var root = uiDoc.rootVisualElement.Q<VisualElement>(path);
         if (root == null) { Debug.LogError($"{path}のVisualElementが見つかりませんでした"); return; }
-        module.Initialize(root, RGB_Mats);
+        module.Initialize(root);
     }
 }
