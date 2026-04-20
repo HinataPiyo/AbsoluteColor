@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(ResultController))]
 [RequireComponent(typeof(AllRoundTotalResult))]
 [RequireComponent(typeof(TopicPreviewAreaController))]
-public class GamePlayUIModuleManager : MonoBehaviour
+public class GamePlayUIModuleManager : UIModuleManagerBase
 {
     public AdjustUIAreaController AdjustUIArea { get; private set; } 
     public ResultController Result { get; private set; }
@@ -19,14 +19,12 @@ public class GamePlayUIModuleManager : MonoBehaviour
     const string ResultPath = "RoundResultScore";
     const string AllRoundTotalResultPath = "AllRoundResultScore";
 
-
     [SerializeField] Material[] RGB_Mats;
 
-    UIDocument uiDoc;
-
-    void Awake()
+    protected override void Awake()
     {
-        uiDoc = GetComponent<UIDocument>();
+        base.Awake();
+
         AdjustUIArea = GetComponent<AdjustUIAreaController>();
         Result = GetComponent<ResultController>();
         AllRoundTotalResult = GetComponent<AllRoundTotalResult>();
@@ -35,18 +33,12 @@ public class GamePlayUIModuleManager : MonoBehaviour
 
     void Initialize()
     {
-        Initialize(AdjustUIArea, AdjustUIAreaPath);
-        Initialize(Result, ResultPath);
-        Initialize(AllRoundTotalResult, AllRoundTotalResultPath);
+        Initialize(AdjustUIArea, AdjustUIAreaPath, RGB_Mats);
+        Initialize(Result, ResultPath, RGB_Mats);
+        Initialize(AllRoundTotalResult, AllRoundTotalResultPath, RGB_Mats);
         Initialize(TopicPreviewArea, TopicPreviewAreaPath);
     }
 
-    void Initialize(IUIModuleController module, string path)
-    {
-        var root = uiDoc.rootVisualElement.Q<VisualElement>(path);
-        if (root == null) { Debug.LogError($"{path}のVisualElementが見つかりませんでした"); return; }
-        module.Initialize(root, RGB_Mats);
-    }
-
-    void OnEnable() => Initialize();
+    
+    protected void OnEnable() => Initialize();
 }

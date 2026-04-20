@@ -41,16 +41,17 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
         resultScrollView.Clear();   // ScrollViewの内容をクリアする
         allroundResultRoot.style.display = DisplayStyle.None;   // 最初は全ラウンドの結果表示用のUIを非表示にする
 
+        // リプレイ
         retryButton.RegisterCallback<ClickEvent>(evt => {
             AudioManager.I.PlaySE("NormalButton");
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(NameConstant.GamePlayScene);
         });
-        backHomeButton.SetEnabled(false);   // ホームに戻るボタンは現状未実装のため、無効化しておく
-    }
 
-    void OnEnable()
-    {
-        
+        // ホームに戻る
+        backHomeButton.RegisterCallback<ClickEvent>(evt => {
+            AudioManager.I.PlaySE("NormalButton");
+            SceneManager.LoadScene(NameConstant.HomeScene);
+        });
     }
 
     /// <summary>

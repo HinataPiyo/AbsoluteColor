@@ -1,0 +1,12 @@
+:root {
+}
+
+.color-edit-buttons {
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
+    font-size: 32px;
+    -unity-text-align: middle-center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}

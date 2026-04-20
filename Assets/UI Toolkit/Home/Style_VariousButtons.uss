@@ -1,0 +1,17 @@
+:root {
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
+    font-size: 46px;
+    -unity-text-align: middle-center;
+    width: 30%;
+}

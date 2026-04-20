@@ -32,13 +32,13 @@
     -unity-text-outline-width: 6px;
     -unity-text-outline-color: rgb(58, 0, 255);
     -unity-font-definition: url("project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&guid=fc3d7703027d6024e8d901155a459c7e&type=3#FunnelSans-SemiBold");
+    -unity-text-align: middle-left;
 }
 
 .button {
-    font-size: 24px;
+    font-size: 48px;
     -unity-text-align: middle-center;
     min-height: 5%;
-    flex-grow: 1;
     margin-top: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
@@ -47,4 +47,6 @@
     border-top-right-radius: 11px;
     border-bottom-right-radius: 11px;
     border-bottom-left-radius: 11px;
+    flex-grow: 1;
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
 }

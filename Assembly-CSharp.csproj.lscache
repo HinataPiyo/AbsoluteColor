@@ -54,13 +54,18 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 [sourceFiles]
 Assets/Scripts/
  Audio/AudioManager.cs
+ Constants/
+  BackButton.cs
+  IPanelChangeElement.cs
+  IUIModuleController.cs
+  NameConstant.cs
+  UIModuleManagerBase.cs
  GamePlay/AdjustColor/
   AdjustSlider.cs
   AdjustUIAreaController.cs
  GamePlay/
   GameManager.cs
   GamePlayUIModuleManager.cs
-  IUIModuleController.cs
   OtherInfo/TopicPreviewAreaController.cs
   PreviewColor/PreviewSlider.cs
   Result/
@@ -68,6 +73,11 @@ Assets/Scripts/
    ResultController.cs
    RoundResult.cs
   TopicSphere/TopicSphereController.cs
+ Home/
+  HomeManager.cs
+  HomeUIModuleManager.cs
+  SelectModePanel.cs
+  VariousButtonsController.cs
  ScriptableObjects/AudioDataSO.cs
 Assets/TutorialInfo/Scripts/Readme.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
