@@ -936,6 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895b5124497dd1b4e9d976687798f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
+  colorChannelDataSO: {fileID: 11400000, guid: 2198d32cc001e8e43bc3f553c885b548, type: 2}
 --- !u!1 &1973986100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1079,6 +1080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f4787a2f1d41d48b9f33027f634d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectModePanel
+  temp_SelectModePanel: {fileID: 9197481963319205126, guid: 5a09733bd8373394da2db9965d0e8881, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

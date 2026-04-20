@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 public class VariousButtonsController : MonoBehaviour, IUIModuleController
 {
-    Button selectModeButton;
+    public SelectModeButton SelectModeButton { get; private set; }
     Button playButton;
     Button collectionButton;
     Button eventButton;
@@ -13,7 +13,7 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
-        selectModeButton = root.Q<Button>("button-select-mode");
+        SelectModeButton = new SelectModeButton(root);
         playButton = root.Q<Button>("button-play");
         collectionButton = root.Q<Button>("button-collection");
         eventButton = root.Q<Button>("button-event");
@@ -31,11 +31,31 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
         SceneManager.LoadScene(NameConstant.GamePlayScene);
     }
 
+    
+}
+
+public class SelectModeButton
+{
+    Button selectModeButton;
+    Label modeText;
+    Label hightScoreText;
+
+    public SelectModeButton(VisualElement root)
+    {
+        selectModeButton = root.Q<Button>("button-select-mode");
+        modeText = root.Q<Label>("selected-mode-text");
+        hightScoreText = root.Q<Label>("high-score-value");
+    }
+
     /// <summary>
     /// SelectModeButtonを押したらモード選択パネルを表示する
     /// </summary>
-    public void SelectModeButtonOnClick(System.Action action)
+    public void ButtonOnClick(System.Action action, ColorChannelData data)
     {
-        selectModeButton.clicked += () => action();
+        selectModeButton.clicked += () => {
+            modeText.text = $"モード: {data.ModeName}";    // モード名を表示
+            hightScoreText.text = data.HighScore.ToString("#,###");    // ハイスコアを表示
+            action();
+        };
     }
 }

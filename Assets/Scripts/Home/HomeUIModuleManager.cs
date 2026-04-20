@@ -23,7 +23,7 @@ public class HomeUIModuleManager : UIModuleManagerBase
         Initialize(SelectModePanel, SelectModePanelPath);
 
         // モード選択パネルを表示
-        VariousButtons.SelectModeButtonOnClick(() => SelectModePanel.OnPanelChange(true));
+        VariousButtons.SelectModeButton.ButtonOnClick(() => SelectModePanel.OnPanelChange(true), HomeManager.I.ColorChannelDataSO.Datas[0]);
     }
 
     void OnEnable() => Initialize();

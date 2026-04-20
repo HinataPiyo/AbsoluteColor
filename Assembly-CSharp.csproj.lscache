@@ -76,9 +76,12 @@ Assets/Scripts/
  Home/
   HomeManager.cs
   HomeUIModuleManager.cs
+  SelectModeComposition.cs
   SelectModePanel.cs
   VariousButtonsController.cs
- ScriptableObjects/AudioDataSO.cs
+ ScriptableObjects/
+  AudioDataSO.cs
+  ColorChannelDataSO.cs
 Assets/TutorialInfo/Scripts/Readme.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 

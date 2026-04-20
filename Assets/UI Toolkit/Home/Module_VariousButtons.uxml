@@ -4,8 +4,8 @@
         <ui:Button name="button-select-mode" class="buttons" style="height: 15%; margin-left: 10px; margin-right: 10px; align-self: center; width: 50%; margin-top: 10px; margin-bottom: 10px;">
             <ui:Label text="モード: RGB" name="selected-mode-text" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
             <ui:VisualElement name="side-container" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; justify-content: space-between; padding-left: 20px; padding-right: 20px;">
-                <ui:Label text="ハイスコア" name="hight-score-text" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 26px; -unity-text-align: middle-left;"/>
-                <ui:Label text="20,200" name="hight-score-value" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 26px; -unity-text-align: middle-right;"/>
+                <ui:Label text="ハイスコア" name="high-score-text" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 26px; -unity-text-align: middle-left;"/>
+                <ui:Label text="20,200" name="high-score-value" picking-mode="Ignore" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 26px; -unity-text-align: middle-right;"/>
             </ui:VisualElement>
         </ui:Button>
         <ui:Button text="プレイ" name="button-play" class="buttons" style="height: 30%; align-self: center; width: 70%;"/>

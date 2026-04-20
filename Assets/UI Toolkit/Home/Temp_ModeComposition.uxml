@@ -7,8 +7,8 @@
         <ui:Label text="モード: RGB" name="selected-mode-value" picking-mode="Ignore" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); font-size: 70px; -unity-text-align: middle-center;"/>
         <ui:Label text="3種類のRed,Green,Blueの色チャンネルを使って&#10;色を調整するモード" name="description-value" picking-mode="Ignore" style="-unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); font-size: 42px; -unity-text-align: middle-center;"/>
         <ui:VisualElement name="score-side-container" picking-mode="Ignore" style="flex-grow: 1; flex-direction: row; justify-content: space-between; padding-left: 20px; padding-right: 20px;">
-            <ui:Label text="ハイスコア" name="hight-score-text" picking-mode="Ignore" class="hight-score-text" style="-unity-text-align: lower-center;"/>
-            <ui:Label text="20,000" name="hight-score-value" picking-mode="Ignore" class="hight-score-text" style="-unity-text-align: lower-right;"/>
+            <ui:Label text="ハイスコア" name="high-score-text" picking-mode="Ignore" class="hight-score-text" style="-unity-text-align: lower-center;"/>
+            <ui:Label text="20,000" name="high-score-value" picking-mode="Ignore" class="hight-score-text" style="-unity-text-align: lower-right;"/>
         </ui:VisualElement>
     </ui:Button>
 </ui:UXML>
