@@ -9,12 +9,12 @@
             </ui:VisualElement>
         </ui:Button>
         <ui:Button text="プレイ" name="button-play" class="buttons" style="height: 30%; align-self: center; width: 70%;"/>
-        <ui:VisualElement name="side-container" style="flex-grow: 1; flex-direction: row; justify-content: center;">
-            <ui:Button text="コレクション" name="button-collection" class="buttons" style="flex-grow: 1;"/>
-            <ui:Button text="イベント" name="button-event" class="buttons" style="flex-grow: 1;"/>
+        <ui:VisualElement name="side-container" enabled="false" style="flex-grow: 1; flex-direction: row; justify-content: center;">
+            <ui:Button text="ComingSoon" name="button-collection" class="buttons" style="flex-grow: 1;"/>
+            <ui:Button text="ComingSoon" name="button-event" class="buttons" style="flex-grow: 1;"/>
         </ui:VisualElement>
-        <ui:VisualElement name="side-container" style="flex-grow: 1; flex-direction: row;">
-            <ui:Button text="ランキング" name="button-ranking" class="buttons" style="flex-grow: 1;"/>
+        <ui:VisualElement name="side-container" enabled="true" style="flex-grow: 1; flex-direction: row;">
+            <ui:Button text="ComingSoon" name="button-ranking" enabled="false" class="buttons" style="flex-grow: 1;"/>
             <ui:Button text="スコア履歴" name="button-score-history" class="buttons" style="flex-grow: 1;"/>
         </ui:VisualElement>
     </ui:VisualElement>

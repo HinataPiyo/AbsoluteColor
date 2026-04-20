@@ -1,0 +1,21 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_BackButton" src="project://database/Assets/UI%20Toolkit/Temp_BackButton.uxml?fileID=9197481963319205126&amp;guid=f516b7b6ca282c441b50fe7235cf37ca&amp;type=3#Temp_BackButton"/>
+    <ui:Template name="Temp_ScoreHistoryComposition" src="project://database/Assets/UI%20Toolkit/Home/Temp_ScoreHistoryComposition.uxml?fileID=9197481963319205126&amp;guid=29bf7507dbc69614cb2fcbe871b02f1d&amp;type=3#Temp_ScoreHistoryComposition"/>
+    <ui:VisualElement name="root" picking-mode="Ignore" style="flex-grow: 1; background-color: rgb(238, 229, 208); padding-bottom: 35px;">
+        <ui:Label text="スコア履歴" name="score-histry-text" style="-unity-text-align: middle-center; font-size: 82px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); margin-top: 50px;"/>
+        <ui:VisualElement name="compositions-container" picking-mode="Ignore" style="flex-grow: 1; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:ScrollView horizontal-scroller-visibility="Hidden" vertical-scroller-visibility="AlwaysVisible" picking-mode="Ignore" style="flex-grow: 1; border-left-color: rgb(255, 171, 88); border-right-color: rgb(255, 171, 88); border-top-color: rgb(255, 171, 88); border-bottom-color: rgb(255, 171, 88); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; overflow: hidden; background-color: rgb(255, 220, 186);">
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+                <ui:Instance template="Temp_ScoreHistoryComposition"/>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:Instance template="Temp_BackButton" name="BackButton" style="width: 60%; align-self: center; height: 5%;"/>
+    </ui:VisualElement>
+</ui:UXML>

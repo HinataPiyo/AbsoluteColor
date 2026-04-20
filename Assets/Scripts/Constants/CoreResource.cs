@@ -8,6 +8,8 @@ public static class CoreResource
         { AdjustColorGenre.RGB_Slider, 0 }
     };
 
+    public static Stack<ScoreHistoryData> ScoreHistoryDatas = new Stack<ScoreHistoryData>();   // スコア履歴のデータを管理するリスト
+
     /// <summary>
     /// ジャンルごとのハイスコアを更新するメソッド
     /// </summary>

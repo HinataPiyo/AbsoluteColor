@@ -1,0 +1,21 @@
+:root {
+}
+
+.composition-text {
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
+    font-size: 32px;
+    -unity-text-align: middle-left;
+}
+
+.button {
+    background-color: rgb(255, 224, 172);
+}
+
+.button:hover {
+    background-color: rgb(255, 165, 165);
+    scale: 1.02 1.02;
+}
+
+.button:active {
+    scale: 0.98 0.98;
+}

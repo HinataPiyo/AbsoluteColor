@@ -1,0 +1,20 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ScoreHistoryComposition.uss?fileID=7433441132597879392&amp;guid=6e77bd367f17ae6489d3ed6f571779c1&amp;type=3#Style_ScoreHistoryComposition"/>
+    <ui:Button name="score-histry-root" class="button" style="flex-grow: 1; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px;">
+        <ui:Label text="/" name="line" class="composition-text" style="position: absolute; left: 49%; bottom: 5%;"/>
+        <ui:VisualElement name="side-container" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+            <ui:Label text="モード: RGB" name="mode-value" class="composition-text" style="-unity-text-align: upper-left;"/>
+            <ui:Label text="19:20" name="time-value" class="composition-text" style="-unity-text-align: upper-right;"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="side-container" style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+            <ui:VisualElement name="side-container" style="flex-direction: row; justify-content: space-between; flex-grow: 1; width: 19px; margin-right: 19px;">
+                <ui:Label text="ランク" name="rank-text" class="composition-text" style="-unity-text-align: lower-right;"/>
+                <ui:Label text="S" name="rank-value" class="composition-text" style="-unity-text-align: lower-left;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="side-container" style="flex-direction: row; justify-content: space-between; flex-grow: 1; width: 19px; margin-left: 19px;">
+                <ui:Label text="スコア" name="score-text" class="composition-text" style="-unity-text-align: lower-right;"/>
+                <ui:Label text="20,000" name="score-value" class="composition-text" style="-unity-text-align: lower-left;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:Button>
+</ui:UXML>

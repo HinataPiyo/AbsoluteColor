@@ -999,6 +999,7 @@ GameObject:
   - component: {fileID: 2080840516}
   - component: {fileID: 2080840515}
   - component: {fileID: 2080840517}
+  - component: {fileID: 2080840518}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1081,6 +1082,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectModePanel
   temp_SelectModePanel: {fileID: 9197481963319205126, guid: 5a09733bd8373394da2db9965d0e8881, type: 3}
+--- !u!114 &2080840518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080840512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b976cc47fc25d904ab6a1b9c150c896c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScoreHistoryPanel
+  temp_ScoreHistoryComposition: {fileID: 9197481963319205126, guid: 29bf7507dbc69614cb2fcbe871b02f1d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

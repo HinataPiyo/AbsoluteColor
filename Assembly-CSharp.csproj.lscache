@@ -77,8 +77,12 @@ Assets/Scripts/
  Home/
   HomeManager.cs
   HomeUIModuleManager.cs
-  SelectModeComposition.cs
-  SelectModePanel.cs
+  ScoreHistory/
+   ScoreHistoryComposition.cs
+   ScoreHistoryPanel.cs
+  SelectMode/
+   SelectModeComposition.cs
+   SelectModePanel.cs
   VariousButtonsController.cs
  ScriptableObjects/
   AudioDataSO.cs

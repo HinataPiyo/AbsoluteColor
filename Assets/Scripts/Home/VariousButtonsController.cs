@@ -30,6 +30,17 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
     {
         SceneManager.LoadScene(NameConstant.GamePlayScene);
     }
+
+    /// <summary>
+    /// ScoreHistoryButtonを押したらスコア履歴パネルを表示する
+    /// </summary>
+    public void ScoreHistoryButtonOnClick(System.Action action)
+    {
+        scoreHistoryButton.clicked += () => {
+            action();
+            AudioManager.I.PlaySE("NormalButton");
+        };
+    }
 }
 
 public class SelectModeButton

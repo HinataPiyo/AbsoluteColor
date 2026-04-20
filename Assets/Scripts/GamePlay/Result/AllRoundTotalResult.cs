@@ -73,13 +73,16 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
             
         // 総合スコアとランクの計算と表示
         int totalScoreValue = CalculateTotalScore(resultDataList);
-        CoreResource.UpdateHighScore(CoreResource.CurrentColorChannelData.AdjustColorGenre, totalScoreValue);   // ハイスコアの更新
         totalScore.text = totalScoreValue.ToString();
+        // ハイスコアの更新
+        CoreResource.UpdateHighScore(CoreResource.CurrentColorChannelData.AdjustColorGenre, totalScoreValue);   // ハイスコアの更新
 
         ScoreRank rank = CalculateScoreRank(totalScoreValue);
         scoreRank.text = rank.ToString();
         scoreRank.style.unityTextOutlineColor = scoreRankColors[rank];
         scoreRankText.style.unityTextOutlineColor = scoreRankColors[rank];  
+
+        CoreResource.ScoreHistoryDatas.Push(new ScoreHistoryData(CoreResource.CurrentColorChannelData, rank, totalScoreValue, DateTime.Now));   // スコア履歴に今回のスコアを追加する
     }
 
     /// <summary>

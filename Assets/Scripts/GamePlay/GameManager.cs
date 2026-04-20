@@ -105,6 +105,5 @@ public class GameManager : MonoBehaviour
     void IgnorePlayerInput(bool ignore)
     {
         ignoreRoot.style.display = ignore ? DisplayStyle.Flex : DisplayStyle.None;   // 無視する場合は無視用のVisualElementを表示し、受け付ける場合は非表示にする        
-        Debug.Log($"プレイヤーの入力を{(ignore ? "無視" : "受け付け")}するように設定しました");
     }
 }

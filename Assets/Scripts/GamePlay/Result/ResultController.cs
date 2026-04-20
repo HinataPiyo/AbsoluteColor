@@ -83,8 +83,6 @@ public class ResultController : MonoBehaviour, IUIModuleController
             resultRoot.style.display = DisplayStyle.None;   // 結果表示用のUIを非表示にする
         });
 
-        IsResultDisplayed = true;    // 結果が表示されているフラ
-        
-        Debug.Log($"結果の色を追加しました。お題の色: {topicColor}, Playerの色: {playerColor}");
+        IsResultDisplayed = true;    // 結果が表示されているフラグを立てる
     }
 }
