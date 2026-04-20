@@ -12,12 +12,12 @@
                 <ui:Instance template="Module_RoundResultScore"/>
             </ui:ScrollView>
         </ui:VisualElement>
-        <ui:VisualElement name="score-rank-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
-            <ui:Label text="RANK" name="score-rank-text" class="score-rank" style="margin-left: 64px;"/>
+        <ui:VisualElement name="score-rank-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 125px; padding-bottom: 0; padding-left: 20px;">
+            <ui:Label text="ランク" name="score-rank-text" class="score-rank" style="margin-left: 64px;"/>
             <ui:Label text="S" name="score-rank-value" class="score-rank"/>
         </ui:VisualElement>
         <ui:VisualElement name="total-score-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
-            <ui:Label text="SCORE" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
+            <ui:Label text="スコア" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
             <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
         </ui:VisualElement>
         <ui:VisualElement name="buttons-container" style="flex-direction: row; height: 10%;">

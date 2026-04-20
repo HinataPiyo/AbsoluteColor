@@ -19,3 +19,9 @@ MonoBehaviour:
     - {fileID: 2100000, guid: 7c066c00a2b23864d91df2fe2e1e9f3d, type: 2}
     - {fileID: 2100000, guid: 1708aeea1ed2e704c9f24709518c5b01, type: 2}
     description: "3\u7A2E\u985E\u306ERed,Green,Blue\u306E\u8272\u30C1\u30E3\u30F3\u30CD\u30EB\u3092\u4F7F\u3063\u3066\n\u8272\u3092\u8ABF\u6574\u3059\u308B\u30E2\u30FC\u30C9"
+  - adjustColorGenre: 0
+    materials:
+    - {fileID: 2100000, guid: b10694c5847060748bb1dc01506fcf5b, type: 2}
+    - {fileID: 2100000, guid: 7c066c00a2b23864d91df2fe2e1e9f3d, type: 2}
+    - {fileID: 2100000, guid: 1708aeea1ed2e704c9f24709518c5b01, type: 2}
+    description: "3\u7A2E\u985E\u306ERed,Green,Blue\u306E\u8272\u30C1\u30E3\u30F3\u30CD\u30EB\u3092\u4F7F\u3063\u3066\n\u8272\u3092\u8ABF\u6574\u3059\u308B\u30E2\u30FC\u30C9"

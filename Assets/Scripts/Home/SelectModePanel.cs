@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +13,7 @@ public class SelectModePanel : MonoBehaviour, IUIModuleController, IPanelChangeE
     [SerializeField] VisualTreeAsset temp_SelectModePanel;   // モード選択パネルのUIテンプレート
 
     ScrollView modeScrollView;    // モード選択のスクロールビュー
+    List<SelectModeComposition> modeCompositions = new List<SelectModeComposition>();   // モード選択のUI構成を管理するリスト
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
@@ -23,25 +25,37 @@ public class SelectModePanel : MonoBehaviour, IUIModuleController, IPanelChangeE
         modeScrollView = Root.Q<ScrollView>();   // モード選択のScrollViewを取得
         modeScrollView.Clear();    // ScrollViewの内容をクリアする
 
+
+        int dataCount = 0;
         // モード選択のUIを生成する
         foreach (ColorChannelData data in HomeManager.I.ColorChannelDataSO.Datas)
-        {
-            CreateModeComposition(data);   // 各モードのUIを生成する
+        {            
+            SelectModeComposition comp = CreateModeComposition(data);   // 各モードのUIを生成する
+            comp.SetNowModeTagActive(dataCount == 0);   // 最初のモードのタグは表示し、他のモードのタグは非表示にする
+            dataCount++;
         }
     }
 
     /// <summary>
     /// モード選択のUIを生成する
     /// </summary>
-    void CreateModeComposition(ColorChannelData data)
+    SelectModeComposition CreateModeComposition(ColorChannelData data)
     {
         VisualElement temp = temp_SelectModePanel.Instantiate();   // UIテンプレートからVisualElementを生成
-        new SelectModeComposition(temp, data, () =>
+        SelectModeComposition composition = new SelectModeComposition(temp, data, (select) =>
         {
             // モード選択時の処理をここに記述
             SelectModeButtonClicked();
+            foreach (SelectModeComposition comp in modeCompositions)
+            {
+                comp.SetNowModeTagActive(comp == select);   // 選択されたモードのタグを表示し、他のモードのタグは非表示にする
+            }
         });
+
         modeScrollView.Add(temp);    // ScrollViewに生成したVisualElementを追加
+        modeCompositions.Add(composition);   // モード選択のUI構成をリストに追加
+
+        return composition;
     }
 
     /// <summary>

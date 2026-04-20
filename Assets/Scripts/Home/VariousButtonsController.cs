@@ -13,7 +13,7 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
-        SelectModeButton = new SelectModeButton(root);
+        SelectModeButton = new SelectModeButton(root, HomeManager.I.ColorChannelDataSO.Datas[0]);   // 最初のモードのデータを渡してSelectModeButtonを初期化
         playButton = root.Q<Button>("button-play");
         collectionButton = root.Q<Button>("button-collection");
         eventButton = root.Q<Button>("button-event");
@@ -30,8 +30,6 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
     {
         SceneManager.LoadScene(NameConstant.GamePlayScene);
     }
-
-    
 }
 
 public class SelectModeButton
@@ -40,11 +38,14 @@ public class SelectModeButton
     Label modeText;
     Label hightScoreText;
 
-    public SelectModeButton(VisualElement root)
+    public SelectModeButton(VisualElement root, ColorChannelData data)
     {
         selectModeButton = root.Q<Button>("button-select-mode");
         modeText = root.Q<Label>("selected-mode-text");
         hightScoreText = root.Q<Label>("high-score-value");
+
+        modeText.text = $"モード: {data.ModeName}";                 // モード名を表示
+        hightScoreText.text = data.HighScore.ToString("#,###");     // ハイスコアを表示
     }
 
     /// <summary>

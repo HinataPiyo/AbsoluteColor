@@ -22,11 +22,13 @@
     -unity-text-align: middle-left;
     color: rgb(255, 235, 0);
     -unity-text-outline-color: rgb(255, 0, 0);
-    -unity-text-outline-width: 3px;
+    -unity-text-outline-width: 2px;
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
 }
 
 .round-count-text {
     font-size: 52px;
     -unity-text-align: middle-center;
     -unity-font-style: bold;
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
 }
