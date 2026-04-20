@@ -22,6 +22,7 @@ public class SelectModeComposition
         modeButton = root.Q<Button>("mode-composition-root");
 
         modeButton.clicked += () => {
+            CoreResource.CurrentColorChannelData = data;    // 選択されたモードのデータをCoreResourceに保存する
             SetNowModeTagActive(true);        // 現在選択中のタグを表示する
             onClickAction(this);
         };
@@ -30,7 +31,7 @@ public class SelectModeComposition
 
         modeText.text = $"モード: {data.ModeName}";             // モードの名前を表示
         modeDescription.text = data.Description;                // モードの説明文を表示
-        highScore.text = data.HighScore.ToString("#,###");        // ハイスコアを表示
+        highScore.text = CoreResource.HighScores[data.AdjustColorGenre].ToString("#,###");        // ハイスコアを表示
         
     }
 

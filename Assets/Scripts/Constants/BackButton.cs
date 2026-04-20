@@ -25,7 +25,10 @@ public class BackButton
     {
         action = onBack;
         backButton = root.Q<VisualElement>("BackButton").Q<Button>();
-        backButton.clicked += () => action();
+        backButton.clicked += () => {
+            action();
+            AudioManager.I.PlaySE("BackButton");
+        };
     }
 
     /// <summary>

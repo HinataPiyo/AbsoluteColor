@@ -73,6 +73,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
             
         // 総合スコアとランクの計算と表示
         int totalScoreValue = CalculateTotalScore(resultDataList);
+        CoreResource.UpdateHighScore(CoreResource.CurrentColorChannelData.AdjustColorGenre, totalScoreValue);   // ハイスコアの更新
         totalScore.text = totalScoreValue.ToString();
 
         ScoreRank rank = CalculateScoreRank(totalScoreValue);

@@ -13,7 +13,7 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
-        SelectModeButton = new SelectModeButton(root, HomeManager.I.ColorChannelDataSO.Datas[0]);   // 最初のモードのデータを渡してSelectModeButtonを初期化
+        SelectModeButton = new SelectModeButton(root, CoreResource.CurrentColorChannelData);   // 最初のモードのデータを渡してSelectModeButtonを初期化
         playButton = root.Q<Button>("button-play");
         collectionButton = root.Q<Button>("button-collection");
         eventButton = root.Q<Button>("button-event");
@@ -45,7 +45,7 @@ public class SelectModeButton
         hightScoreText = root.Q<Label>("high-score-value");
 
         modeText.text = $"モード: {data.ModeName}";                 // モード名を表示
-        hightScoreText.text = data.HighScore.ToString("#,###");     // ハイスコアを表示
+        hightScoreText.text = CoreResource.HighScores[data.AdjustColorGenre].ToString("#,###");     // ハイスコアを表示
     }
 
     /// <summary>
@@ -53,10 +53,12 @@ public class SelectModeButton
     /// </summary>
     public void ButtonOnClick(System.Action action, ColorChannelData data)
     {
-        selectModeButton.clicked += () => {
+        selectModeButton.clicked += () =>
+        {
             modeText.text = $"モード: {data.ModeName}";    // モード名を表示
-            hightScoreText.text = data.HighScore.ToString("#,###");    // ハイスコアを表示
+            hightScoreText.text = CoreResource.HighScores[data.AdjustColorGenre].ToString("#,###");    // ハイスコアを表示
             action();
+            AudioManager.I.PlaySE("NormalButton");
         };
     }
 }

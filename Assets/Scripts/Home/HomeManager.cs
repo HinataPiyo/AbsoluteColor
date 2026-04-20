@@ -5,13 +5,15 @@ public class HomeManager : MonoBehaviour
 {
     public static HomeManager I { get; private set; }
 
-    [SerializeField] ColorChannelDataSO colorChannelDataSO;   // 色チャンネルデータのScriptableObject 
-    public ColorChannelDataSO ColorChannelDataSO => colorChannelDataSO;    // 色チャンネルデータのプロパティ
+    [SerializeField] ColorChannelDataSO colorChannelDataSO;   // 色チャンネルデータのScriptableObject
+    public ColorChannelDataSO ColorChannelDataSO => colorChannelDataSO;   // 色チャンネルデータのプロパティ
 
     void Awake()
     {
         if(I == null) I = this;
-        if(ColorChannelDataSO.Datas.Count == 0) Debug.LogError("ColorChannelDataSOにデータが設定されていません。");
+        if(colorChannelDataSO.Datas.Count == 0) Debug.LogError("ColorChannelDataSOにデータが設定されていません。");
+
+        CoreResource.CurrentColorChannelData = colorChannelDataSO.Datas[0];   // 最初の色チャンネルデータを現在のデータとして設定
     }
 
     void Start()

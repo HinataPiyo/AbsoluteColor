@@ -23,6 +23,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 60c2fdc07fca0084db36bc9a6598563c, type: 3}
   - tag: TimeUp
     clip: {fileID: 8300000, guid: ce771800ae04e7a40be14f321bc63958, type: 3}
+  - tag: BackButton
+    clip: {fileID: 8300000, guid: 8ced597f3d1ad0548a600fa38823298f, type: 3}
+  - tag: ModeChange
+    clip: {fileID: 8300000, guid: e30921dd351ccea4f9ed6fedbfa85760, type: 3}
   bgmClips:
   - tag: HomeScene
     clip: {fileID: 8300000, guid: 9f94d97cb67d34c4c8183925d9c08e96, type: 3}

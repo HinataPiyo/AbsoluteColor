@@ -50,6 +50,7 @@ public class SelectModePanel : MonoBehaviour, IUIModuleController, IPanelChangeE
             {
                 comp.SetNowModeTagActive(comp == select);   // 選択されたモードのタグを表示し、他のモードのタグは非表示にする
             }
+            AudioManager.I.PlaySE("ModeChange");
         });
 
         modeScrollView.Add(temp);    // ScrollViewに生成したVisualElementを追加

@@ -15,7 +15,6 @@ public class ColorChannelData
     [SerializeField] AdjustColorGenre adjustColorGenre;
     [SerializeField] Material[] materials;          // 色のマテリアルの配列
     [SerializeField, TextArea(5,10)] string description;            // モードの説明文
-    public int HighScore { get; private set; }      // ハイスコアのプロパティ
 
     readonly Dictionary<AdjustColorGenre, string> modeName = new Dictionary<AdjustColorGenre, string>()
     {
