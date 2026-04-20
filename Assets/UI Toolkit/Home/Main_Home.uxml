@@ -3,7 +3,7 @@
     <ui:Template name="Module_ScoreHistory" src="project://database/Assets/UI%20Toolkit/Home/Module_ScoreHistory.uxml?fileID=9197481963319205126&amp;guid=2b0bc69b3c6565d48a57a5f59dbea7d0&amp;type=3#Module_ScoreHistory"/>
     <ui:Template name="Module_SelectModePanel" src="project://database/Assets/UI%20Toolkit/Home/Module_SelectModePanel.uxml?fileID=9197481963319205126&amp;guid=ec29c790568b1f9409bbb16d09be8db3&amp;type=3#Module_SelectModePanel"/>
     <ui:Template name="Module_VariousButtons" src="project://database/Assets/UI%20Toolkit/Home/Module_VariousButtons.uxml?fileID=9197481963319205126&amp;guid=cbdb6a74d7ad59948bd349944656d723&amp;type=3#Module_VariousButtons"/>
-    <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ColorEditButtons.uss?fileID=7433441132597879392&amp;guid=f3f299f607a22484f9a806b7faf527d8&amp;type=3#Style_ColorEditButtons"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ColorEditButtons.uss?fileID=7433441132597879392&amp;guid=f3f299f607a22484f9a806b7faf527d8&amp;type=3"/>
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="upper-area" style="flex-grow: 1; height: 0%;">
             <ui:VisualElement name="player-information-box" style="position: absolute; top: 5%; left: 5%; width: 40%; flex-direction: row; align-items: center;">

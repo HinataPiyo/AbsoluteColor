@@ -18,6 +18,7 @@ public class HomeUIModuleManager : UIModuleManagerBase
     public ColorPreviewPanel ColorPreviewPanel { get; private set; }
 
     Button button_edit_rgb;
+    public VisualElement ColorPreview { get; private set; }
 
 
     protected override void Awake()
@@ -28,7 +29,9 @@ public class HomeUIModuleManager : UIModuleManagerBase
         ScoreHistoryPanel = GetComponent<ScoreHistoryPanel>();
         ColorPreviewPanel = GetComponent<ColorPreviewPanel>();
 
-        button_edit_rgb = uiDoc.rootVisualElement.Q<Button>("button-edit-rgb");
+        VisualElement root = uiDoc.rootVisualElement;
+        button_edit_rgb = root.Q<Button>("button-edit-rgb");
+        ColorPreview = root.Q<VisualElement>("color-preview");
     }
 
     void Initialize()

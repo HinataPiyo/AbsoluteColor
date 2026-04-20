@@ -937,6 +937,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomeManager
   colorChannelDataSO: {fileID: 11400000, guid: 2198d32cc001e8e43bc3f553c885b548, type: 2}
+  homeUiManager: {fileID: 2080840516}
+  topicSphere: {fileID: 634705810}
 --- !u!1 &1973986100
 GameObject:
   m_ObjectHideFlags: 0

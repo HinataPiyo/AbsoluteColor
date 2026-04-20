@@ -58,8 +58,8 @@ public class AdjustRGBSlidedr : PanelChangeElementBase
         }
 
         preview_sliders.Find(slider => slider.Type == type).AdjustChanged(value);       // プレビュー用のスライダーも値を変更する
-        // UpdatePreviewColor(new Color(r, g, b));         // プレビュー用のVisualElementの背景色を変更する
-        if (shouldPlaySe) AudioManager.I.PlaySE("MoveAdjustSlider");      // 小数第2位以上が変化したときのみSEを再生する
+        HomeManager.I.UpdatePreviewColor(new Color(r, g, b));               // プレビュー用の色を変更する
+        if (shouldPlaySe) AudioManager.I.PlaySE("MoveAdjustSlider");        // 小数第2位以上が変化したときのみSEを再生する
     }
 
     /// <summary>
