@@ -1,4 +1,5 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Module_ColorPreviewEditPanel" src="project://database/Assets/UI%20Toolkit/Home/Module_ColorPreviewEditPanel.uxml?fileID=9197481963319205126&amp;guid=ec7b88b38d301894e8d5f9198c2b90d5&amp;type=3#Module_ColorPreviewEditPanel"/>
     <ui:Template name="Module_ScoreHistory" src="project://database/Assets/UI%20Toolkit/Home/Module_ScoreHistory.uxml?fileID=9197481963319205126&amp;guid=2b0bc69b3c6565d48a57a5f59dbea7d0&amp;type=3#Module_ScoreHistory"/>
     <ui:Template name="Module_SelectModePanel" src="project://database/Assets/UI%20Toolkit/Home/Module_SelectModePanel.uxml?fileID=9197481963319205126&amp;guid=ec29c790568b1f9409bbb16d09be8db3&amp;type=3#Module_SelectModePanel"/>
     <ui:Template name="Module_VariousButtons" src="project://database/Assets/UI%20Toolkit/Home/Module_VariousButtons.uxml?fileID=9197481963319205126&amp;guid=cbdb6a74d7ad59948bd349944656d723&amp;type=3#Module_VariousButtons"/>
@@ -25,8 +26,9 @@
                 <ui:Button text="RGB" name="button-edit-rgb" class="color-edit-buttons"/>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="bottom-area" style="height: 42%;">
-            <ui:Instance template="Module_VariousButtons" name="VariousButtons" style="flex-grow: 1;"/>
+        <ui:VisualElement name="bottom-area" style="height: 42%; background-color: rgb(255, 234, 220); border-left-color: rgb(248, 177, 134); border-right-color: rgb(248, 177, 134); border-top-color: rgb(248, 177, 134); border-bottom-color: rgb(248, 177, 134); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; justify-content: center;">
+            <ui:Instance template="Module_VariousButtons" name="VariousButtons" style="flex-grow: 1; display: flex;"/>
+            <ui:Instance template="Module_ColorPreviewEditPanel" name="ColorPreviewEditPanel" style="display: none;"/>
         </ui:VisualElement>
         <ui:VisualElement name="all-area" picking-mode="Ignore" style="position: absolute; height: 90%; width: 100%;">
             <ui:Instance template="Module_SelectModePanel" name="SelectModePanel" style="flex-grow: 1; display: none;"/>

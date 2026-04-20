@@ -75,6 +75,7 @@ Assets/Scripts/
    RoundResult.cs
   TopicSphere/TopicSphereController.cs
  Home/
+  ColorPreview(Home)/ColorPreviewPanel.cs
   HomeManager.cs
   HomeUIModuleManager.cs
   ScoreHistory/

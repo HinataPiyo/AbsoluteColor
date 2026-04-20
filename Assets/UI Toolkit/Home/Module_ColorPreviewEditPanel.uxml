@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Temp_AdjustColorSlider" src="project://database/Assets/UI%20Toolkit/GamePlay/Temp_AdjustColorSlider.uxml?fileID=9197481963319205126&amp;guid=be99ea6ebb98c844ca3965056fd4e029&amp;type=3#Temp_AdjustColorSlider"/>
+    <ui:Template name="Temp_BackButton" src="project://database/Assets/UI%20Toolkit/Temp_BackButton.uxml?fileID=9197481963319205126&amp;guid=f516b7b6ca282c441b50fe7235cf37ca&amp;type=3#Temp_BackButton"/>
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:Label text="色調整" name="change-rgb-text" style="font-size: 32px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; bottom: -21px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); -unity-text-align: upper-center;"/>
+        <ui:VisualElement name="rgb-adjust-color-panel" style="flex-grow: 1;">
+            <ui:VisualElement name="adjust-color-sliders" style="padding-top: 12px; padding-right: 12px; padding-bottom: 12px; padding-left: 12px; justify-content: space-between; margin-bottom: 30px; flex-grow: 1;">
+                <ui:Instance template="Temp_AdjustColorSlider"/>
+                <ui:Instance template="Temp_AdjustColorSlider"/>
+                <ui:Instance template="Temp_AdjustColorSlider"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Instance template="Temp_BackButton" name="BackButton" style="align-self: center; width: 60%; margin-bottom: 20px;"/>
+    </ui:VisualElement>
+</ui:UXML>

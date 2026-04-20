@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class UIModuleManagerBase : MonoBehaviour
 {
-    UIDocument uiDoc;
+    protected UIDocument uiDoc;
 
     protected virtual void Awake()
     {

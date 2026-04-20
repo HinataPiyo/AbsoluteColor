@@ -30,4 +30,9 @@ public class ColorChannelDataSO : ScriptableObject
 {
     [SerializeField] List<ColorChannelData> colorChannelDatas = new List<ColorChannelData>();   // 色チャンネルデータのリスト
     public List<ColorChannelData> Datas => colorChannelDatas;   // 色チャンネルデータのリストのプロパティ
+
+    public ColorChannelData GetColorChannelData(AdjustColorGenre genre)
+    {
+        return colorChannelDatas.Find(data => data.AdjustColorGenre == genre);   // ジャンルに一致する色チャンネルデータを返す
+    }
 }

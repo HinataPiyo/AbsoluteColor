@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class VariousButtonsController : MonoBehaviour, IUIModuleController
+public class VariousButtonsController : MonoBehaviour, IUIModuleController, IPanelChangeElement
 {
     public SelectModeButton SelectModeButton { get; private set; }
+    public VisualElement Root { get; private set; }
     Button playButton;
     Button collectionButton;
     Button eventButton;
@@ -13,6 +14,8 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root, Material[] Mats = null)
     {
+        Root = root;
+
         SelectModeButton = new SelectModeButton(root, CoreResource.CurrentColorChannelData);   // 最初のモードのデータを渡してSelectModeButtonを初期化
         playButton = root.Q<Button>("button-play");
         collectionButton = root.Q<Button>("button-collection");
@@ -21,6 +24,14 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController
         scoreHistoryButton = root.Q<Button>("button-score-history");
 
         playButton.clicked += PlayButtonOnClick;
+    }
+
+    /// <summary>
+    /// パネルの表示/非表示を切り替える処理
+    /// </summary>
+    public void OnPanelChange(bool isActive)
+    {
+        Root.style.display = isActive ? DisplayStyle.Flex : DisplayStyle.None;   // パネルの表示/非表示を切り替える
     }
 
     /// <summary>
