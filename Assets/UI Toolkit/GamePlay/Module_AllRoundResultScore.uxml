@@ -12,17 +12,19 @@
                 <ui:Instance template="Module_RoundResultScore"/>
             </ui:ScrollView>
         </ui:VisualElement>
-        <ui:VisualElement name="score-rank-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 125px; padding-bottom: 0; padding-left: 20px;">
-            <ui:Label text="ランク" name="score-rank-text" class="score-rank" style="margin-left: 64px;"/>
-            <ui:Label text="S" name="score-rank-value" class="score-rank"/>
+        <ui:VisualElement name="bottom-container" style="width: 75%;">
+            <ui:VisualElement name="total-score-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
+                <ui:Label text="スコア" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
+                <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="buttons-container" style="flex-direction: row; flex-grow: 1;">
+                <ui:Button text="ホームに戻る" name="button-back-home" class="button"/>
+                <ui:Button text="リトライ" name="button-retry" class="button"/>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="total-score-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
-            <ui:Label text="スコア" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
-            <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
-        </ui:VisualElement>
-        <ui:VisualElement name="buttons-container" style="flex-direction: row; height: 10%;">
-            <ui:Button text="ホームに戻る" name="button-back-home" class="button"/>
-            <ui:Button text="リトライ" name="button-retry" class="button"/>
+        <ui:VisualElement name="score-rank-box" style="justify-content: space-between; position: absolute; right: 0%; bottom: 0%; width: 25%; height: 22%;">
+            <ui:Label text="ランク" name="score-rank-text" class="score-rank" style="font-size: 42px;"/>
+            <ui:Label text="D" name="score-rank-value" class="score-rank" style="font-size: 146px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Playball-Regular.ttf?fileID=12800000&amp;guid=c0c3d2cecd4f10f438065affce0d3657&amp;type=3#Playball-Regular&quot;); -unity-font-style: italic; top: -8%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -30,7 +30,7 @@ public class GamePlayUIModuleManager : UIModuleManagerBase
         AllRoundTotalResult = GetComponent<AllRoundTotalResult>();
         TopicPreviewArea = GetComponent<TopicPreviewAreaController>();
 
-        ColorMaterials = CoreResource.CurrentColorChannelData.Materials;   // 現在の色チャンネルデータからマテリアルを取得
+        ColorMaterials = CoreResource.GetColorChannelData().Materials;   // 現在の色チャンネルデータからマテリアルを取得
     }
 
     void Initialize()

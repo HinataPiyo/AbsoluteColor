@@ -22,7 +22,7 @@ public class SelectModeComposition
         modeButton = root.Q<Button>("mode-composition-root");
 
         modeButton.clicked += () => {
-            CoreResource.CurrentColorChannelData = data;    // 選択されたモードのデータをCoreResourceに保存する
+            CoreResource.SetColorChannelData(data);     // 選択されたモードのデータをCoreResourceに保存する
             SetNowModeTagActive(true);        // 現在選択中のタグを表示する
             onClickAction(this);
         };

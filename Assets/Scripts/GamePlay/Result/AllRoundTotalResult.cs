@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public enum ScoreRank { S, A, B, C, D }
 public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 {
     [SerializeField] VisualTreeAsset roundResultTemplate;    // ラウンドごとの結果を表示するためのUIテンプレート
@@ -20,7 +19,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root)
     {
-        colorMaterials = CoreResource.CurrentColorChannelData.Materials;
+        colorMaterials = CoreResource.GetColorChannelData().Materials;
         allroundResultRoot = root;
 
         if (allroundResultRoot == null) { Debug.LogError("allroundResultRootのVisualElementが見つかりませんでした"); return; }
@@ -73,16 +72,16 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
             
         // 総合スコアとランクの計算と表示
         int totalScoreValue = CalculateTotalScore(resultDataList);
-        totalScore.text = totalScoreValue.ToString();
+        totalScore.text = totalScoreValue.ToString("#,###");
         // ハイスコアの更新
-        CoreResource.UpdateHighScore(CoreResource.CurrentColorChannelData.AdjustColorGenre, totalScoreValue);   // ハイスコアの更新
+        CoreResource.UpdateHighScore(CoreResource.GetColorChannelData().AdjustColorGenre, totalScoreValue);   // ハイスコアの更新
 
-        ScoreRank rank = CalculateScoreRank(totalScoreValue);
+        ScoreRank rank = ValueConstants.GetScoreRank(totalScoreValue);
         scoreRank.text = rank.ToString();
-        scoreRank.style.unityTextOutlineColor = scoreRankColors[rank];
-        scoreRankText.style.unityTextOutlineColor = scoreRankColors[rank];  
+        scoreRank.style.unityTextOutlineColor = ValueConstants.ScoreRankColors[rank];
+        scoreRankText.style.unityTextOutlineColor = ValueConstants.ScoreRankColors[rank];  
 
-        CoreResource.ScoreHistoryDatas.Push(new ScoreHistoryData(CoreResource.CurrentColorChannelData, rank, totalScoreValue, DateTime.Now));   // スコア履歴に今回のスコアを追加する
+        CoreResource.ScoreHistoryDatas.Push(new ScoreHistoryData(CoreResource.GetColorChannelData(), rank, totalScoreValue, DateTime.Now));   // スコア履歴に今回のスコアを追加する
     }
 
     /// <summary>
@@ -98,45 +97,4 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 
         return totalScore;
     }
-
-    /// <summary>
-    /// 総合スコアに基づいてスコアランクを計算するメソッド
-    /// </summary>
-    ScoreRank CalculateScoreRank(int totalScore)
-    {
-        foreach (var kvp in scoreRankThresholds)
-        {
-            if (totalScore >= kvp.Value)
-            {
-                return kvp.Key;
-            }
-        }
-
-        return ScoreRank.D;   // どのランクにも該当しない場合はDランクとする
-    }
-
-    /// <summary>
-    /// 総合スコアに基づいてスコアランクを計算するメソッド
-    /// </summary>
-    readonly Dictionary<ScoreRank, int> scoreRankThresholds = new Dictionary<ScoreRank, int>()
-    {
-        { ScoreRank.S, 450 },
-        { ScoreRank.A, 400 },
-        { ScoreRank.B, 300 },
-        { ScoreRank.C, 200 },
-        { ScoreRank.D, 0 }
-    };
-
-    /// <summary>
-    /// 総合スコアに基づいてスコアランクを計算するメソッド
-    /// </summary>
-    readonly Dictionary<ScoreRank, Color> scoreRankColors = new Dictionary<ScoreRank, Color>()
-    {
-        { ScoreRank.S, new Color(1f, 0.84f, 0f) },   // ゴールド
-        { ScoreRank.A, new Color(0.75f, 0.75f, 0.75f) },   // シルバー
-        { ScoreRank.B, new Color(0.8f, 0.5f, 0.2f) },   // ブロンズ
-        { ScoreRank.C, new Color(0.5f, 0.5f, 0.5f) },   // グレー
-        { ScoreRank.D, new Color(1f, 0f, 0f) }    // レッド
-    };
-
 }

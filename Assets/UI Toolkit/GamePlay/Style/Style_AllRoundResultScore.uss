@@ -32,7 +32,7 @@
     -unity-text-outline-width: 2px;
     -unity-text-outline-color: rgb(58, 0, 255);
     -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
-    -unity-text-align: middle-left;
+    -unity-text-align: middle-center;
 }
 
 .button {
@@ -50,4 +50,8 @@
     flex-grow: 1;
     -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
     width: 0%;
+}
+
+.allround-result .judgement-text {
+    font-size: 82px;
 }

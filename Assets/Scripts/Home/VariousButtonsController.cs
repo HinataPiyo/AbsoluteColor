@@ -16,7 +16,7 @@ public class VariousButtonsController : MonoBehaviour, IUIModuleController, IPan
     {
         Root = root;
 
-        SelectModeButton = new SelectModeButton(root, CoreResource.CurrentColorChannelData);   // 最初のモードのデータを渡してSelectModeButtonを初期化
+        SelectModeButton = new SelectModeButton(root, CoreResource.GetColorChannelData());   // 最初のモードのデータを渡してSelectModeButtonを初期化
         playButton = root.Q<Button>("button-play");
         collectionButton = root.Q<Button>("button-collection");
         eventButton = root.Q<Button>("button-event");

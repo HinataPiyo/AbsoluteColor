@@ -32,3 +32,28 @@
     -unity-font-style: bold;
     -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
 }
+
+.judgement-text {
+    -unity-font-definition: url("project://database/Assets/Fonts/Playball-Regular.ttf?fileID=12800000&guid=c0c3d2cecd4f10f438065affce0d3657&type=3#Playball-Regular");
+    font-size: 96px;
+    -unity-text-align: middle-center;
+}
+
+
+
+.show-panel {
+    opacity: 1;
+    transition-duration: 0.2s;
+    scale: 1 1;
+    translate: 0 0;
+    transition-timing-function: ease-out;
+}
+
+.hide-panel {
+    opacity: 0;
+    display: none;
+    scale: 1.5 1.5;
+    translate: 0 -200px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}

@@ -16,7 +16,7 @@ public class HomeManager : MonoBehaviour
         if(I == null) I = this;
         if(colorChannelDataSO.Datas.Count == 0) Debug.LogError("ColorChannelDataSOにデータが設定されていません。");
 
-        CoreResource.CurrentColorChannelData = colorChannelDataSO.Datas[0];   // 最初の色チャンネルデータを現在のデータとして設定
+        CoreResource.SetColorChannelData(colorChannelDataSO.Datas[0]);   // 最初はSOの最初のデータをCoreResourceに保存する
     }
 
     /// <summary>

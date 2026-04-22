@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
     public static GameManager I { get; private set; }
-    public const int MaxRound = 5;
-    const float initialTimeLimit = 15f;
     [SerializeField] TopicSphereController topicSphere;
     TopicPreviewAreaController topicPreviewArea;
     ResultController result;
@@ -40,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        for (int ii = 1; ii <= MaxRound; ii++)
+        for (int ii = 1; ii <= ValueConstants.MaxRound; ii++)
         {
             // ラウンド開始の処理
             topicPreviewArea.UpdateRoundCount(ii);      // ラウンド数の更新
@@ -50,7 +48,7 @@ public class GameManager : MonoBehaviour
 
             // Mathf.Powとは、第一引数を第二引数乗した値を返す関数です。
             // ここでは、ラウンドが進むごとに時間制限を短くするために使用しています。
-            float timeLimit = initialTimeLimit * Mathf.Pow(0.9f, ii - 1);   // ラウンドごとに5%ずつ短くする
+            float timeLimit = ValueConstants.InitialOneRoundTimeLimit * Mathf.Pow(0.9f, ii - 1);   // ラウンドごとに5%ずつ短くする
             float elapsedTime = 0f;
 
             while (elapsedTime < timeLimit)

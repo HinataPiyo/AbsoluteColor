@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -49,7 +50,7 @@ public partial class ResultData
     {
         // 差が小さいほどスコアが高くなるように計算する（ここでは単純に差の逆数を使用）
         float difference = GetDifferenceByValue();
-        return Mathf.RoundToInt((1f - difference) * 100);   // スコアは0から100の範囲で返す
+        return Mathf.RoundToInt((1f - difference) * ValueConstants.MaxScore);   // スコアは0から100の範囲で返す
     }
 }
 
@@ -64,9 +65,9 @@ public class ResultController : MonoBehaviour, IUIModuleController
 
     public void Initialize(VisualElement root)
     {
-        colorMaterials = CoreResource.CurrentColorChannelData.Materials;
+        colorMaterials = CoreResource.GetColorChannelData().Materials;
         resultRoot = root;
-        resultRoot.style.display = DisplayStyle.None;   // 最初は結果表示用のUIを非表示にする
+        CoreResource.ChangePanelMotion(resultRoot, PanelMotionState.Hide);    // 結果表示用のUIを初期状態では非表示にする
     }
 
     /// <summary>
@@ -75,12 +76,14 @@ public class ResultController : MonoBehaviour, IUIModuleController
     public void AddResultColor(Color topicColor, Color playerColor)
     {
         resultRoot.style.display = DisplayStyle.Flex;       // 結果表示用のUIを表示する
+        CoreResource.ChangePanelMotion(resultRoot, PanelMotionState.Show);    // 結果表示用のUIを開くアニメーションを再生する
         resultColors.Add(new ResultData(topicColor, playerColor, resultColors.Count + 1));
 
         // 結果の色をUIに反映する
         new RoundResult(resultRoot, colorMaterials, resultColors[resultColors.Count - 1], () => {
+            CoreResource.ChangePanelMotion(resultRoot, PanelMotionState.Hide);    // 結果表示用のUIを初期状態では非表示にする
+            resultRoot.style.display = DisplayStyle.None;       // 結果表示用のUIを非表示にする
             IsResultDisplayed = false;      // 結果が表示されていない状態にする
-            resultRoot.style.display = DisplayStyle.None;   // 結果表示用のUIを非表示にする
         });
 
         IsResultDisplayed = true;    // 結果が表示されているフラグを立てる

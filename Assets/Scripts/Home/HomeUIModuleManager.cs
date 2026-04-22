@@ -42,7 +42,7 @@ public class HomeUIModuleManager : UIModuleManagerBase
         Initialize(ColorPreviewPanel, ColorPreviewPanelPath);
 
         // モード選択ボタンのリスナーを登録する
-        VariousButtons.SelectModeButton.ButtonOnClick(() => SelectModePanel.OnPanelChange(true), CoreResource.CurrentColorChannelData);
+        VariousButtons.SelectModeButton.ButtonOnClick(() => SelectModePanel.OnPanelChange(true), CoreResource.GetColorChannelData());
         // スコア履歴ボタンのリスナーを登録する
         VariousButtons.ScoreHistoryButtonOnClick(() => ScoreHistoryPanel.OnPanelChange(true));
         // RGB編集ボタンのリスナーを登録する

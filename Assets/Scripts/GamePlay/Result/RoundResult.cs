@@ -47,7 +47,7 @@ public partial class RoundResult
         if (answer_preview_roots.Count != 3) { Debug.LogError($"{answer_preview_roots.Count} : プレイヤーのPreviewSliderの数が3つではありませんでした"); return; }
         if (difference_ranges.Count != 3) { Debug.LogError($"{difference_ranges.Count} : 差分のLabelの数が3つではありませんでした"); return; }
 
-        if(resultData.RoundCount >= GameManager.MaxRound) nextRoundButton.text = "結果発表";    // 最終ラウンドの場合はボタンのテキストを変更する
+        if(resultData.RoundCount >= ValueConstants.MaxRound) nextRoundButton.text = "結果発表";    // 最終ラウンドの場合はボタンのテキストを変更する
         nextRoundButton.RegisterCallback<ClickEvent>(evt => onNextRound.Invoke());     // 次のラウンドに進むボタンに処理を登録
         CreatePreviewSliders(topic_preview_roots, answer_preview_roots);        // お題の色とPlayerが決定した色のPreviewSliderを作成する
         AssignResultDataToUI(resultData);       // ResultDataの内容をUIに反映する
@@ -73,7 +73,7 @@ public partial class RoundResult
     /// </summary>
     void AssignResultDataToUI(ResultData resultData)
     {
-        roundCount.text = $"Round {resultData.RoundCount}";
+        roundCount.text = $"ラウンド {resultData.RoundCount}";
         score.text = resultData.GetScore().ToString();
         topic_previewColor.style.backgroundColor = resultData.TopicColor;
         answer_previewColor.style.backgroundColor = resultData.AnswerColor;
@@ -83,7 +83,10 @@ public partial class RoundResult
         {
             topic_preview_sliders[ii].AdjustChanged(resultData.TopicColor[(int)topic_preview_sliders[ii].Type]);
             answer_preview_sliders[ii].AdjustChanged(resultData.AnswerColor[(int)answer_preview_sliders[ii].Type]);
-            difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + resultData.GetDifferenceByColor()[(int)topic_preview_sliders[ii].Type].ToString("F2");
+            float difference = resultData.GetDifferenceByColor()[(int)topic_preview_sliders[ii].Type];
+
+            if(difference > 0) difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + "+" + difference.ToString("F2");
+            else difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + difference.ToString("F2");
         }
     }
 }
