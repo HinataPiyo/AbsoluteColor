@@ -54,4 +54,24 @@
 
 .allround-result .judgement-text {
     font-size: 82px;
+    margin-left: 15px;
+}
+
+.show-panel {
+    opacity: 1;
+    transition-duration: 0.5s, 0.5s, 0.5s;
+    scale: 1 1;
+    translate: 0 0;
+    transition-timing-function: ease-out-bounce, ease-in-out, ease-out-bounce;
+    transition-property: translate, opacity, scale;
+    transition-delay: 0.3s, 0s, 0.3s;
+}
+
+.hide-panel {
+    opacity: 0;
+    display: none;
+    scale: 1.5 1.5;
+    translate: 0 -200px;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
 }

@@ -38,7 +38,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
         if (retryButton == null) { Debug.LogError("retryButtonが見つかりませんでした"); return; }
 
         resultScrollView.Clear();   // ScrollViewの内容をクリアする
-        allroundResultRoot.style.display = DisplayStyle.None;   // 最初は全ラウンドの結果表示用のUIを非表示にする
+        CoreResource.ChangePanelMotion(allroundResultRoot, PanelMotionState.Hide);    // 全ラウンドの結果表示用のUIは初期状態では非表示にする
 
         // リプレイ
         retryButton.RegisterCallback<ClickEvent>(evt => {
@@ -60,6 +60,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
     public void ShowAllRoundResult(List<ResultData> resultDataList)
     {
         allroundResultRoot.style.display = DisplayStyle.Flex;   // 全ラウンドの結果表示用のUIを表示する
+        CoreResource.ChangePanelMotion(allroundResultRoot, PanelMotionState.Show);
 
         // ラウンドごとの結果をScrollViewに追加する
         for (int ii = 0; ii < resultDataList.Count; ii++)

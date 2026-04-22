@@ -65,7 +65,7 @@ public static class CoreResource
     /// </summary>
     /// <param name="targetPanel"></param>
     /// <param name="state"></param>
-    public static void ChangePanelMotion(VisualElement targetPanel, PanelMotionState state)
+    public static void ChangePanelMotion(VisualElement targetPanel, PanelMotionState state, float motionDuration = 0f)
     {
         targetPanel.ClearClassList();
         switch (state)
