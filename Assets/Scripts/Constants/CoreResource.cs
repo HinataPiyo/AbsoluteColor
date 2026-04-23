@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 public enum PanelMotionState
 { Hide, Show }
 
+public enum JugementType
+{ Perfect, Excellent, Great, Good, Bad }
+
 public static class CoreResource
 {
 #region ColorChannelData

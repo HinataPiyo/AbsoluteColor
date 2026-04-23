@@ -17,16 +17,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3d35e00b8766a954ca13bddca0f7159f, type: 3}
   - tag: SpawnTopic
     clip: {fileID: 8300000, guid: 8e5e3537b0cceb94b8c7df0f92f9cb1e, type: 3}
-  - tag: DecideAdjustColorButton
-    clip: {fileID: 8300000, guid: e321178d467e8c347a4a5db5e035760d, type: 3}
   - tag: NormalButton
     clip: {fileID: 8300000, guid: 60c2fdc07fca0084db36bc9a6598563c, type: 3}
-  - tag: TimeUp
-    clip: {fileID: 8300000, guid: ce771800ae04e7a40be14f321bc63958, type: 3}
   - tag: BackButton
     clip: {fileID: 8300000, guid: 8ced597f3d1ad0548a600fa38823298f, type: 3}
   - tag: ModeChange
     clip: {fileID: 8300000, guid: e30921dd351ccea4f9ed6fedbfa85760, type: 3}
+  - tag: Jugement_Perfect
+    clip: {fileID: 8300000, guid: da2948baab048154c90dcc12c42f2a71, type: 3}
+  - tag: Jugement_Excellent
+    clip: {fileID: 8300000, guid: c6bee949dbd72ba4e801d6ebe14c6950, type: 3}
+  - tag: Jugement_Great
+    clip: {fileID: 8300000, guid: 096031c4a4739fb4f8d407af21284a08, type: 3}
+  - tag: Jugement_Good
+    clip: {fileID: 8300000, guid: 8400740e52886ef40b834a5b2cacf274, type: 3}
+  - tag: Jugement_Bad
+    clip: {fileID: 8300000, guid: 686dca9bca345b548b45871c169d67fb, type: 3}
   bgmClips:
   - tag: HomeScene
     clip: {fileID: 8300000, guid: 9f94d97cb67d34c4c8183925d9c08e96, type: 3}

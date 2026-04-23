@@ -41,7 +41,6 @@ public class AdjustUIAreaController: MonoBehaviour, IUIModuleController
         // 決定用のButtonに処理を登録
         decideButton.RegisterCallback<ClickEvent>(evt => {
             GameManager.I.isPlayerDecided = true;
-            AudioManager.I.PlaySE("DecideAdjustColorButton");
         });
     }
 

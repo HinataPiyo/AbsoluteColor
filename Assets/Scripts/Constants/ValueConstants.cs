@@ -4,7 +4,7 @@ using UnityEngine;
 public static class ValueConstants
 {
     public const int MaxRound = 5;      // 最大ラウンド数
-    public const int MaxScore = 1000;   // 最大スコア
+    public const int MaxScore = 750;   // 最大スコア
     
     public const float InitialOneRoundTimeLimit = 15f;
 

@@ -16,6 +16,8 @@ public class TopicPreviewAreaController : MonoBehaviour, IUIModuleController
         if (maxScore == null) { Debug.LogError("max-scoreのLabelが見つかりませんでした"); return; }
         if (roundCount == null) { Debug.LogError("round-countのLabelが見つかりませんでした"); return; }
         if (timer == null) { Debug.LogError("timerのLabelが見つかりませんでした"); return; }
+
+        UpdateMaxScore(CoreResource.HighScores[AdjustColorGenre.RGB_Slider]);   // 初期状態の最高スコアを表示する
     }
 
     public void UpdateTimer(float time)
@@ -27,12 +29,12 @@ public class TopicPreviewAreaController : MonoBehaviour, IUIModuleController
     public void UpdateRoundCount(int count)
     {
         // ラウンド数の更新処理
-        roundCount.text = "Round " + count.ToString();
+        roundCount.text = "ラウンド " + count.ToString();
     }
 
     public void UpdateMaxScore(int score)
     {
         // 最高スコアの更新処理
-        maxScore.text = "HightScore: " + score.ToString();
+        maxScore.text = "ハイスコア: " + score.ToString();
     }
 }

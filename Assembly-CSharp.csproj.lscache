@@ -54,6 +54,7 @@ Assets/Scripts/
  Audio/AudioManager.cs
  Constants/
   BackButton.cs
+  CameraShake.cs
   CoreResource.cs
   IPanelChangeElement.cs
   IUIModuleController.cs
@@ -70,6 +71,7 @@ Assets/Scripts/
   PreviewColor/PreviewSlider.cs
   Result/
    AllRoundTotalResult.cs
+   JugementUI.cs
    ResultController.cs
    RoundResult.cs
   TopicSphere/TopicSphereController.cs

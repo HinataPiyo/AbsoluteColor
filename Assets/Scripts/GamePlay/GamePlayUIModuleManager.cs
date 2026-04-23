@@ -13,7 +13,6 @@ public class GamePlayUIModuleManager : UIModuleManagerBase
     public AllRoundTotalResult AllRoundTotalResult { get; private set; }
     public TopicPreviewAreaController TopicPreviewArea { get; private set; }
 
-
     const string AdjustUIAreaPath = "AdjustColorArea";
     const string TopicPreviewAreaPath = "TopicPreviewArea";
     const string ResultPath = "RoundResultScore";

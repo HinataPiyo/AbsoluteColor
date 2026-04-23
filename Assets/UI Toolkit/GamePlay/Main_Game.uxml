@@ -5,7 +5,7 @@
     <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: column-reverse; padding-bottom: 150px;">
         <ui:Instance template="Module_AdjustColorArea" name="AdjustColorArea" style="height: 45%;"/>
         <ui:VisualElement name="TopicPreviewArea" style="flex-grow: 1;">
-            <ui:Label text="MaxScore: 2000" name="max-score" style="font-size: 42px; -unity-text-align: middle-left; -unity-font-definition: url(&quot;project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&amp;guid=fc3d7703027d6024e8d901155a459c7e&amp;type=3#FunnelSans-SemiBold&quot;);"/>
+            <ui:Label text="MaxScore: 2000" name="max-score" style="font-size: 42px; -unity-text-align: middle-left; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;);"/>
             <ui:Label text="ラウンド1" name="round-count" style="font-size: 80px; -unity-text-align: middle-center; -unity-font-style: bold; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;);"/>
             <ui:Label text="time: 10s" name="timer" style="font-size: 62px; -unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;);"/>
         </ui:VisualElement>

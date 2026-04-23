@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager I { get; private set; }
     [SerializeField] TopicSphereController topicSphere;
+    [SerializeField] JugementUI jugementUI;
     TopicPreviewAreaController topicPreviewArea;
     ResultController result;
     AdjustUIAreaController adjustUIArea;
@@ -60,17 +61,20 @@ public class GameManager : MonoBehaviour
                 yield return null;
             }
 
-            if(!isPlayerDecided) { AudioManager.I.PlaySE("TimeUp"); }   // タイムアップのSEを再生する
-            result.AddResultColor(topicColor, adjustUIArea.GetDecidedColor());      // 結果の色を追加する
-
-            
             // ラウンド終了の処理
             topicPreviewArea.UpdateTimer(0f);   // タイマーを0にする
             isPlayerDecided = false;            // プレイヤーの決定フラグをリセット
             IgnorePlayerInput(true);            // ラウンド終了後はプレイヤーの入力を無視する
+            
+            ResultData resultData = result.CreateResultData(topicColor, adjustUIArea.GetDecidedColor());      // 結果の色を追加する
+            result.GetJugement(resultData, out JugementType type, out float parcentage);   // ジャッジメントの種類とパーセンテージを取得する
+            jugementUI.SetJugementText(type, parcentage);                   // ジャッジメントのテキストとパーセンテージを設定する
+            yield return StartCoroutine(jugementUI.DisplayAndHide());       // ジャッジメントを表示して非表示にする
+            result.ShowResult();     // リザルトを表示する
 
             // リザルトを表示してスコアを更新しPlayerが次へ行くまで待機
             yield return new WaitUntil(() => result.IsResultDisplayed == false);    // 結果が表示されている間は待機
+            jugementUI.ResetPostProcessingEffect();   // ジャッジメントのポストプロセスエフェクトをリセットするコルーチンを開始する
         }
 
         // ゲーム終了の処理

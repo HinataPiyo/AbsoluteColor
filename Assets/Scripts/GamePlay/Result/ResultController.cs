@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -49,8 +47,30 @@ public partial class ResultData
     public int GetScore()
     {
         // 差が小さいほどスコアが高くなるように計算する（ここでは単純に差の逆数を使用）
+        // 差が小さいほど倍率が高くなり、差が大きいほど倍率が低くなる
+        float maxCoefficient = 1.75f;    // スコアの最大倍率
+        float minCoefficient = 0.1f;    // スコアの最小倍率
+        float coefficient = Mathf.Lerp(maxCoefficient, minCoefficient, GetDifferenceByValue());   // 差に応じて倍率を線形補間で計算
+        int score = Mathf.RoundToInt(ValueConstants.MaxScore * coefficient);   // 最大スコアに倍率を掛けて最終的なスコアを計算
+        return score;
+    }
+
+    /// <summary>
+    /// お題の色とPlayerが決定した色の差を元にジャッジメントの種類を返すメソッド
+    /// </summary>
+    public JugementType GetJugementType()
+    {
         float difference = GetDifferenceByValue();
-        return Mathf.RoundToInt((1f - difference) * ValueConstants.MaxScore);   // スコアは0から100の範囲で返す
+        if (difference < 0.05f) return JugementType.Perfect;
+        else if (difference < 0.15f) return JugementType.Excellent;
+        else if (difference < 0.3f) return JugementType.Great;
+        else if (difference < 0.5f) return JugementType.Good;
+        else return JugementType.Bad;
+    }
+
+    public float GetParcentage()
+    {
+        return (1f - GetDifferenceByValue()) * 100f;   // パーセンテージは0%から100%の範囲で返す
     }
 }
 
@@ -73,11 +93,22 @@ public class ResultController : MonoBehaviour, IUIModuleController
     /// <summary>
     /// 結果の色を追加するメソッド
     /// </summary>
-    public void AddResultColor(Color topicColor, Color playerColor)
+    public ResultData CreateResultData(Color topicColor, Color playerColor)
+    {
+        ResultData data = new ResultData(topicColor, playerColor, resultColors.Count + 1);
+        resultColors.Add(data);
+
+        IsResultDisplayed = true;    // 結果が表示されているフラグを立てる
+        return data;
+    }
+
+    /// <summary>
+    /// 結果を表示するメソッド
+    /// </summary>
+    public void ShowResult()
     {
         resultRoot.style.display = DisplayStyle.Flex;       // 結果表示用のUIを表示する
         CoreResource.ChangePanelMotion(resultRoot, PanelMotionState.Show);    // 結果表示用のUIを開くアニメーションを再生する
-        resultColors.Add(new ResultData(topicColor, playerColor, resultColors.Count + 1));
 
         // 結果の色をUIに反映する
         new RoundResult(resultRoot, colorMaterials, resultColors[resultColors.Count - 1], () => {
@@ -85,7 +116,15 @@ public class ResultController : MonoBehaviour, IUIModuleController
             resultRoot.style.display = DisplayStyle.None;       // 結果表示用のUIを非表示にする
             IsResultDisplayed = false;      // 結果が表示されていない状態にする
         });
+    }
+    
 
-        IsResultDisplayed = true;    // 結果が表示されているフラグを立てる
+
+    public void GetJugement(ResultData data, out JugementType type, out float parcentage)
+    {
+        if(data == null) { Debug.LogError("ResultData is null"); type = JugementType.Bad; parcentage = 0f; return; }
+
+        type = data.GetJugementType();
+        parcentage = data.GetParcentage();
     }
 }
