@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Temp_RoundResultSliders" src="project://database/Assets/UI%20Toolkit/GamePlay/Temp_RoundResultSliders.uxml?fileID=9197481963319205126&amp;guid=6a9d6077ccc10154f8ef9990761d5681&amp;type=3#Temp_RoundResultSliders"/>
-    <Style src="project://database/Assets/UI%20Toolkit/GamePlay/Style/Style_RoundResultScore.uss?fileID=7433441132597879392&amp;guid=cbb9dfed6ca82714384a6695f104ea59&amp;type=3"/>
+    <Style src="project://database/Assets/UI%20Toolkit/GamePlay/Style/Style_RoundResultScore.uss?fileID=7433441132597879392&amp;guid=cbb9dfed6ca82714384a6695f104ea59&amp;type=3#Style_RoundResultScore"/>
     <ui:VisualElement name="round-result-root" class="show-panel" style="background-color: rgb(255, 219, 161); border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 29px; border-top-right-radius: 29px; border-bottom-right-radius: 29px; border-bottom-left-radius: 29px; margin-bottom: 20px; margin-top: 20px; margin-right: 20px; margin-left: 20px;">
         <ui:Label text="ラウンド1" name="round-count" class="round-count-text" style="margin-top: 10px; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
         <ui:Instance template="Temp_RoundResultSliders" name="RoundResultSliders" class="round-result result" style="border-left-color: rgb(233, 177, 25); border-right-color: rgb(233, 177, 25); border-top-color: rgb(233, 177, 25); border-bottom-color: rgb(233, 177, 25); border-bottom-width: 9px; margin-right: 0; margin-left: 0; margin-top: 0; margin-bottom: 0; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px; flex-grow: 1;"/>
@@ -17,9 +17,9 @@
             <ui:Label text="20,000" name="score-value" class="score-text" style="flex-grow: 1; -unity-text-align: middle-right;"/>
         </ui:VisualElement>
         <ui:Button text="次のラウンドへ" name="button-next-round" style="margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-grow: 1; align-self: center; width: 50%; font-size: 36px; min-height: 5%; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;);"/>
-        <ui:VisualElement name="judgement-container" style="flex-grow: 1; position: absolute; rotate: -15deg; top: -6%; left: -3%; margin-bottom: 30px; -unity-text-outline-color: rgb(27, 27, 27); -unity-text-outline-width: 3px; text-shadow: 0 0 0 rgb(255, 0, 161);">
-            <ui:Label text="Parfect!" name="judgement-text" class="judgement-text" style="text-shadow: -6px 3px 0 rgb(255, 0, 161);"/>
-            <ui:Label text="100.0%" name="judgement-value" class="judgement-text" style="font-size: 46px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; bottom: 25px; right: -80px; text-shadow: -6px 3px 0 rgb(255, 0, 161);"/>
+        <ui:VisualElement name="judgement-container" style="flex-grow: 1; position: absolute; rotate: -15deg; top: -8%; left: -3%; margin-bottom: 30px; -unity-text-outline-color: rgb(27, 27, 27); -unity-text-outline-width: 3px; text-shadow: 0 0 0 rgb(255, 0, 161);">
+            <ui:Label text="Parfect!" name="judgement-text" class="judgement-text"/>
+            <ui:Label text="100.0%" name="judgement-percentage" class="judgement-percentage" style="left: 31%; top: -13%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

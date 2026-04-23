@@ -46,13 +46,8 @@ public partial class ResultData
     /// </summary>
     public int GetScore()
     {
-        // 差が小さいほどスコアが高くなるように計算する（ここでは単純に差の逆数を使用）
-        // 差が小さいほど倍率が高くなり、差が大きいほど倍率が低くなる
-        float maxCoefficient = 1.75f;    // スコアの最大倍率
-        float minCoefficient = 0.1f;    // スコアの最小倍率
-        float coefficient = Mathf.Lerp(maxCoefficient, minCoefficient, GetDifferenceByValue());   // 差に応じて倍率を線形補間で計算
-        int score = Mathf.RoundToInt(ValueConstants.MaxScore * coefficient);   // 最大スコアに倍率を掛けて最終的なスコアを計算
-        return score;
+        float difference = GetDifferenceByValue();
+        return ValueConstants.GetScore(difference);
     }
 
     /// <summary>

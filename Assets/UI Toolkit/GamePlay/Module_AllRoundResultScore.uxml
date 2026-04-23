@@ -1,10 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Module_RoundResultScore" src="project://database/Assets/UI%20Toolkit/GamePlay/Module_RoundResultScore.uxml?fileID=9197481963319205126&amp;guid=e906f17d63dae1140961bbcaf72e4003&amp;type=3"/>
-    <Style src="project://database/Assets/UI%20Toolkit/GamePlay/Style/Style_AllRoundResultScore.uss?fileID=7433441132597879392&amp;guid=5df8c68eb5664a14394f6a444546060e&amp;type=3#Style_AllRoundResultScore"/>
-    <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgb(255, 212, 155); border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">
+    <ui:Template name="Module_RoundResultScore" src="project://database/Assets/UI%20Toolkit/GamePlay/Module_RoundResultScore.uxml?fileID=9197481963319205126&amp;guid=e906f17d63dae1140961bbcaf72e4003&amp;type=3#Module_RoundResultScore"/>
+    <Style src="project://database/Assets/UI%20Toolkit/GamePlay/Style/Style_AllRoundResultScore.uss?fileID=7433441132597879392&amp;guid=5df8c68eb5664a14394f6a444546060e&amp;type=3"/>
+    <ui:VisualElement name="root" style="background-color: rgb(255, 212, 155); border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px;">
         <ui:Label text="TotalResult" name="total-result-text" style="-unity-text-align: middle-center; -unity-font-style: bold; font-size: 50px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/FunnelSans-SemiBold.ttf?fileID=12800000&amp;guid=fc3d7703027d6024e8d901155a459c7e&amp;type=3#FunnelSans-SemiBold&quot;);"/>
-        <ui:VisualElement name="rounds-container" class="allround-result" style="height: 70%; border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; border-bottom-left-radius: 24px; overflow: hidden; background-color: rgb(255, 219, 161);">
-            <ui:ScrollView horizontal-scroller-visibility="Hidden" style="flex-grow: 1;">
+        <ui:VisualElement name="rounds-container" class="allround-result" style="height: 70%; border-left-color: rgb(255, 89, 94); border-right-color: rgb(255, 89, 94); border-top-color: rgb(255, 89, 94); border-bottom-color: rgb(255, 89, 94); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; border-bottom-left-radius: 24px; overflow: hidden; background-color: rgb(255, 219, 161); flex-grow: 1;">
+            <ui:ScrollView horizontal-scroller-visibility="Hidden" style="flex-grow: 1; padding-top: 20px;">
                 <ui:Instance template="Module_RoundResultScore"/>
                 <ui:Instance template="Module_RoundResultScore"/>
                 <ui:Instance template="Module_RoundResultScore"/>
@@ -12,19 +12,21 @@
                 <ui:Instance template="Module_RoundResultScore"/>
             </ui:ScrollView>
         </ui:VisualElement>
-        <ui:VisualElement name="bottom-container" style="width: 75%;">
-            <ui:VisualElement name="total-score-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
-                <ui:Label text="スコア" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
-                <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
+        <ui:VisualElement name="bottom-container" style="flex-direction: row;">
+            <ui:VisualElement name="vertical-container" style="flex-grow: 1;">
+                <ui:VisualElement name="total-score-box" style="flex-direction: row; justify-content: space-between; padding-top: 0; padding-right: 20px; padding-bottom: 0; padding-left: 20px;">
+                    <ui:Label text="スコア" name="total-score-text" class="total-score-text" style="-unity-text-align: middle-left;"/>
+                    <ui:Label text="20,000" name="total-score-value" class="total-score-text" style="-unity-text-align: middle-right;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="buttons-container" style="flex-direction: row; flex-grow: 1;">
+                    <ui:Button text="ホームに戻る" name="button-back-home" class="button"/>
+                    <ui:Button text="リトライ" name="button-retry" class="button"/>
+                </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="buttons-container" style="flex-direction: row; flex-grow: 1;">
-                <ui:Button text="ホームに戻る" name="button-back-home" class="button"/>
-                <ui:Button text="リトライ" name="button-retry" class="button"/>
+            <ui:VisualElement name="score-rank-box" style="padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+                <ui:Label text="ランク" name="score-rank-text" class="score-rank" style="font-size: 42px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;"/>
+                <ui:Label text="D" name="score-rank-value" class="score-rank" style="font-size: 146px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Playball-Regular.ttf?fileID=12800000&amp;guid=c0c3d2cecd4f10f438065affce0d3657&amp;type=3#Playball-Regular&quot;); -unity-font-style: italic; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
             </ui:VisualElement>
-        </ui:VisualElement>
-        <ui:VisualElement name="score-rank-box" style="justify-content: space-between; position: absolute; right: 0%; bottom: 0%; width: 25%; height: 22%;">
-            <ui:Label text="ランク" name="score-rank-text" class="score-rank" style="font-size: 42px;"/>
-            <ui:Label text="D" name="score-rank-value" class="score-rank" style="font-size: 146px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/Playball-Regular.ttf?fileID=12800000&amp;guid=c0c3d2cecd4f10f438065affce0d3657&amp;type=3#Playball-Regular&quot;); -unity-font-style: italic; top: -8%;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

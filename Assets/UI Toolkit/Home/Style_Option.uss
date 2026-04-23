@@ -1,0 +1,36 @@
+:root {
+}
+
+.option-text {
+    -unity-font-definition: url("project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&guid=8dc6deb8c7626c644b886806e8b2f960&type=3#YuseiMagic-Regular");
+    font-size: 54px;
+    -unity-text-align: middle-center;
+}
+
+.unity-base-slider__tracker {
+    height: 35px;
+    position: relative;
+    top: 0%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.unity-base-slider__dragger {
+    position: absolute;
+    top: 0%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    height: 100%;
+}

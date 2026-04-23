@@ -11,6 +11,8 @@ public partial class RoundResult
     VisualElement topic_previewColor;
     VisualElement answer_previewColor;
     Label score;
+    Label jugement_text;
+    Label jugement_parcentage;
     Button nextRoundButton;
     Material[] colorMaterials;
 
@@ -22,13 +24,15 @@ public partial class RoundResult
 
         roundCount = scoreRoot.Q<Label>("round-count");
         score = scoreRoot.Q<Label>("score-value");
+        jugement_text = scoreRoot.Q<Label>("judgement-text");
+        jugement_parcentage = scoreRoot.Q<Label>("judgement-percentage");
         nextRoundButton = scoreRoot.Q<Button>();
 
         var topic_area = root.Q<VisualElement>("topic-area");
         var answer_area = root.Q<VisualElement>("answer-area");
 
-        if(topic_area == null) { Debug.LogError("topic-areaのVisualElementが見つかりませんでした"); return; }
-        if(answer_area == null) { Debug.LogError("answer-areaのVisualElementが見つかりませんでした"); return; }
+        if (topic_area == null) { Debug.LogError("topic-areaのVisualElementが見つかりませんでした"); return; }
+        if (answer_area == null) { Debug.LogError("answer-areaのVisualElementが見つかりませんでした"); return; }
 
         topic_previewColor = topic_area.Q<VisualElement>("preview-color");
         answer_previewColor = answer_area.Q<VisualElement>("preview-color");
@@ -46,8 +50,10 @@ public partial class RoundResult
         if (topic_preview_roots.Count != 3) { Debug.LogError($"{topic_preview_roots.Count} : お題のPreviewSliderの数が3つではありませんでした"); return; }
         if (answer_preview_roots.Count != 3) { Debug.LogError($"{answer_preview_roots.Count} : プレイヤーのPreviewSliderの数が3つではありませんでした"); return; }
         if (difference_ranges.Count != 3) { Debug.LogError($"{difference_ranges.Count} : 差分のLabelの数が3つではありませんでした"); return; }
+        if (jugement_text == null) { Debug.LogError("judgement-textのLabelが見つかりませんでした"); return; }
+        if (jugement_parcentage == null) { Debug.LogError("parcentage-textのLabelが見つかりませんでした"); return; }
 
-        if(resultData.RoundCount >= ValueConstants.MaxRound) nextRoundButton.text = "結果発表";    // 最終ラウンドの場合はボタンのテキストを変更する
+        if (resultData.RoundCount >= ValueConstants.MaxRound) nextRoundButton.text = "結果発表";    // 最終ラウンドの場合はボタンのテキストを変更する
         nextRoundButton.RegisterCallback<ClickEvent>(evt => onNextRound.Invoke());     // 次のラウンドに進むボタンに処理を登録
         CreatePreviewSliders(topic_preview_roots, answer_preview_roots);        // お題の色とPlayerが決定した色のPreviewSliderを作成する
         AssignResultDataToUI(resultData);       // ResultDataの内容をUIに反映する
@@ -78,6 +84,22 @@ public partial class RoundResult
         topic_previewColor.style.backgroundColor = resultData.TopicColor;
         answer_previewColor.style.backgroundColor = resultData.AnswerColor;
 
+        Color jugementColor = JugementUI.JudgementTypeToColor[resultData.GetJugementType()];
+        jugement_text.style.textShadow = new TextShadow{
+            offset = new Vector2(-6f, 3f),
+            blurRadius = 0f,
+            color = jugementColor
+        };
+        
+        jugement_parcentage.style.textShadow = new TextShadow{
+            offset = new Vector2(-6f, 3f),
+            blurRadius = 0f,
+            color = jugementColor
+        };
+
+        jugement_text.text = JugementUI.JudgementTypeToText[resultData.GetJugementType()];
+        jugement_parcentage.text = resultData.GetParcentage().ToString("F1") + "%";
+
         // お題の色とPlayerが決定した色の差をUIに反映する
         for (int ii = 0; ii < topic_preview_sliders.Count; ii++)
         {
@@ -85,7 +107,7 @@ public partial class RoundResult
             answer_preview_sliders[ii].AdjustChanged(resultData.AnswerColor[(int)answer_preview_sliders[ii].Type]);
             float difference = resultData.GetDifferenceByColor()[(int)topic_preview_sliders[ii].Type];
 
-            if(difference > 0) difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + "+" + difference.ToString("F2");
+            if (difference > 0) difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + "+" + difference.ToString("F2");
             else difference_ranges[ii].text = topic_preview_sliders[ii].Type.ToString() + ": " + difference.ToString("F2");
         }
     }

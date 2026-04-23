@@ -65,6 +65,7 @@ Assets/Scripts/
   AdjustSlider.cs
   AdjustUIAreaController.cs
  GamePlay/
+  GameClearParticleController.cs
   GameManager.cs
   GamePlayUIModuleManager.cs
   OtherInfo/TopicPreviewAreaController.cs
@@ -81,6 +82,7 @@ Assets/Scripts/
  Home/
   HomeManager.cs
   HomeUIModuleManager.cs
+  Option/Option.cs
   ScoreHistory/
    ScoreHistoryComposition.cs
    ScoreHistoryPanel.cs

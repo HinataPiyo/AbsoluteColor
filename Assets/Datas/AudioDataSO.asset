@@ -38,3 +38,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9f94d97cb67d34c4c8183925d9c08e96, type: 3}
   - tag: GamePlayScene
     clip: {fileID: 8300000, guid: a0783924b72a42946b73a6bc9d099532, type: 3}
+  - tag: GameClear
+    clip: {fileID: 8300000, guid: 781af5ef3a3b6d14094d9b7b7d40c046, type: 3}

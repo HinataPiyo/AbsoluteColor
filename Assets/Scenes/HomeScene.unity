@@ -392,11 +392,11 @@ AudioSource:
   m_GameObject: {fileID: 276563646}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 3937748880009022755, guid: ae9aa35213252eb44be7b612e467afd5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -489,7 +489,7 @@ AudioSource:
   m_GameObject: {fileID: 276563646}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3260456717328938280, guid: ae9aa35213252eb44be7b612e467afd5, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -1003,6 +1003,7 @@ GameObject:
   - component: {fileID: 2080840517}
   - component: {fileID: 2080840518}
   - component: {fileID: 2080840519}
+  - component: {fileID: 2080840520}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -1110,6 +1111,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0137b85c2fcd64cb65c0c87109484d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ColorPreviewPanel
+--- !u!114 &2080840520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080840512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2726c1e6623044094e1bac646abb79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Option
+  audioMixer: {fileID: 24100000, guid: ae9aa35213252eb44be7b612e467afd5, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

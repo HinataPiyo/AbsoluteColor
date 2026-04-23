@@ -5,19 +5,24 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(SelectModePanel))]
 [RequireComponent(typeof(ScoreHistoryPanel))]
 [RequireComponent(typeof(ColorPreviewPanel))]
+[RequireComponent(typeof(Option))]
 public class HomeUIModuleManager : UIModuleManagerBase
 {
     const string VariousButtonsPath = "VariousButtons";
     const string SelectModePanelPath = "SelectModePanel";
     const string ScoreHistoryPanelPath = "ScoreHistoryPanel";
     const string ColorPreviewPanelPath = "ColorPreviewEditPanel";
+    const string OptionPath = "Option";
+
 
     public VariousButtonsController VariousButtons { get; private set; }
     public SelectModePanel SelectModePanel { get; private set; }
     public ScoreHistoryPanel ScoreHistoryPanel { get; private set; }
     public ColorPreviewPanel ColorPreviewPanel { get; private set; }
+    public Option Option { get; private set; }
 
     Button button_edit_rgb;
+    Button button_option;
     public VisualElement ColorPreview { get; private set; }
 
 
@@ -28,10 +33,12 @@ public class HomeUIModuleManager : UIModuleManagerBase
         SelectModePanel = GetComponent<SelectModePanel>();
         ScoreHistoryPanel = GetComponent<ScoreHistoryPanel>();
         ColorPreviewPanel = GetComponent<ColorPreviewPanel>();
+        Option = GetComponent<Option>();
 
         VisualElement root = uiDoc.rootVisualElement;
         button_edit_rgb = root.Q<Button>("button-edit-rgb");
         ColorPreview = root.Q<VisualElement>("color-preview");
+        button_option = root.Q<Button>("button-option");
     }
 
     void Initialize()
@@ -40,6 +47,7 @@ public class HomeUIModuleManager : UIModuleManagerBase
         Initialize(SelectModePanel, SelectModePanelPath);
         Initialize(ScoreHistoryPanel, ScoreHistoryPanelPath);
         Initialize(ColorPreviewPanel, ColorPreviewPanelPath);
+        Initialize(Option, OptionPath);
 
         // モード選択ボタンのリスナーを登録する
         VariousButtons.SelectModeButton.ButtonOnClick(() => SelectModePanel.OnPanelChange(true), CoreResource.GetColorChannelData());
@@ -53,8 +61,15 @@ public class HomeUIModuleManager : UIModuleManagerBase
             AudioManager.I.PlaySE("NormalButton");
         };
 
+        button_option.clicked += () => {
+            Option.OnPanelChange(true);     // オプションパネルを表示する
+            VariousButtons.OnPanelChange(false);        // ボタンパネルを非表示にする
+            AudioManager.I.PlaySE("NormalButton");
+        };
+
         // RGB編集パネルのバックボタンに、ボタンパネルを表示する処理を登録する
         ColorPreviewPanel.AddRegisterBackButtonOnClick(() => VariousButtons.OnPanelChange(true));
+        Option.AddRegisterBackButtonOnClick(() => VariousButtons.OnPanelChange(true));
     }
 
     void OnEnable() => Initialize();

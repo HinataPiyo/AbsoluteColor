@@ -57,7 +57,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
     /// 全ラウンドの結果を表示するためのメソッド
     /// </summary>
     /// <param name="resultDataList">お題の色とPlayerが決定した色のリスト</param>
-    public void ShowAllRoundResult(List<ResultData> resultDataList)
+    public ScoreRank ShowAllRoundResult(List<ResultData> resultDataList)
     {
         allroundResultRoot.style.display = DisplayStyle.Flex;   // 全ラウンドの結果表示用のUIを表示する
         CoreResource.ChangePanelMotion(allroundResultRoot, PanelMotionState.Show);
@@ -83,6 +83,8 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
         scoreRankText.style.unityTextOutlineColor = ValueConstants.ScoreRankColors[rank];  
 
         CoreResource.ScoreHistoryDatas.Push(new ScoreHistoryData(CoreResource.GetColorChannelData(), rank, totalScoreValue, DateTime.Now));   // スコア履歴に今回のスコアを追加する
+        
+        return rank;
     }
 
     /// <summary>

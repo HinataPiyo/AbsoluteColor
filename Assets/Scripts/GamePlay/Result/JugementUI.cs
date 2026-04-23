@@ -29,7 +29,7 @@ public class JugementUI : MonoBehaviour
         public float vignette_intensity;
     }
 
-    readonly Dictionary<JugementType, string> judgementTypeToText = new Dictionary<JugementType, string>()
+    public static readonly Dictionary<JugementType, string> JudgementTypeToText = new Dictionary<JugementType, string>()
     {
         { JugementType.Perfect, "Perfect!" },
         { JugementType.Excellent, "Excellent!" },
@@ -38,7 +38,7 @@ public class JugementUI : MonoBehaviour
         { JugementType.Bad, "Bad..." }
     };
 
-    readonly Dictionary<JugementType, Color> judgementTypeToColor = new Dictionary<JugementType, Color>()
+    public static readonly Dictionary<JugementType, Color> JudgementTypeToColor = new Dictionary<JugementType, Color>()
     {
         { JugementType.Perfect, new Color(1f, 0f, 0.9f) },
         { JugementType.Excellent, new Color(1f, 0f, 0f) },
@@ -52,8 +52,8 @@ public class JugementUI : MonoBehaviour
         { JugementType.Perfect, new PostProcessingEffectSettings { bloom_intensity = 20, vignette_intensity = 0.2f } },
         { JugementType.Excellent, new PostProcessingEffectSettings { bloom_intensity = 15, vignette_intensity = 0.2f } },
         { JugementType.Great, new PostProcessingEffectSettings { bloom_intensity = 10, vignette_intensity = 0.2f } },
-        { JugementType.Good, new PostProcessingEffectSettings { bloom_intensity = 1.5f, vignette_intensity = 0.25f } },
-        { JugementType.Bad, new PostProcessingEffectSettings { bloom_intensity = -1, vignette_intensity = 0.3f } }
+        { JugementType.Good, new PostProcessingEffectSettings { bloom_intensity = 0f, vignette_intensity = 0.25f } },
+        { JugementType.Bad, new PostProcessingEffectSettings { bloom_intensity = -5, vignette_intensity = 0.3f } }
     };
 
     void Awake()
@@ -85,12 +85,12 @@ public class JugementUI : MonoBehaviour
     {
         currentJugementType = type;    // 現在のジャッジメントの種類を更新する
 
-        judgement_Text.text = judgementTypeToText[type];
-        judgement_TextShadow.text = judgementTypeToText[type];
+        judgement_Text.text = JudgementTypeToText[type];
+        judgement_TextShadow.text = JudgementTypeToText[type];
         parcentage_Text.text = parcentage.ToString("F1") + "%";
         parcentage_TextShadow.text = parcentage.ToString("F1") + "%";
 
-        Color color = judgementTypeToColor[type];
+        Color color = JudgementTypeToColor[type];
         judgement_TextShadow.color = color;
         parcentage_TextShadow.color = color;
 

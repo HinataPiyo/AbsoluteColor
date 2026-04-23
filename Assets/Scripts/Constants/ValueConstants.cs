@@ -7,6 +7,8 @@ public static class ValueConstants
     public const int MaxScore = 750;   // 最大スコア
     
     public const float InitialOneRoundTimeLimit = 15f;
+    const float MaxScoreCoefficient = 1.75f;    // スコアの最大倍率
+    const float MinScoreCoefficient = 0.1f;    // スコアの
 
     /// <summary>
     /// 総合スコアに基づいてスコアランクを計算するメソッド
@@ -14,13 +16,30 @@ public static class ValueConstants
     /// </summary>
     public static ScoreRank GetScoreRank(int totalScore)
     {
-        float scorePercentage = (float)totalScore / (MaxRound * MaxScore);   // 総合スコアの割合を計算
+        // スコアの倍率も考慮する
+        float scorePercentage = totalScore / (float)(MaxRound * MaxScore * MaxScoreCoefficient);   // 最大スコアに倍率を掛けた値で割って割合を計算
 
         if (scorePercentage >= 0.95f) return ScoreRank.S;
         else if (scorePercentage >= 0.9f) return ScoreRank.A;
         else if (scorePercentage >= 0.7f) return ScoreRank.B;
         else if (scorePercentage >= 0.8f) return ScoreRank.C;
         else return ScoreRank.D;
+    }
+
+    public static float GetScoreCoefficient(float difference)
+    {
+        return Mathf.Lerp(MaxScoreCoefficient, MinScoreCoefficient, difference);   // 差に応じて倍率を線形補間で計算
+    }
+
+    /// <summary>
+    /// お題の色とPlayerが決定した色の差を元にスコアを計算するメソッド
+    /// </summary>
+    /// <param name="difference">お題の色とPlayerが決定した色の差（0.0〜1.0）</param>
+    public static int GetScore(float difference)
+    {
+        float coefficient = GetScoreCoefficient(difference);
+        int score = Mathf.RoundToInt(MaxScore * coefficient);
+        return score;
     }
 
     /// <summary>

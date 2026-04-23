@@ -1,9 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Module_ColorPreviewEditPanel" src="project://database/Assets/UI%20Toolkit/Home/Module_ColorPreviewEditPanel.uxml?fileID=9197481963319205126&amp;guid=ec7b88b38d301894e8d5f9198c2b90d5&amp;type=3#Module_ColorPreviewEditPanel"/>
+    <ui:Template name="Module_Option" src="project://database/Assets/UI%20Toolkit/Home/Module_Option.uxml?fileID=9197481963319205126&amp;guid=f8131a840e797b04cafa13ef91805beb&amp;type=3#Module_Option"/>
     <ui:Template name="Module_ScoreHistory" src="project://database/Assets/UI%20Toolkit/Home/Module_ScoreHistory.uxml?fileID=9197481963319205126&amp;guid=2b0bc69b3c6565d48a57a5f59dbea7d0&amp;type=3#Module_ScoreHistory"/>
     <ui:Template name="Module_SelectModePanel" src="project://database/Assets/UI%20Toolkit/Home/Module_SelectModePanel.uxml?fileID=9197481963319205126&amp;guid=ec29c790568b1f9409bbb16d09be8db3&amp;type=3#Module_SelectModePanel"/>
     <ui:Template name="Module_VariousButtons" src="project://database/Assets/UI%20Toolkit/Home/Module_VariousButtons.uxml?fileID=9197481963319205126&amp;guid=cbdb6a74d7ad59948bd349944656d723&amp;type=3#Module_VariousButtons"/>
-    <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ColorEditButtons.uss?fileID=7433441132597879392&amp;guid=f3f299f607a22484f9a806b7faf527d8&amp;type=3"/>
+    <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ColorEditButtons.uss?fileID=7433441132597879392&amp;guid=f3f299f607a22484f9a806b7faf527d8&amp;type=3#Style_ColorEditButtons"/>
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="upper-area" style="flex-grow: 1; height: 0%;">
             <ui:VisualElement name="player-information-box" style="position: absolute; top: 5%; left: 5%; width: 40%; flex-direction: row; align-items: center;">
@@ -30,9 +31,10 @@
             <ui:Instance template="Module_VariousButtons" name="VariousButtons" style="flex-grow: 1; display: flex;"/>
             <ui:Instance template="Module_ColorPreviewEditPanel" name="ColorPreviewEditPanel" style="display: none;"/>
         </ui:VisualElement>
-        <ui:VisualElement name="all-area" picking-mode="Ignore" style="position: absolute; height: 90%; width: 100%;">
+        <ui:VisualElement name="all-area" picking-mode="Ignore" style="position: absolute; height: 90%; width: 100%; justify-content: center;">
             <ui:Instance template="Module_SelectModePanel" name="SelectModePanel" style="flex-grow: 1; display: none;"/>
             <ui:Instance template="Module_ScoreHistory" name="ScoreHistoryPanel" style="display: none; flex-grow: 1;"/>
+            <ui:Instance template="Module_Option" name="Option" style="width: 50%; align-self: center; display: none;"/>
         </ui:VisualElement>
         <ui:VisualElement name="Ads" style="height: 10%;"/>
     </ui:VisualElement>

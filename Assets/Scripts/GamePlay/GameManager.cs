@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager I { get; private set; }
     [SerializeField] TopicSphereController topicSphere;
     [SerializeField] JugementUI jugementUI;
+    [SerializeField] GameClearParticleController gameClearParticle;
     TopicPreviewAreaController topicPreviewArea;
     ResultController result;
     AdjustUIAreaController adjustUIArea;
@@ -79,7 +80,9 @@ public class GameManager : MonoBehaviour
 
         // ゲーム終了の処理
         IgnorePlayerInput(true);    // ゲーム終了後はプレイヤーの入力を無視する
-        allRoundTotalResult.ShowAllRoundResult(result.resultColors);    // 全ラウンドの結果を表示する
+        ScoreRank rank = allRoundTotalResult.ShowAllRoundResult(result.resultColors);    // 全ラウンドの結果を表示する
+        gameClearParticle.SpawnParticles(rank);   // スコアランクに応じた量のパーティクルを生成する
+        AudioManager.I.PlayBGM("GameClear");
     }
 
     /// <summary>

@@ -15,12 +15,14 @@ public static class CoreResource
     {
         if(CurrentColorChannelData == null)
         {
+#if UNITY_EDITOR
             var so = UnityEditor.AssetDatabase.LoadAssetAtPath<ColorChannelDataSO>("Assets/Datas/ColorChannelDataSO.asset");
             if(so == null)
             {
                 Debug.LogError("Failed to load ColorChannelData from Assets/Resources/ColorChannelDataSO.asset");
             }
             return so.Datas[0];   // とりあえず最初のデータを返す
+#endif
         }
 
         return CurrentColorChannelData;
