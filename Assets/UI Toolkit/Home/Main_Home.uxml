@@ -7,7 +7,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/Home/Style_ColorEditButtons.uss?fileID=7433441132597879392&amp;guid=f3f299f607a22484f9a806b7faf527d8&amp;type=3#Style_ColorEditButtons"/>
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="upper-area" style="flex-grow: 1; height: 0%;">
-            <ui:VisualElement name="player-information-box" style="position: absolute; top: 5%; left: 5%; width: 40%; flex-direction: row; align-items: center;">
+            <ui:VisualElement name="player-information-box" style="position: absolute; top: 5%; left: 5%; width: 40%; flex-direction: row; align-items: center; display: none;">
                 <ui:VisualElement name="icon" style="background-color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; overflow: hidden; width: 140px; height: 140px;"/>
                 <ui:VisualElement name="vertical-container" style="margin-top: 0; flex-grow: 1;">
                     <ui:VisualElement name="title-box" style="background-color: rgb(168, 168, 168); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 0; border-top-right-radius: 20px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 0; justify-content: center;">
@@ -22,7 +22,7 @@
                 <ui:Label text="プレビュー" name="preview-text" style="top: -50%; position: relative; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); font-size: 26px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
             </ui:VisualElement>
             <ui:Button text="オプション" name="button-option" style="font-size: 32px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); position: absolute; right: 5%; top: 8%; width: 150px;"/>
-            <ui:Button text="ヘルプ" name="button-help" style="font-size: 32px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); position: absolute; right: 23%; top: 8%; width: 150px;"/>
+            <ui:Button text="ヘルプ" name="button-help" style="font-size: 32px; -unity-font-definition: url(&quot;project://database/Assets/Fonts/YuseiMagic-Regular.ttf?fileID=12800000&amp;guid=8dc6deb8c7626c644b886806e8b2f960&amp;type=3#YuseiMagic-Regular&quot;); position: absolute; right: 23%; top: 8%; width: 150px; display: none;"/>
             <ui:VisualElement name="color-edit-buttons" style="right: 5%; bottom: 5%; position: absolute; flex-direction: column-reverse; align-items: stretch; width: 18%; height: 55%;">
                 <ui:Button text="RGB" name="button-edit-rgb" class="color-edit-buttons"/>
             </ui:VisualElement>
