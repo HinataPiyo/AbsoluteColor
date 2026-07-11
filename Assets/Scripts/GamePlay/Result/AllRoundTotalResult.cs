@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using unityroom.Api;
 
 public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
 {
@@ -83,6 +84,7 @@ public class AllRoundTotalResult : MonoBehaviour, IUIModuleController
         scoreRankText.style.unityTextOutlineColor = ValueConstants.ScoreRankColors[rank];  
 
         CoreResource.ScoreHistoryDatas.Push(new ScoreHistoryData(CoreResource.GetColorChannelData(), rank, totalScoreValue, DateTime.Now));   // スコア履歴に今回のスコアを追加する
+        UnityroomApiClient.Instance.SendScore(1, totalScoreValue, ScoreboardWriteMode.Always);
         
         return rank;
     }
