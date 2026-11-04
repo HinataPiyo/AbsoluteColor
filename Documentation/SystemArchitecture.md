@@ -1,156 +1,247 @@
-# システム構成・アーキテクチャ
+# システム構成
 
-## 1. 全体像
+## 1. アーキテクチャ概要
 
-このプロジェクトは、ホーム／ゲームプレイの2シーンを、`MonoBehaviour`の管理クラスとUI ToolkitベースのUIモジュールで進行させる構成である。ゲーム進行の中心は `GameManager` のコルーチン。モード・オーディオの編集データはScriptableObject、シーン間や結果履歴の実行時データは静的クラス等で扱う。
+```mermaid
+flowchart TB
+    SO["ColorChannelDataSO<br/>AudioDataSO"]
+    HM["HomeManager"]
+    HUI["Home UI Module"]
+    CR["CoreResource<br/>実行時状態"]
+    GM["GameManager"]
+    GUM["Gameplay UI Module"]
+    RC["ResultController"]
+    RD["ResultData"]
+    AUA["AdjustUIAreaController"]
+    TS["TopicSphereController"]
+    JUI["JugementUI"]
+    AR["AllRoundTotalResult"]
+    AM["AudioManager"]
+    FX["CameraShake<br/>Particle<br/>Postprocessing"]
+    
+    SO --> HM
+    HM --> HUI
+    HUI --> CR
+    SO --> AM
+    AM --> GM
+    CR --> GM
+    GM --> GUM
+    GM --> RC
+    GM --> TS
+    RC --> RD
+    RD --> JUI
+    RD --> AR
+    GM --> AUA
+    GM --> AR
+    JUI --> FX
+    AR --> AM
+```
+
+システムは2つのシーン（HomeScene, GamePlayScene）で構成。GameManagerのCoroutineが5ラウンドの進行フローを制御。ScriptableObjectで色・音声データ、CoreResourceで実行時状態を管理。
+
+## 2. 主要システム
+
+| システム | 構成クラス | 責務 |
+|---|---|---|
+| **ホーム・モード選択** | HomeManager, HomeUIModuleManager, SelectModePanel, CoreResource | 色チャンネルデータの選択、ホームUI初期化、モード情報の共有 |
+| **RGB入力** | AdjustUIAreaController, AdjustSlider, PreviewSlider | スライダーイベント処理、RGB値保持、プレビュー更新 |
+| **ゲーム進行** | GameManager, ValueConstants | ラウンドループ、タイマー、見本色生成、採点タイミング |
+| **採点・結果** | ResultController, ResultData, RoundResult, AllRoundTotalResult | 色差計算、判定、得点算出、ラウンド/総合結果表示 |
+| **判定演出** | JugementUI, CameraShake, GameClearParticleController | 判定テキスト、効果音、カメラ揺れ、パーティクル、ポストプロセス |
+| **UI基盤** | UIModuleManagerBase, GamePlayUIModuleManager | UI Toolkit要素の取得と画面別モジュール初期化 |
+| **オーディオ** | AudioManager, AudioDataSO | BGM/SEの取得と再生 |
+| **情報表示** | TopicPreviewAreaController, TopicSphereController | ラウンド、タイマー、見本色の更新 |
+
+## 3. データフロー
+
+### シーン間データ共有
 
 ```mermaid
 flowchart LR
-    SO[ColorChannelDataSO / AudioDataSO]
-    HM[HomeManager / Home UI]
-    CR[CoreResource]
-    GM[GameManager]
-    UI[Gameplay UI modules]
-    RS[ResultController / RoundResult]
-    JU[JugementUI]
-    AR[AllRoundTotalResult]
-    AM[AudioManager]
-    FX[CameraShake / Particle / Post Processing]
-
-    SO --> HM
-    HM --> CR
-    CR --> GM
-    GM --> UI
-    UI --> GM
-    GM --> RS
-    RS --> JU
-    GM --> AR
-    GM --> AM
-    JU --> AM
-    JU --> FX
+    CD["ColorChannelDataSO<br/>選択データ"]
+    CR["CoreResource<br/>static"]
+    HM["HomeManager<br/>HomeScene"]
+    GM["GameManager<br/>GamePlayScene"]
+    
+    CD -->|Inspector設定| HM
+    HM -->|設定| CR
+    CR -->|参照| GM
+    CR -->|参照| GM
 ```
 
-図はC#参照と処理フローを要約したもの。具体的な参照の一部はInspector上のシーン設定に依存する。
+ColorChannelDataSOを選択し、CoreResourceに保存。GamePlaySceneで参照。
 
-## 2. システム一覧
-
-| システム | 主な構成 | 責務・連携 |
-|---|---|---|
-| ホーム／モード | `HomeManager`、`HomeUIModuleManager`、`SelectModePanel`、`CoreResource` | 初期モード情報、ホームUI、ゲーム開始／遷移。 |
-| RGB入力／プレビュー | `AdjustSlider`、`AdjustUIAreaController`、`PreviewSlider`、ホーム色プレビュー | チャンネル値を保持し、調整色をプレビューへ反映。ホームとゲーム中に近い操作を提供する。 |
-| ゲーム進行 | `GameManager`、`ValueConstants` | ラウンド数・時間・見本生成・入力待ち・結果待ち・最終処理を順に実行。 |
-| 採点／結果 | `ResultController`、`ResultData`、`RoundResult`、`JugementUI`、`AllRoundTotalResult` | 色差、判定、得点、ラウンド／総合表示を担当。 |
-| UIモジュール共通化 | `UIModuleManagerBase`、`IPanelChangeElement`、`IUIModuleController` | UI要素の初期化やパネル切り替えを共通化する。要素の取得には文字列パスを使用。 |
-| オーディオ | `AudioDataSO`、`AudioManager` | タグからBGM／SEクリップを解決して再生する。 |
-| 演出 | `CameraShake`、`GameClearParticleController`、`JugementUI`、Animator／Volume | カメラ、パーティクル、アニメーション、ポストプロセス等の結果演出。 |
-| 外部ランキング | `AllRoundTotalResult` とUnityroomクライアント依存 | 終了時にランキング送信を呼び出す実装がある。実運用上の成功は未検証。 |
-
-敵、戦闘、Wave、ネットワーク対戦、セーブデータの独立システムは確認できない。
-
-## 3. 主要なデータフロー
+### ラウンド内データフロー
 
 ```mermaid
 flowchart TD
-    C[ColorChannelDataSO] --> HM[HomeManager]
-    HM --> CR[CoreResource.CurrentColorChannelData]
-    CR --> UI[モード表示・色チャンネル素材]
-    GM[GameManager] --> T[ランダム見本RGB]
-    T --> SP[TopicSphereController]
-    UI --> A[AdjustUIAreaControllerの回答RGB]
-    T --> RC[ResultController]
-    A --> RC
-    RC --> RD[ResultData: 見本・回答・ラウンド]
-    RD --> J[判定用の値]
-    J --> GM[GameManager]
-    GM --> JU[JugementUI]
-    RD --> RR[ラウンド結果]
-    RD --> AR[総合結果用の全ラウンドデータ]
-    AD[AudioDataSO] --> AM[AudioManager]
-    JU --> AM
+    GM["GameManager"]
+    TS["TopicSphereController"]
+    RC["ResultController"]
+    RD["ResultData"]
+    AUA["AdjustUIAreaController"]
+    JUI["JugementUI"]
+    
+    GM -->|見本RGB生成| TS
+    TS -->|見本色表示| TS
+    GM -->|回答RGB取得| AUA
+    AUA -->|回答色| RC
+    TS -->|見本色| RC
+    RC -->|ResultData作成| RD
+    RD -->|判定・得点計算| JUI
+    JUI -->|表示| JUI
 ```
 
-`ResultData` は構築後に値を変更できない形（private setter）で扱われる。色差／判定／得点は結果処理の中で算出される。モード情報の一部は `CoreResource` の静的状態を介してシーンをまたぐ。
+GameManagerが見本色を生成してTopicSphereControllerで表示。AdjustUIAreaControllerから回答色を取得。ResultControllerがResultDataを作成し、判定・得点を計算。
 
 ## 4. ラウンド処理フロー
 
 ```mermaid
-sequenceDiagram
-    participant GM as GameManager
-    participant Topic as TopicSphereController
-    participant Adjust as AdjustUIAreaController
-    participant Result as ResultController
-    participant Judgement as JugementUI
-    participant Round as RoundResult
-
-    GM->>Topic: ランダムな見本色を設定
-    GM->>Adjust: ラウンド開始・入力可能化
-    loop 決定まで、または制限時間終了まで
-        Adjust-->>GM: 決定状態を更新
-    end
-    GM->>Adjust: 現在の回答RGBを取得
-    GM->>Result: CreateResultData(topicColor, answerColor)
-    Result-->>GM: ResultDataを保存
-    GM->>Judgement: 判定・割合を表示
-    GM->>Result: ShowResult()
-    Result->>Round: 最新ResultDataを表示
-    Round-->>GM: 次へ操作で待機解除
+flowchart TD
+    A["ラウンド開始<br/>GameManager"]
+    B["ラウンド番号更新"]
+    C["見本RGB生成<br/>TopicSphere表示"]
+    D["制限時間設定"]
+    E["RGB入力受け取り"]
+    F{"決定または<br/>時間切れ?"}
+    G["ResultData作成"]
+    H["判定・得点計算"]
+    I["JugementUI表示"]
+    J["ラウンド結果表示"]
+    K{"最終ラウンド?"}
+    L["総合結果表示"]
+    M["ホーム/リトライ待機"]
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F -->|いいえ| E
+    F -->|はい| G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    K -->|いいえ| B
+    K -->|はい| L
+    L --> M
 ```
 
-この図はコード上の依存を概略化したもの。直接呼び出しとInspector参照の詳細は、対象シーンのInspector設定をUnity Editor上で確認する必要がある。
+GameManager.GameLoop()がCoroutineで制御。見本色生成から採点、結果表示まで一連の処理を管理。
 
-## 5. クラス関係（概略）
+## 5. クラス構造
 
 ```mermaid
 classDiagram
+    class UIModuleManagerBase {
+        +Initialize()
+    }
+    
+    class HomeUIModuleManager {
+        +Initialize()
+    }
+    
+    class GamePlayUIModuleManager {
+        +Initialize()
+    }
+    
     class GameManager {
-      +Start()
-      +GameLoop()
+        +GameLoop()
+        +DesideTopicColor()
+        +IgnorePlayerInput()
     }
-    class HomeManager
-    class UIModuleManagerBase
-    class HomeUIModuleManager
-    class GamePlayUIModuleManager
-    class CoreResource {
-      +GetColorChannelData()
-    }
-    class ColorChannelDataSO
-    class AudioDataSO
-    class AudioManager
+    
     class ResultController {
-      +CreateResultData()
-      +ShowResult()
+        +CreateResultData()
+        +ShowResult()
+        +GetJugement()
     }
-    class ResultData
-    class RoundResult
-    class JugementUI
-    class AllRoundTotalResult
+    
+    class ResultData {
+        +GetDifferenceByValue()
+        +GetScore()
+        +GetJugementType()
+        +GetParcentage()
+    }
+    
+    class AudioManager {
+        +PlayBGM()
+        +PlaySE()
+    }
+    
     UIModuleManagerBase <|-- HomeUIModuleManager
     UIModuleManagerBase <|-- GamePlayUIModuleManager
-    HomeManager --> ColorChannelDataSO
-    HomeManager --> CoreResource
-    GameManager --> GamePlayUIModuleManager
-    GameManager --> ResultController
-    GameManager --> JugementUI
-    GameManager --> AllRoundTotalResult
+    GameManager --|> TopicSphereController
+    GameManager --|> ResultController
+    GameManager --|> JugementUI
+    GameManager --|> AllRoundTotalResult
     ResultController --> ResultData
-    ResultController --> RoundResult
     AudioManager --> AudioDataSO
 ```
 
-継承関係と依存はスクリプト構造に基づく。`GameManager` から複数の具体クラスへ参照が集まっており、汎用的なイベントバスやDIコンテナを中心とする構成ではない。
+UIModuleManagerBaseを継承した画面別マネージャー。GameManagerが複数の結果・表示クラスを参照。
 
-## 6. シーン・アセット構成
+## 6. 参照パターン
 
-- **HomeScene**：ホーム管理、UI管理、モード選択、履歴、オプション、色プレビュー、オーディオ等のスクリプトがシーンに結び付いている。
-- **GamePlayScene**：`GameManager`、見本球、RGB調整、結果／判定、総合結果、演出、オーディオ等が存在する。
-- Build Settings上はホームが先、ゲームプレイが次。
-- Git管理対象のPrefabは確認できない。少なくとも確認したゲーム固有のオブジェクト構成はScene直置きであり、Prefab再利用を前提とした構成とは確認できない。
-- ScriptableObjectアセットは色チャンネルデータと音声タグデータを確認。`Resources` フォルダーは空。
-- UI Toolkit用の素材一式は存在するが、コード上の具体的な画面構造・実機表示はシーンとUnity Editorでの確認が必要。
+### Inspector設定による参照
 
-## 7. 依存関係上の特徴とリスク
+GameManagerとAllRoundTotalResultはSerializeFieldで以下を参照：
+- TopicSphereController
+- JugementUI
+- GameClearParticleController
+- UIDocument
 
-- `GameManager.I`、`AudioManager.I`、`CameraShake.I` 等の静的インスタンス参照と `CoreResource` の静的状態を使用する。シーン間連携は簡潔になる一方、初期化順序・テスト分離・シーン重複時の振る舞いに注意が必要。
-- UI Toolkit要素の名前／階層を文字列で取得するため、UXML／シーン側の命名変更は実行時の欠落につながりやすい。
-- シーン参照・演出コンポーネントの設定に依存する箇所があり、Inspector未設定を検出する一貫した検証機構は確認できない。
-- `ScoreHistoryComposition` のボタン購読処理と `BackButton` の解除処理にはイベント配線上の不具合候補がある。詳細は[コードレビュー](./CodeReview.md)を参照。
+### コンポーネント取得による参照
+
+UIModuleManagerBase派生クラスがUIDocumentからUIModuleControllerを取得：
+```
+UIDocument.GetComponent<UIModuleControllerType>()
+```
+
+### 静的参照
+
+- `GameManager.I`（シングルトン）
+- `AudioManager.I`（シングルトン）
+- `CoreResource`（staticクラス）
+
+### UI要素の名前指定
+
+UIToolkitの要素をQ<T>メソッドで名前取得。要素名の変更がコンパイル時に検出されない。
+
+## 7. シーン構成
+
+### HomeScene
+
+- HomeManager（MonoBehaviour）
+- UIDocument（HomeUIModuleManager, SelectModePanel等を保持）
+- AudioSource（BGM再生）
+- コンポーネント参照で色データと音声データを保持
+
+### GamePlayScene
+
+- GameManager（MonoBehaviour）
+- UIDocument（GamePlayUIModuleManager, ResultController, AllRoundTotalResult等を保持）
+- TopicSphereController（見本色表示用オブジェクト）
+- JugementUI（判定演出）
+- GameClearParticleController（結果演出）
+- AudioSource（SE再生）
+- Camera（カメラ揺れ制御）
+- Post Processing Volume（Bloom, Vignette）
+
+## 8. 現在の技術課題
+
+### 設計上の課題
+
+- GameManagerが複数の具体クラスを直接参照（ResultController, JugementUI, AllRoundTotalResultなど）により、依存関係が複雑化
+- CoreResourceとGameManager.I等の静的状態が複数存在、テスト困難
+- UI要素を名前文字列で取得するため、要素名変更時にコンパイル時検出不可
+
+### 実装上の課題
+
+- ValueConstants.cs のランク判定でB条件がC条件より先に評価（現在Cランク到達不可）
+- ScoreHistoryComposition でクリックハンドラー登録失敗
+- BackButton.Reset() での異なるラムダ解除によるイベント残存
+- UI Toolkitイベント登録と解除の寿命管理の脆弱性
+
+詳細は[技術課題](./CodeReview.md)と[改善計画](./ImprovementPlan.md)を参照。

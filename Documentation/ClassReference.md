@@ -1,152 +1,363 @@
-# 主要クラスリファレンス
+# クラスリファレンス
 
-本書ではゲーム進行・入力・採点・データ連携を優先して掲載する。メソッド名はコードから確認できたものだけを明記し、Inspector参照の具体値はUnity Editorでの確認が必要である。
+## ゲーム進行・管理
 
-## 重要度A：ゲーム進行・結果
+### GameManager
 
-### 1. `GameManager`
+**ファイルパス** — `Assets/Scripts/GamePlay/GameManager.cs`
 
-- **ファイル**：`Assets/Scripts/GamePlay/GameManager.cs`
-- **役割**：ゲームプレイのラウンド進行管理。
-- **主な処理**：`Awake()`でUIコントローラー参照を解決し、`Start()`でゲームBGMとゲームループを開始。`GameLoop()`で規定ラウンドを進め、`DesideTopicColor()`／`GetRandomZeroToOne()`で見本色を生成し、入力待ち、制限時間、結果表示・次ラウンド待ち、最終結果へつなぐ。`IgnorePlayerInput(bool)`は結果オーバーレイを切り替える。
-- **管理データ／依存**：現在のラウンド、決定状態等。`TopicSphereController`、`AdjustUIAreaController`、`ResultController`、`JugementUI`、`AllRoundTotalResult`、UI管理クラス等の具体参照を持つ。
-- **設計上の特徴**：コルーチン中心に順番を制御する。シーン上の各クラスを束ねる一方、依存先が多い。
-- **改善余地**：フェーズと状態遷移の明示、参照検証、キャンセル／シーン破棄時の処理を整える。
-- **根拠**：`GameManager.cs:17-34,37-119`
+**責務** — 5ラウンドのゲーム進行フローを制御。見本色生成、タイマー管理、採点タイミングの判定。
 
-### 2. `ResultController`／`ResultData`
+**管理データ**
+- `topicColor` — 現在のラウンドの見本RGB
+- `isPlayerDecided` — プレイヤーの決定フラグ
 
-- **ファイル**：`Assets/Scripts/GamePlay/Result/ResultController.cs`
-- **役割**：1ラウンド分の色差・判定・得点の算出と、結果表示系への受け渡し。
-- **主なメソッド**：`CreateResultData(topicColor, playerColor)`は`ResultData`を作成・保存し、結果表示状態を設定する。`ShowResult()`は保存した最新の結果から`RoundResult`を構築して表示し、閉じる操作で結果表示状態を解除する。色差・得点・判定は`ResultData`側で計算する。
-- **管理データ**：`ResultData`にラウンド番号、見本色、回答色を保持。プロパティはprivate setterで生成後の変更を抑える。
-- **依存関係**：判定UI、ラウンド結果UI、総合結果等。
-- **設計上の特徴**：UIから独立した値オブジェクトを用意し、複数の結果表示へ渡す。
-- **改善余地**：色差／スコア／ランク仕様の一元化と境界値テスト。`ShowResult()`で結果表示クラスを都度生成する構造も整理する。
-- **根拠**：`ResultController.cs:7-19,22-69,78-127`
+**主な処理**
+- `Awake()` — UIコンポーネント参照を取得
+- `Start()` — BGM再生、GameLoop()開始
+- `GameLoop()` — ラウンド開始から総合結果まで5ラウンドのフローをCoroutineで制御
+- `DesideTopicColor()` — 0～1の範囲でランダムなRGB値を生成
+- `IgnorePlayerInput()` — 結果表示中のプレイヤー入力を無視
 
-`ShowResult()`は各ラウンドで`RoundResult`を構築する。`RoundResult`のコンストラクターは結果UI、見本色／回答色プレビュー、次へボタンを結び付ける。`CreatePreviewSliders(...)`と`AssignResultDataToUI(...)`がプレビュー生成・表示値設定を担当する（`RoundResult.cs:14-111`）。
+**依存関係** — TopicSphereController、ResultController、JugementUI、AllRoundTotalResult、AdjustUIAreaController、TopicPreviewAreaController
 
-### 3. `AllRoundTotalResult`
+**パターン** — 静的シングルトン `GameManager.I`
 
-- **ファイル**：`Assets/Scripts/GamePlay/Result/AllRoundTotalResult.cs`
-- **役割**：全ラウンド終了後の合計結果、ランク、履歴・最高点、最終演出、再試行／ホーム遷移を扱う。
-- **主なメソッド**：`Initialize(VisualElement)`はUI要素・再試行／ホームボタンを設定する。`ShowAllRoundResult(List<ResultData>)`は全ラウンド表示を作り、合計・ランク・履歴・最高点を更新してランキング送信を呼び出す。`CalculateTotalScore(...)`は得点を合計する。
-- **依存関係**：`CoreResource`、総合結果UI、スコアランク、シーン管理、Unityroomクライアント等。
-- **設計上の特徴**：最終結果のユーザー操作と外部ランキング連携が同じ機能領域にある。
-- **改善余地**：外部送信の成功／失敗・オフライン応答を明示し、外部サービス呼び出しと結果表示を分離する。
-- **根拠**：`Assets/Scripts/GamePlay/Result/AllRoundTotalResult.cs:22-110`
+---
 
-### 4. `ValueConstants`
+## 採点・結果
 
-- **ファイル**：`Assets/Scripts/Constants/ValueConstants.cs`
-- **役割**：ラウンド数・得点・ランク等の定数と計算規則を提供。
-- **主なメソッド**：`GetScoreRank(int)`は総得点を正規化しS〜Dランクを返す。`GetScoreCoefficient(float)`と`GetScore(float)`は色差から得点を算出する。`ScoreRankColors`はランク別表示色を持つ。
-- **ランク条件**：正規化値に対しS `>=0.95`、A `>=0.90`、B `>=0.70`、C `>=0.80`、それ以外Dの順で判定するため、Cは到達不能。
-- **設計上の特徴**：共通値をクラスに集めることで呼び出し側の数値重複を抑える。
-- **問題点**：Cランク条件はBランク条件より後にあるため到達不能。`MaxScore=750`の意味（基準値か1ラウンド上限か）は名前だけでは明確でない。
-- **根拠**：`ValueConstants.cs:5-58`
+### ResultController
 
-## 重要度B：操作・データ・共通UI
+**ファイルパス** — `Assets/Scripts/GamePlay/Result/ResultController.cs`
 
-### 5. `AdjustUIAreaController`／`AdjustSlider`
+**責務** — 見本色と回答色からResultDataを生成し、採点結果をUIに表示。
 
-- **ファイル**：`Assets/Scripts/GamePlay/AdjustColor/AdjustUIAreaController.cs`、`AdjustSlider.cs`
-- **役割**：ゲーム中のRGB調整、値の保持、決定操作、プレビュー更新。
-- **主なメソッド**：`Initialize(VisualElement)`は各スライダー／決定ボタンを解決してイベントを登録する。`OnSliderValueChanged(...)`はRGB値とプレビューを同期し、`GetDecidedColor()`は回答色を返す。ボタン操作は `GameManager.I.isPlayerDecided` を更新する。
-- **連携**：3本のスライダー、プレビュー、ゲーム進行、操作効果音。
-- **設計上の特徴**：1成分のスライダーと領域全体の色／決定管理を分けている。
-- **改善余地**：ホーム側RGB調整と共通ロジックを検討し、初期値とスライダー表示値の一致をテストする。
-- **根拠**：`AdjustSlider.cs:13-35`、`AdjustUIAreaController.cs:13-94`
+**管理データ**
+- `resultColors` — List<ResultData>。ラウンドごとの結果を保持
 
-### 6. `CoreResource`
+**主な処理**
+- `CreateResultData()` — TopicColorとPlayerColorからResultDataを新規作成
+- `ShowResult()` — ラウンド結果UIパネルを開き、RoundResultを構築
+- `GetJugement()` — ResultDataから判定タイプとパーセンテージを取得
 
-- **ファイル**：`Assets/Scripts/Constants/CoreResource.cs`
-- **役割**：選択中の色データ、履歴、最高得点等の静的な実行時共有状態とUI補助処理。
-- **主なメソッド**：`GetColorChannelData()`／`SetColorChannelData(...)`、`UpdateHighScore(...)`、`ChangePanelMotion(...)`。共有モード、セッション中の最高点、CSSクラスによるパネル切替を扱う。
-- **設計上の特徴**：シーンを越えて参照できるため、ホームからゲームへモード情報を渡しやすい。
-- **問題点**：永続化ではなくプロセス内状態。Playerビルドで色データ未設定時にnullとなる可能性がある。
-- **改善余地**：初期値保証、null診断、責務分割。将来の保存仕様に合わせて保存層を導入する。
-- **根拠**：`CoreResource.cs:10-88`
+**関連クラス** — ResultData、RoundResult
 
-### 7. `ColorChannelDataSO`／`AudioDataSO`
+---
 
-- **ファイル**：`Assets/Scripts/ScriptableObjects/ColorChannelDataSO.cs`、`AudioDataSO.cs`
-- **役割**：色チャンネルの表示データと、音声タグ／クリップの対応をUnityアセットとして保持する。
-- **主なメソッド**：`ColorChannelDataSO.GetColorChannelData(...)`がジャンルから定義を検索する。`AudioDataSO.GetSEClip(string)`／`GetBGMClip(string)`はシリアライズ済み配列からタグを検索する。
-- **連携**：ホーム初期化／モード選択、`AudioManager`の再生要求。
-- **設計上の特徴**：設定をInspectorで差し替えられる。ただしデータモデル外の挙動追加はコード変更が必要。
-- **改善余地**：重複タグ、未設定Clip、マテリアル数等の検証を追加。
-- **根拠**：`ColorChannelDataSO.cs:9-41`、`AudioDataSO.cs:8-30`
+### ResultData
 
-### 8. `UIModuleManagerBase`と派生クラス
+**ファイルパス** — `Assets/Scripts/GamePlay/Result/ResultController.cs`内の部分クラス
 
-- **ファイル**：`Assets/Scripts/Constants/UIModuleManagerBase.cs`、`Assets/Scripts/Home/HomeUIModuleManager.cs`、`Assets/Scripts/GamePlay/GamePlayUIModuleManager.cs`
-- **役割**：UI Toolkitのルート要素から名前付き要素を取得し、画面固有モジュールへ初期化・参照を渡す。
-- **設計上の特徴**：ホームとゲームに共通するUI取得の雛形がある。
-- **弱点**：文字列で指定した要素名に依存し、UXML名変更や欠落をコンパイル時に検出しにくい。
-- **改善余地**：取得失敗の明示的なエラー、UI要素の参照整合性検証、モジュール初期化のテスト。
-- **根拠**：`UIModuleManagerBase.cs:5-16`、`HomeUIModuleManager.cs:38-48`、`GamePlayUIModuleManager.cs:34-47`
+**責務** — 見本色・回答色・ラウンド番号を保持し、色差と採点に関する計算を行う。
 
-### 9. `AudioManager`
+**管理データ**
+- `TopicColor` — 見本色（Color型）
+- `AnswerColor` — 回答色（Color型）
+- `RoundCount` — ラウンド番号（1～5）
 
-- **ファイル**：`Assets/Scripts/Audio/AudioManager.cs`
-- **主なメソッド**：`Awake()`でSingletonを設定し、`PlaySE(string)`／`PlayBGM(string)`がSOからタグ検索したClipを再生する。
-- **依存関係**：`AudioDataSO`、AudioSource／AudioMixer等のシーン設定。
-- **設計上の特徴**：呼び出し側が音源アセットの直接参照を持たず、キーで再生要求を行える。
-- **改善余地**：未登録タグ・Clip未設定時の診断、音量設定の保存、オーディオ設定値の初期化検証。
-- **根拠**：`AudioManager.cs:10-30`、`AudioDataSO.cs:8-30`
+**主な処理**
+- `GetDifferenceByValue()` — RGB各成分の絶対差を平均して返す（0.0～1.0）
+- `GetScore()` — 色差からスコアを計算（最大1313点）
+- `GetJugementType()` — 色差からJugementType (Perfect/Excellent/Great/Good/Bad) を判定
+- `GetParcentage()` — スコア割合を計算（0～100）
 
-### 10. `JugementUI`／演出クラス
+---
 
-- **ファイル**：`Assets/Scripts/GamePlay/Result/JugementUI.cs`、`Assets/Scripts/Constants/CameraShake.cs`、`Assets/Scripts/GamePlay/GameClearParticleController.cs`
-- **役割**：判定表示、効果音、ポストプロセス／カメラ揺れ、ランクに応じた最終演出。
-- **依存関係**：TextMeshPro、Volume ProfileのBloom/Vignette、Cinemachine、Particle System等のUnityコンポーネント。
-- **設計上の特徴**：採点規則と演出処理を別クラスに分けている。
-- **問題点**：ポストプロセス参照が未取得でも後続処理で参照する経路があり、シーン設定不備時に例外となる可能性がある。
-- **改善余地**：必須参照の初期化時検証と、任意演出が欠けても採点結果を表示できる分離。
-- **主なメソッド**：`JugementUI.SetJugementText(...)`、`DisplayAndHide()`、`AssignPostProcessingEffect(...)`、`CameraShake.Shake(...)`、`GameClearParticleController.SpawnParticles(ScoreRank)`。
-- **根拠**：`JugementUI.cs:70-132`、`CameraShake.cs:17-38`、`GameClearParticleController.cs:20-30`
+### JugementUI
 
-## 重要度C：ホーム・設定・履歴
+**ファイルパス** — `Assets/Scripts/GamePlay/Result/JugementUI.cs`
 
-### 11. `HomeManager`／`HomeUIModuleManager`
+**責務** — ラウンド採点時の判定表示、効果音、画面演出を制御。
 
-- **ファイル**：`Assets/Scripts/Home/HomeManager.cs`、`Assets/Scripts/Home/HomeUIModuleManager.cs`
-- **役割**：ホーム画面の初期モード設定、UIモジュール初期化、色プレビュー更新、BGM開始。
-- **主な処理**：`HomeManager.Awake()`で最初の色チャンネルデータを共有状態へ設定し、`UpdatePreviewColor(Color)`で球／UI表示を更新、`Start()`でホームBGMを再生する。`HomeUIModuleManager.Initialize()`はモード・履歴・RGB編集・オプション等を初期化する。
-- **改善余地**：初期モードを「リストの先頭」とする前提の明示と、空データ時の診断。
-- **根拠**：`HomeManager.cs:17-40`、`HomeUIModuleManager.cs:26-72`
+**管理データ** — TextMeshPro、Volume、Animator、CameraShakeへの参照（Inspectorで設定）
 
-### 12. `SelectModePanel`／`SelectModeComposition`
+**主な処理**
+- `SetJugementText()` — 判定タイプとパーセンテージをUI表示
+- `DisplayAndHide()` — 判定表示アニメーション実行
+- `ResetPostProcessingEffect()` — ポストプロセス効果（Bloom、Vignette）をリセット
 
-- **ファイル**：`Assets/Scripts/Home/SelectMode/SelectModePanel.cs`、`SelectModeComposition.cs`
-- **役割**：色モード選択肢を構築し、選択中モードを共有状態へ反映する。
-- **主な処理**：`Initialize(...)`で色データごとに選択UIを生成し、選択時にモード／ハイスコア表示を更新する。パネル表示・戻る操作も扱う。
-- **改善余地**：SOデータが空／重複時の扱いと、選択状態表示の検証。
-- **根拠**：`SelectModePanel.cs:16-76`、`SelectModeComposition.cs:12-42`
+**依存関係** — AudioManager（効果音）、CameraShake、Post Processing Volume
 
-### 13. `ScoreHistoryPanel`／`ScoreHistoryComposition`
+---
 
-- **ファイル**：`Assets/Scripts/Home/ScoreHistory/ScoreHistoryPanel.cs`、`ScoreHistoryComposition.cs`
-- **役割**：メモリ上の最大100件の履歴を表示し、項目データにモード・ランク・得点・日時を保持する。
-- **問題点**：`ScoreHistoryComposition`の45行目でローカルな`onClick`デリゲートを変更しており、ボタンの`clicked`イベントに項目コールバックが登録されない。
-- **根拠**：`ScoreHistoryPanel.cs:16-59`、`ScoreHistoryComposition.cs:5-45`
+### AllRoundTotalResult
 
-### 14. `Option`
+**ファイルパス** — `Assets/Scripts/GamePlay/Result/AllRoundTotalResult.cs`
 
-- **ファイル**：`Assets/Scripts/Home/Option/Option.cs`
-- **役割**：BGM／SE音量スライダーをAudioMixerパラメーターへ接続し、オプションパネルを表示する。
-- **改善余地**：スライダー値の永続化やMixerパラメーター名の検証は確認できない。
-- **根拠**：`Option.cs:15-62`
+**責務** — 5ラウンド全体の結果集計、総合スコア計算、ランク判定、履歴記録、UI表示。
 
-### 15. `TopicSphereController`／`TopicPreviewAreaController`
+**管理データ**
+- `resultScrollView` — ラウンド結果をスクロール表示するUI
+- `totalScore` — 合計スコア表示ラベル
+- `scoreRank` — ランク表示ラベル
 
-- **ファイル**：`Assets/Scripts/GamePlay/TopicSphere/TopicSphereController.cs`、`Assets/Scripts/GamePlay/OtherInfo/TopicPreviewAreaController.cs`
-- **役割**：見本色を球のマテリアルへ適用し、ゲームHUDのRGBモード最高点・タイマー・ラウンド数等を表示する。
-- **主なメソッド**：`TopicSphereController.SetColor(Color)`、`TopicPreviewAreaController.Initialize(...)`、`UpdateTimer(...)`、`UpdateRoundCount(...)`、`UpdateMaxScore(...)`。
-- **根拠**：`TopicSphereController.cs:8-23`、`TopicPreviewAreaController.cs:9-38`
+**主な処理**
+- `ShowAllRoundResult()` — 5ラウンドの結果をスクロールビューに追加し、合計スコアとランクを計算・表示
+- `CalculateTotalScore()` — 各ラウンドのスコアを合算
+- CoreResourceへ履歴追加、Unityroomへスコア送信
 
-## 関係のまとめ
+**出力** — ScoreRank（S/A/B/C/D）
 
-`HomeManager`が色モードデータを `CoreResource` に設定し、`GameManager`がゲーム進行を統括する。ゲーム中の入力は `AdjustUIAreaController` が回答色として保持し、`ResultController`が結果データを作る。`JugementUI`と`RoundResult`がラウンド表示を行い、`AllRoundTotalResult`がゲーム全体の集計・終了処理を担う。オーディオと演出は各表示イベントから別クラスへ委譲される。
+---
+
+### RoundResult
+
+**ファイルパス** — `Assets/Scripts/GamePlay/Result/RoundResult.cs`
+
+**責務** — 1ラウンドの結果をUIに表示。見本色、回答色、スコア、判定を描画。
+
+**入力** — VisualElement、Material配列、ResultData、コールバック
+
+**主な処理**
+- コンストラクタで受け取ったResultDataからスコア、判定、色を抽出してUI更新
+- 「次へ」ボタンのクリックコールバック設定
+
+---
+
+## 入力・RGB調整
+
+### AdjustUIAreaController
+
+**ファイルパス** — `Assets/Scripts/GamePlay/AdjustColor/AdjustUIAreaController.cs`
+
+**責務** — ゲーム画面のRGBスライダーコンポーネント管理、入力値保持、プレビュー更新。
+
+**管理データ** — R/G/Bスライダー（0.0～1.0）、現在のRGB値
+
+**主な処理**
+- スライダーのchangeイベント登録
+- 決定ボタンのclickedイベント登録で `GameManager.I.isPlayerDecided = true`
+- `GetDecidedColor()` — 現在のスライダー値をColor型で返す
+
+**関連クラス** — AdjustSlider、PreviewSlider
+
+---
+
+### AdjustSlider
+
+**ファイルパス** — `Assets/Scripts/GamePlay/AdjustColor/AdjustSlider.cs`
+
+**責務** — 個別のRGBスライダーの値変更イベント処理、プレビュー更新。
+
+**主な処理**
+- スライダーのvalueプロパティ変更をイベント取得
+- 色プレビューに反映
+
+---
+
+## データ・状態管理
+
+### CoreResource
+
+**ファイルパス** — `Assets/Scripts/Constants/CoreResource.cs`
+
+**責務** — 実行時の共有状態を静的に管理。選択中の色データ、スコア履歴、最高得点。
+
+**管理データ**（全てstatic）
+- `GetColorChannelData()` — 選択中のColorChannelDataSO（nullの可能性あり）
+- `ScoreHistoryDatas` — Stack<ScoreHistoryData>（最大100件）
+- 色チャンネルごとの最高得点
+
+**注意点**
+- Player実行時に色データ未設定ならnullを返すリスク
+- アプリ再起動後の永続化なし
+- テスト時のリセット困難
+
+---
+
+### ValueConstants
+
+**ファイルパス** — `Assets/Scripts/Constants/ValueConstants.cs`
+
+**責務** — ゲーム全体の定数定義。ラウンド数、タイマー、得点係数、判定条件。
+
+**定数**
+- `MaxRound = 5`
+- `MaxScore = 750`
+- `InitialOneRoundTimeLimit = 15f`
+- `MaxScoreCoefficient = 1.75f`（完全一致時の倍率）
+- `MinScoreCoefficient = 0.1f`（完全不一致時の倍率）
+
+**主な処理**
+- `GetScoreRank()` — 合計スコアの正規化値からランクを判定
+  - **既知の誤り** — B条件（≥0.70）がC条件（≥0.80）より先に評価されるため、Cランク到達不可
+- `GetScoreCoefficient()` — 色差から得点係数をLerpで計算
+- `GetScore()` — 色差からスコアを計算
+
+**ランク判定テーブル**
+```
+ScoreRankColors — ランク別のカラー（UI表示用）
+```
+
+---
+
+## UI・ホーム画面
+
+### HomeManager
+
+**ファイルパス** — `Assets/Scripts/Home/HomeManager.cs`
+
+**責務** — ホーム画面の初期化、色チャンネル選択データの設定、BGM再生。
+
+**主な処理**
+- ColorChannelDataSO配列から色チャンネルデータを読み込み
+- CoreResourceへ初期データ設定（配列の先頭を使用）
+- ホーム画面BGM再生
+
+---
+
+### SelectModePanel
+
+**ファイルパス** — `Assets/Scripts/Home/SelectMode/SelectModePanel.cs`
+
+**責務** — 色チャンネル選択UI。ユーザー操作を受けてColorChannelDataSOをCoreResourceに設定。
+
+**主な処理**
+- 各モードボタンのクリックイベント登録
+- クリック時にCoreResourceへ選択データを設定
+
+---
+
+### ScoreHistoryPanel、ScoreHistoryComposition
+
+**ファイルパス** — `Assets/Scripts/Home/ScoreHistory/ScoreHistoryPanel.cs`、`ScoreHistoryComposition.cs`
+
+**責務** — スコア履歴UIの表示と管理。
+
+**管理データ** — CoreResourceのScoreHistoryDatas Stack（最大100件）
+
+**既知の課題** — ScoreHistoryComposition でクリックイベントをボタンに登録できていない
+
+---
+
+### AudioManager
+
+**ファイルパス** — `Assets/Scripts/Audio/AudioManager.cs`
+
+**責務** — BGM/SE再生。AudioDataSOからタグでクリップを検索して再生。
+
+**主な処理**
+- `PlayBGM()` — タグからBGM用AudioClipを取得して再生
+- `PlaySE()` — タグからSE用AudioClipを取得して再生
+- 存在しないタグの場合は警告出力してnull返却
+
+**パターン** — 静的シングルトン `AudioManager.I`
+
+**依存関係** — AudioDataSO
+
+---
+
+## データアセット
+
+### ColorChannelDataSO
+
+**ファイルパス** — `Assets/Scripts/ScriptableObjects/ColorChannelDataSO.cs`
+
+**責務** — 色チャンネル関連情報をScriptableObjectで管理。
+
+**保持データ**
+- 説明テキスト（UI表示用）
+- 表示名
+- マテリアル配列（プレビュー用）
+
+**参照元** — HomeManager、CoreResource
+
+---
+
+### AudioDataSO
+
+**ファイルパス** — `Assets/Scripts/ScriptableObjects/AudioDataSO.cs`
+
+**責務** — BGM/SEクリップをタグで管理。
+
+**構造**
+- タグ（"GamePlayScene", "SpawnTopic", "NormalButton"等）
+- AudioClip参照
+
+**アクセス** — AudioManager がタグで検索
+
+---
+
+## 情報表示
+
+### TopicSphereController
+
+**ファイルパス** — `Assets/Scripts/GamePlay/TopicSphere/TopicSphereController.cs`
+
+**責務** — 見本色を球体で表示。
+
+**主な処理**
+- `SetColor()` — 見本RGB値を受け取り、マテリアル色を更新
+
+---
+
+### TopicPreviewAreaController
+
+**ファイルパス** — `Assets/Scripts/GamePlay/OtherInfo/TopicPreviewAreaController.cs`
+
+**責務** — ラウンド番号、残り時間などの情報表示更新。
+
+**主な処理**
+- `UpdateRoundCount()` — ラウンド番号表示
+- `UpdateTimer()` — 残り秒数表示
+
+---
+
+## UI基盤
+
+### UIModuleManagerBase
+
+**ファイルパス** — `Assets/Scripts/Constants/UIModuleManagerBase.cs`
+
+**責務** — UI Toolkit要素取得とUIModuleController初期化。
+
+**主な処理**
+- `Initialize()` — UIDocumentからUI要素をQ<T>で名前検索
+- 派生クラスで画面別モジュールを初期化
+
+**派生クラス**
+- HomeUIModuleManager
+- GamePlayUIModuleManager
+
+**注意点** — 要素名の変更をコンパイル時に検出できない
+
+---
+
+## 演出・オブジェクト管理
+
+### CameraShake
+
+**ファイルパス** — `Assets/Scripts/Constants/CameraShake.cs`
+
+**責務** — カメラ揺れ演出をCoroutineで制御。
+
+---
+
+### GameClearParticleController
+
+**ファイルパス** — `Assets/Scripts/GamePlay/GameClearParticleController.cs`
+
+**責務** — 最終ランクに応じたパーティクル生成。
+
+**主な処理**
+- `SpawnParticles()` — ランク別の演出パーティクルを生成
+
+---
+
+## スコア・履歴
+
+### ScoreHistoryData
+
+**責務** — スコア履歴の1件分（色チャンネル、ランク、スコア、時刻）を保持。
+
+---
+
+## クラス間の主要フロー
+
+1. **HomeManager** — ColorChannelDataSOを選択してCoreResourceに設定
+2. **GameManager** — CoreResourceから色データを参照、ゲーム開始
+3. **ゲーム進行中** — AdjustUIAreaController からRGB値を取得
+4. **採点** — ResultController が ResultDataを生成
+5. **結果表示** — RoundResult、AllRoundTotalResult でUI描画
+6. **音声・演出** — JugementUI、CameraShake、GameClearParticleController
