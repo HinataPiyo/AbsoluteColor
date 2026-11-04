@@ -18,23 +18,23 @@ AbsoluteColorは、提示されたお題の色をRGBスライダーで再現す�
 
 | 資料 | 内容 |
 |---|---|
-| [GameOverview.md](./GameOverview.md) | ゲーム概要、企画上の位置づけ、基本ループ |
-| [GameDesignDocument.md](./GameDesignDocument.md) | プレイヤー体験、ゲームデザイン、進行の考え方 |
-| [GameSpecification.md](./GameSpecification.md) | 操作、ラウンド、採点、UI、遷移など実装確認済みの仕様 |
-| [SystemArchitecture.md](./SystemArchitecture.md) | システム構成、クラス関係、処理・データフロー |
-| [TechnicalDesign.md](./TechnicalDesign.md) | Unity環境、パッケージ、データ設計、技術選定と制約 |
-| [TechnicalHighlights.md](./TechnicalHighlights.md) | 根拠付きの技術的アピールポイントと客観評価 |
-| [ClassReference.md](./ClassReference.md) | 主要クラスの役割、依存、改善余地 |
-| [CodeReview.md](./CodeReview.md) | 実装品質、確認できた問題、未確認事項 |
-| [ImprovementPlan.md](./ImprovementPlan.md) | 優先度・難易度を付けた改善案 |
-| [PortfolioTechnicalSummary.md](./PortfolioTechnicalSummary.md) | 採用面接・ポートフォリオ向けの説明整理 |
+| [GameOverview.md](Documentation/GameOverview.md) | ゲーム概要、企画上の位置づけ、基本ループ |
+| [GameDesignDocument.md](Documentation/GameDesignDocument.md) | プレイヤー体験、ゲームデザイン、進行の考え方 |
+| [GameSpecification.md](Documentation/GameSpecification.md) | 操作、ラウンド、採点、UI、遷移など実装確認済みの仕様 |
+| [SystemArchitecture.md](Documentation/SystemArchitecture.md) | システム構成、クラス関係、処理・データフロー |
+| [TechnicalDesign.md](Documentation/TechnicalDesign.md) | Unity環境、パッケージ、データ設計、技術選定と制約 |
+| [TechnicalHighlights.md](Documentation/TechnicalHighlights.md) | 根拠付きの技術的アピールポイントと客観評価 |
+| [ClassReference.md](Documentation/ClassReference.md) | 主要クラスの役割、依存、改善余地 |
+| [CodeReview.md](Documentation/CodeReview.md) | 実装品質、確認できた問題、未確認事項 |
+| [ImprovementPlan.md](Documentation/ImprovementPlan.md) | 優先度・難易度を付けた改善案 |
+| [PortfolioTechnicalSummary.md](Documentation/PortfolioTechnicalSummary.md) | 採用面接・ポートフォリオ向けの説明整理 |
 
 ## 読み進め方
 
-- **ゲームを手早く把握する**：[GameOverview.md](./GameOverview.md) → [GameSpecification.md](./GameSpecification.md)
-- **コード構造を把握する**：[SystemArchitecture.md](./SystemArchitecture.md) → [ClassReference.md](./ClassReference.md)
-- **技術評価と改善点を確認する**：[TechnicalHighlights.md](./TechnicalHighlights.md) → [CodeReview.md](./CodeReview.md) → [ImprovementPlan.md](./ImprovementPlan.md)
-- **ポートフォリオ説明を準備する**：[PortfolioTechnicalSummary.md](./PortfolioTechnicalSummary.md)
+- **ゲームを手早く把握する**：[GameOverview.md](Documentation/GameOverview.md) → [GameSpecification.md](Documentation/GameSpecification.md)
+- **コード構造を把握する**：[SystemArchitecture.md](Documentation/SystemArchitecture.md) → [ClassReference.md](Documentation/ClassReference.md)
+- **技術評価と改善点を確認する**：[TechnicalHighlights.md](Documentation/TechnicalHighlights.md) → [CodeReview.md](Documentation/CodeReview.md) → [ImprovementPlan.md](Documentation/ImprovementPlan.md)
+- **ポートフォリオ説明を準備する**：[PortfolioTechnicalSummary.md](Documentation/PortfolioTechnicalSummary.md)
 
 ## 技術概要
 
@@ -45,10 +45,10 @@ AbsoluteColorは、提示されたお題の色をRGBスライダーで再現す�
 - ScriptableObjectによる色チャンネル関連データとBGM／SEデータの管理
 - Cinemachine、ポストプロセス、アニメーション／パーティクル等による演出
 
-詳細は[TechnicalDesign.md](./TechnicalDesign.md)を参照してください。パッケージの導入状況は実際の利用状況と同義ではなく、Input SystemのActionsアセットは存在しますが、ゲームスクリプトから利用するコードは確認できていません。
+詳細は[TechnicalDesign.md](Documentation/TechnicalDesign.md)を参照してください。パッケージの導入状況は実際の利用状況と同義ではなく、Input SystemのActionsアセットは存在しますが、ゲームスクリプトから利用するコードは確認できていません。
 
 ## 分析上の注意
 
 - 設計資料はコード・Unity設定・アセットを中心にした現状分析です。Profilerによる性能測定、端末別の動作、Unityroom外部ランキングの通信結果などは検証していません。
-- スコア計算では`MaxScore`の基準値としての意味に確認事項があり、ランク条件の順序によりCランクが到達不能です。詳細と改善案は[GameSpecification.md](./GameSpecification.md)および[ImprovementPlan.md](./ImprovementPlan.md)に記載しています。
+- スコア計算では`MaxScore`の基準値としての意味に確認事項があり、ランク条件の順序によりCランクが到達不能です。詳細と改善案は[GameSpecification.md](Documentation/GameSpecification.md)および[ImprovementPlan.md](Documentation/ImprovementPlan.md)に記載しています。
 - スコア履歴のクリックイベント登録など、コード上で確認できる不具合もあります。完成済み機能と改善提案を混同しないでください。
